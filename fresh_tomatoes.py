@@ -526,7 +526,14 @@ main_page_head = '''
           }
         }
 
-
+        .active-cyan-2 input[type=text]:focus:not([readonly]) {
+        border-bottom: 1px solid #4dd0e1;
+        box-shadow: 0 1px 0 0 #4dd0e1;
+        }
+        .active-cyan input[type=text] {
+        border-bottom: 1px solid #4dd0e1;
+        box-shadow: 0 1px 0 0 #4dd0e1;
+        }
 
     </style>
     <script type="text/javascript" charset="utf-8">
@@ -576,6 +583,79 @@ main_page_head = '''
             $('a[title]').tooltip();
             });
 
+        function searchMovie() {
+            // Declare variables
+            var input, filter, ul, li, a, i, txtValue;
+            input = document.getElementById('movies_search_box');
+            filter = input.value.toUpperCase();
+            li = document.getElementsByClassName("col-md-6 col-lg-4 movie-tile text-center");
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("h2")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+        function searchSeries() {
+            // Declare variables
+            var input, filter, ul, li, a, i, txtValue;
+            input = document.getElementById('series_search_box');
+            filter = input.value.toUpperCase();
+            li = document.getElementsByClassName("col-md-6 col-lg-4 series-tile text-center");
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("h2")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+        function searchAnime() {
+            // Declare variables
+            var input, filter, ul, li, a, i, txtValue;
+            input = document.getElementById('anime_search_box');
+            filter = input.value.toUpperCase();
+            li = document.getElementsByClassName("col-md-6 col-lg-4 anime-tile text-center");
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("h2")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+
+        function searchComments() {
+            // Declare variables
+            var input, filter, ul, li, a, i, txtValue;
+            input = document.getElementById('comments_search_box');
+            filter = input.value.toUpperCase();
+            li = document.getElementsByClassName("col-12 col-md-6 col-lg-3");
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("h3")[0];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
     </script>
 </head>
 '''
@@ -650,15 +730,27 @@ main_page_content = '''
 
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="movies">
+                            <div class="md-form active-cyan-2 mb-3">
+                                <input id="movies_search_box" onkeyup="searchMovie()" class="form-control" type="text" placeholder="Search for Movies.." aria-label="Search">
+                            </div>
                             {movie_tiles}
                         </div>
                         <div class="tab-pane fade" id="series">
+                            <div class="md-form active-cyan-2 mb-3">
+                                <input id="series_search_box" onkeyup="searchSeries()" class="form-control" type="text" placeholder="Search for Series.." aria-label="Search">
+                            </div>
                           {series_tiles}
                         </div>
                         <div class="tab-pane fade" id="anime">
+                            <div class="md-form active-cyan-2 mb-3">
+                                <input id="anime_search_box" onkeyup="searchAnime()" class="form-control" type="text" placeholder="Search for Anime.." aria-label="Search">
+                            </div>
                           {anime_tile}
                         </div>
                         <div class="tab-pane fade" id="comments">
+                            <div class="md-form active-cyan-2 mb-3">
+                                <input id="comments_search_box" onkeyup="searchComments()" class="form-control" type="text" placeholder="Search for Comments..(Type title of movie/series/anime)" aria-label="Search">
+                            </div>
                           {comments_tiles}
                         </div>
                         <div class="tab-pane fade" id="about">

@@ -3,12 +3,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Fresh Tomatoes!</title>
+    <title>Entertainment Center!</title>
 
     <!-- Bootstrap 3 -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <style type="text/css" media="screen">
         body {
@@ -37,6 +37,14 @@
             background-color: #EEE;
             cursor: pointer;
         }
+        .series-tile {
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+        .series-tile:hover {
+            background-color: #EEE;
+            cursor: pointer;
+        }
         .scale-media {
             padding-bottom: 56.25%;
             position: relative;
@@ -50,6 +58,341 @@
             top: 0;
             background-color: white;
         }
+        @import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+        /* written by riliwan balogun http://www.facebook.com/riliwan.rabo*/
+        .board{
+        margin: 60px auto;
+        background: #fff;
+        /*box-shadow: 10px 10px #ccc,-10px 20px #ddd;*/
+        }
+        .board .nav-tabs {
+            position: relative;
+            /* border-bottom: 0; */
+            /* width: 80%; */
+            margin: 40px auto;
+            margin-bottom: 0;
+            box-sizing: border-box;
+
+        }
+
+        .board > div.board-inner{
+            background: #fafafa url(http://subtlepatterns.com/patterns/geometry2.png);
+
+        }
+
+        p.narrow{
+            width: 60%;
+            margin: 10px auto;
+        }
+
+        .liner{
+            height: 2px;
+            background: #ddd;
+            position: absolute;
+            width: 80%;
+            margin: 0 auto;
+            left: 0;
+            right: 0;
+            top: 50%;
+            z-index: 1;
+        }
+
+        .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+            color: #555555;
+            cursor: default;
+            /* background-color: #ffffff; */
+            border: 0;
+            border-bottom-color: transparent;
+        }
+
+        span.round-tabs{
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+            display: inline-block;
+            border-radius: 100px;
+            background: white;
+            z-index: 2;
+            position: absolute;
+            left: 0;
+            text-align: center;
+            font-size: 25px;
+        }
+
+        span.round-tabs.one{
+            color: rgb(34, 194, 34);border: 2px solid rgb(34, 194, 34);
+        }
+
+        li.active span.round-tabs.one{
+            background: #fff !important;
+            border: 2px solid #ddd;
+            color: rgb(34, 194, 34);
+        }
+
+        span.round-tabs.two{
+            color: #febe29;border: 2px solid #febe29;
+        }
+
+        li.active span.round-tabs.two{
+            background: #fff !important;
+            border: 2px solid #ddd;
+            color: #febe29;
+        }
+
+        span.round-tabs.three{
+            color: #3e5e9a;border: 2px solid #3e5e9a;
+        }
+
+        li.active span.round-tabs.three{
+            background: #fff !important;
+            border: 2px solid #ddd;
+            color: #3e5e9a;
+        }
+
+        span.round-tabs.four{
+            color: #f1685e;border: 2px solid #f1685e;
+        }
+
+        li.active span.round-tabs.four{
+            background: #fff !important;
+            border: 2px solid #ddd;
+            color: #f1685e;
+        }
+
+        span.round-tabs.five{
+            color: #ef0090;border: 2px solid #ef0090;
+        }
+
+        li.active span.round-tabs.five{
+            background: #fff !important;
+            border: 2px solid #ddd;
+            color: #ef0090;
+        }
+
+        .nav-tabs > li.active > a span.round-tabs{
+            background: #fafafa;
+        }
+        .nav-tabs > li {
+            width: 20%;
+        }
+        /*li.active:before {
+            content: " ";
+            position: absolute;
+            left: 45%;
+            opacity:0;
+            margin: 0 auto;
+            bottom: -2px;
+            border: 10px solid transparent;
+            border-bottom-color: #fff;
+            z-index: 1;
+            transition:0.2s ease-in-out;
+        }*/
+        .nav-tabs > li:after {
+            content: " ";
+            position: absolute;
+            left: 45%;
+           opacity:0;
+            margin: 0 auto;
+            bottom: 0px;
+            border: 5px solid transparent;
+            border-bottom-color: #ddd;
+            transition:0.1s ease-in-out;
+
+        }
+        .nav-tabs > li.active:after {
+            content: " ";
+            position: absolute;
+            left: 45%;
+           opacity:1;
+            margin: 0 auto;
+            bottom: 0px;
+            border: 10px solid transparent;
+            border-bottom-color: #ddd;
+
+        }
+        .nav-tabs > li a{
+           width: 70px;
+           height: 70px;
+           margin: 20px auto;
+           border-radius: 100%;
+           padding: 0;
+        }
+
+        .nav-tabs > li a:hover{
+            background: transparent;
+        }
+
+        .tab-content{
+        }
+        .tab-pane{
+           position: relative;
+        padding-top: 50px;
+        }
+        .tab-content .head{
+            font-family: 'Roboto Condensed', sans-serif;
+            font-size: 25px;
+            text-transform: uppercase;
+            padding-bottom: 10px;
+        }
+        .btn-outline-rounded{
+            padding: 10px 40px;
+            margin: 20px 0;
+            border: 2px solid transparent;
+            border-radius: 25px;
+        }
+
+        .btn.green{
+            background-color:#5cb85c;
+            /*border: 2px solid #5cb85c;*/
+            color: #ffffff;
+        }
+
+
+
+        @media(){
+
+            .board {
+        width: 90%;
+        height:auto !important;
+        }
+            span.round-tabs {
+                font-size:16px;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+            }
+            .tab-content .head{
+                font-size:20px;
+                }
+            .nav-tabs > li a {
+        width: 50px;
+        height: 50px;
+        line-height:50px;
+        }
+
+        .nav-tabs > li.active:after {
+        content: " ";
+        position: absolute;
+        left: 35%;
+        }
+
+        .btn-outline-rounded {
+            padding:12px 20px;
+            }
+        }
+        .row.heading h2 {
+            color: #fff;
+            font-size: 52.52px;
+            line-height: 95px;
+            font-weight: 400;
+            text-align: center;
+            margin: 0 0 40px;
+            padding-bottom: 20px;
+            text-transform: uppercase;
+        }
+        ul{
+          margin:0;
+          padding:0;
+          list-style:none;
+        }
+        .heading.heading-icon {
+            display: block;
+        }
+        .padding-lg {
+            display: block;
+            padding-top: 60px;
+            padding-bottom: 60px;
+        }
+        .practice-area.padding-lg {
+            padding-bottom: 55px;
+            padding-top: 55px;
+        }
+        .practice-area .inner{
+             border:1px solid #999999;
+             text-align:center;
+             margin-bottom:28px;
+             padding:40px 25px;
+        }
+        .our-webcoderskull .cnt-block:hover {
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+            border: 0;
+        }
+        .practice-area .inner h3{
+            color:#3c3c3c;
+            font-size:24px;
+            font-weight:500;
+            font-family: 'Poppins', sans-serif;
+            padding: 10px 0;
+        }
+        .practice-area .inner p{
+            font-size:14px;
+            line-height:22px;
+            font-weight:400;
+        }
+        .practice-area .inner img{
+            display:inline-block;
+        }
+
+
+
+        .our-webcoderskull .cnt-block{
+           float:left;
+           width:100%;
+           background:#fff;
+           padding:30px 20px;
+           text-align:center;
+           border:2px solid #d5d5d5;
+           margin: 0 0 28px;
+        }
+        .our-webcoderskull .cnt-block figure{
+           width:148px;
+           height:148px;
+           border-radius:100%;
+           display:inline-block;
+           margin-bottom: 15px;
+        }
+        .our-webcoderskull .cnt-block img{
+           width:148px;
+           height:148px;
+           border-radius:100%;
+        }
+        .our-webcoderskull .cnt-block h3{
+           color:#2a2a2a;
+           font-size:20px;
+           font-weight:500;
+           padding:6px 0;
+           text-transform:uppercase;
+        }
+        .our-webcoderskull .cnt-block h3 a{
+          text-decoration:none;
+            color:#2a2a2a;
+        }
+        .our-webcoderskull .cnt-block h3 a:hover{
+            color:#337ab7;
+        }
+        .our-webcoderskull .cnt-block p{
+           color:#2a2a2a;
+           font-size:13px;
+           line-height:20px;
+           font-weight:400;
+        }
+        .our-webcoderskull .cnt-block .follow-us{
+            margin:20px 0 0;
+        }
+        .our-webcoderskull .cnt-block .follow-us li{
+            display:inline-block;
+            width:auto;
+            margin:0 5px;
+        }
+        .our-webcoderskull .cnt-block .follow-us li .fa{
+           font-size:24px;
+           color:#767676;
+        }
+        .our-webcoderskull .cnt-block .follow-us li .fa:hover{
+           color:#025a8e;
+        }
+
+
     </style>
     <script type="text/javascript" charset="utf-8">
         // Pause the video when the modal is closed
@@ -75,6 +418,29 @@
             $(this).next("div").show("fast", showNext);
           });
         });
+
+        $(document).on('click', '.series-tile', function (event) {
+            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
+            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
+            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+              'id': 'trailer-video',
+              'type': 'text-html',
+              'src': sourceUrl,
+              'frameborder': 0
+            }));
+        });
+        // Animate in the movies when the page loads
+        $(document).ready(function () {
+          $('.series-tile').hide().first().show("fast", function showNext() {
+            $(this).next("div").show("fast", showNext);
+          });
+        });
+
+
+        $(function(){
+            $('a[title]').tooltip();
+            });
+
     </script>
 </head>
 
@@ -93,37 +459,195 @@
     </div>
 
     <!-- Main Page Content -->
-    <div class="container">
-      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+    <section style="background:#efefe9;">
         <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">Fresh Tomatoes Movie Trailers</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      
+            <div class="row">
+                <div class="board">
+                    <div class="board-inner">
+                        <ul class="nav nav-tabs" id="myTab">
+                            <div class="liner"></div>
+                            <li class="active">
+                                <a href="#movies" data-toggle="tab" title="Movies">
+                                  <span class="round-tabs one">
+                                          <i class="glyphicon glyphicon-facetime-video"></i>
+                                  </span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#series" data-toggle="tab" title="Series">
+                                    <span class="round-tabs two">
+                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#comments" data-toggle="tab" title="Important comments">
+                                     <span class="round-tabs three">
+                                          <i class="glyphicon glyphicon-comment"></i>
+                                     </span>
+                                 </a>
+                            </li>
+
+                            <li>
+                                <a href="#anime" data-toggle="tab" title="Add new">
+                                    <span class="round-tabs four">
+                                        <i class="glyphicon glyphicon-plus"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#about" data-toggle="tab" title="About">
+                                    <span class="round-tabs five">
+                                        <i class="glyphicon glyphicon-cog"></i>
+                                    </span>
+                                </a>
+                            </li>
+
+                        </ul>
+                     </div>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="movies">
+                            
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="tGpTpVyI_OQ" data-toggle="modal" data-target="#trailer">
-    <img src="https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" width="220" height="342">
+    <img src="https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" width="220" height="342" title="In the realm of underworld, a series of incidents intertwines the lives of two Los Angeles mobsters, a gangster's wife, a boxer and two small-time criminals.">
     <h2>Pulp Fiction</h2>
 </div>
 
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="9vN6DHB6bJc" data-toggle="modal" data-target="#trailer">
-    <img src="http://www.gstatic.com/tv/thumb/v22vodart/11098044/p11098044_v_v8_af.jpg" width="220" height="342">
+    <img src="http://www.gstatic.com/tv/thumb/v22vodart/11098044/p11098044_v_v8_af.jpg" width="220" height="342" title="Mercenary Wade Wilson, subjected to an experiment to heal himself of cancer, obtains healing powers, but at the cost of becoming awfully disfigured. He then adopts the alter ego of Deadpool.">
     <h2>Deadpool</h2>
 </div>
 
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="EXeTwQWrcwY" data-toggle="modal" data-target="#trailer">
-    <img src="https://i.kinja-img.com/gawker-media/image/upload/s--A1lC8jc---/c_scale,f_auto,fl_progressive,q_80,w_800/ya4c8rc9pwfcsn8awr1e.jpg" width="220" height="342">
+    <img src="http://www.gstatic.com/tv/thumb/v22vodart/173378/p173378_v_v8_at.jpg" width="220" height="342" title="With the help of allies Lt. Jim Gordon (Gary Oldman) and DA Harvey Dent (Aaron Eckhart), Batman (Christian Bale) has been able to keep a tight lid on crime in Gotham City. But when a vile young criminal calling himself the Joker (Heath Ledger) suddenly throws the town into chaos, the caped Crusader begins to tread a fine line between heroism and vigilantism.">
     <h2>The Dark Knight</h2>
 </div>
 
 <div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="6ZfuNTqbHE8" data-toggle="modal" data-target="#trailer">
-    <img src="http://www.gstatic.com/tv/thumb/v22vodart/12863030/p12863030_v_v8_ae.jpg" width="220" height="342">
+    <img src="http://www.gstatic.com/tv/thumb/v22vodart/12863030/p12863030_v_v8_ae.jpg" width="220" height="342" title="Iron Man, Thor, the Hulk and the rest of the Avengers unite to battle their most powerful enemy yet -- the evil Thanos. On a mission to collect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twisted will on reality. The fate of the planet and existence itself has never been more uncertain as everything the Avengers have fought for has led up to this moment.">
     <h2>Avengers: Infinity War</h2>
 </div>
 
-    </div>
+                        </div>
+                        <div class="tab-pane fade" id="series">
+                          
+<div class="col-md-6 col-lg-4 series-tile text-center" data-trailer-youtube-id="XzaGBihfREw" data-toggle="modal" data-target="#trailer">
+    <img src="https://peopledotcom.files.wordpress.com/2016/08/friends-435-5.jpg" width="220" height="342" title="Follow the lives of six reckless adults living in Manhattan, as they indulge in adventures which make their lives both troublesome and happening.">
+    <h2>Friends</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 series-tile text-center" data-trailer-youtube-id="WiyfT_w4GwQ" data-toggle="modal" data-target="#trailer">
+    <img src="https://images-na.ssl-images-amazon.com/images/I/51CR295PR1L._SY445_.jpg" width="220" height="342" title="Eric, a high school student, and his group of teenage friends struggle to lead purposeful lives whilst going through the tumultuous phase of adolescence.">
+    <h2>That '70s Show</h2>
+</div>
+
+<div class="col-md-6 col-lg-4 series-tile text-center" data-trailer-youtube-id="o96UB-B-0C4" data-toggle="modal" data-target="#trailer">
+    <img src="http://www.gstatic.com/tv/thumb/tvbanners/9916255/p9916255_b_v8_aa.jpg" width="220" height="342" title="Ted Mosby, an architect, recounts to his children the events that led him to meet their mother. His journey is made more eventful by the presence of his friends Lily, Marshall, Robin and Barney.">
+    <h2>How I Met Your Mother</h2>
+</div>
+
+                        </div>
+                        <div class="tab-pane fade" id="comments">
+                          
+<section class="our-webcoderskull padding-lg">
+  <div class="container">
+    <ul class="row">
+
+<li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="https://peopledotcom.files.wordpress.com/2016/08/friends-435-5.jpg" class="img-responsive" alt=""></figure>
+            <h3>Friends</h3>
+            <p>Watch season 2,3 and 4!! Great seasons</p>
+
+          </div>
+</li>
+
+<li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="https://peopledotcom.files.wordpress.com/2016/08/friends-435-5.jpg" class="img-responsive" alt=""></figure>
+            <h3>Friends</h3>
+            <p>Joey punches ross : Episode: Season 9 Episode 2</p>
+
+          </div>
+</li>
+
+<li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="https://peopledotcom.files.wordpress.com/2016/08/friends-435-5.jpg" class="img-responsive" alt=""></figure>
+            <h3>Friends</h3>
+            <p>Ross gets tan: S10E03</p>
+
+          </div>
+</li>
+
+<li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="https://images-na.ssl-images-amazon.com/images/I/51CR295PR1L._SY445_.jpg" class="img-responsive" alt=""></figure>
+            <h3>That '70s Show</h3>
+            <p>Enjoyed the circle..</p>
+
+          </div>
+</li>
+
+<li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="https://images-na.ssl-images-amazon.com/images/I/51CR295PR1L._SY445_.jpg" class="img-responsive" alt=""></figure>
+            <h3>That '70s Show</h3>
+            <p>Search for best circles on youtube..Had a lot of fun!!!</p>
+
+          </div>
+</li>
+
+<li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="http://www.gstatic.com/tv/thumb/tvbanners/9916255/p9916255_b_v8_aa.jpg" class="img-responsive" alt=""></figure>
+            <h3>How I Met Your Mother</h3>
+            <p>Jinx!!!! Enough to explain!</p>
+
+          </div>
+</li>
+
+<li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="http://www.gstatic.com/tv/thumb/tvbanners/9916255/p9916255_b_v8_aa.jpg" class="img-responsive" alt=""></figure>
+            <h3>How I Met Your Mother</h3>
+            <p>Barney's best moments search on Youtube</p>
+
+          </div>
+</li>
+
+<li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="http://www.gstatic.com/tv/thumb/tvbanners/9916255/p9916255_b_v8_aa.jpg" class="img-responsive" alt=""></figure>
+            <h3>How I Met Your Mother</h3>
+            <p>Last season was disappointing</p>
+
+          </div>
+</li>
+
+ </ul>
+  </div>
+</section>
+
+                        </div>
+                        <div class="tab-pane fade" id="anime">
+                          create_movie_tiles_content(movies)
+                        </div>
+                        <div class="tab-pane fade" id="about">
+                          create_movie_tiles_content(movies)
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
   </body>
 </html>

@@ -1,19 +1,16 @@
 class Video():
-    def __init__(self):
-        self.title = ''
-        self.duration = 0
-        self.storyline=''
+    comments = None
 
-    def __init__(self, title, duration,storyline):
+    def __init__(self, title, storyline, duration=0):
         self.title = title
         self.duration = duration
-        self.storyline=storyline
+        self.storyline = storyline
 
     def get_title(self):
         return self.title
 
     def get_duration(self):
-        return self.duration()
+        return self.duration
 
     def set_duration(self, duration):
         self.duration = duration
@@ -25,4 +22,18 @@ class Video():
         self.storyline = storyline
 
     def get_storyline(self):
-        return seld.storyline
+        return self.storyline
+
+    def get_comments(self):
+        return self.comments
+
+    def set_comments(self, comments):
+        self.comments = comments
+
+    def add_comment(self, comment):
+        if self.comments is None:
+            self.comments = []
+        self.comments.append(comment)
+
+    def has_comments(self):
+        return not(self.comments is None)

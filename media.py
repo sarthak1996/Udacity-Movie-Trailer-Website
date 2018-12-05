@@ -11,6 +11,14 @@ class Movie(Video):
     def show_trailer(self):
         webbrowser.open(self.trailer_youtube_url)
 
+    def convert_to_xml(self):
+        content = '\n<movie>\n'
+        content += Video.convert_to_xml(self)
+        content += '  <poster_image_url>' + self.poster_image_url.replace('</', '').replace('>', '') + '</poster_image_url>\n'
+        content += '  <trailer_youtube_url>' + self.trailer_youtube_url.replace('</', '').replace('>', '') + '</trailer_youtube_url>\n'
+        content += '</movie>'
+        return content
+
 
 class Series(Video):
     def __init__(self, series_title, series_storyline, series_poster, series_trailer, series_duration=0):
@@ -21,6 +29,14 @@ class Series(Video):
     def show_trailer(self):
         webbrowser.open(self.trailer_youtube_url)
 
+    def convert_to_xml(self):
+        content = '\n<series>\n'
+        content += Video.convert_to_xml(self)
+        content += '  <poster_image_url>' + self.poster_image_url.replace('</', '').replace('>', '') + '</poster_image_url>\n'
+        content += '  <trailer_youtube_url>' + self.trailer_youtube_url.replace('</', '').replace('>', '') + '</trailer_youtube_url>\n'
+        content += '</series>'
+        return content
+
 
 class Anime(Video):
     def __init__(self, series_title, series_storyline, series_poster, series_trailer, series_duration=0):
@@ -30,3 +46,11 @@ class Anime(Video):
 
     def show_trailer(self):
         webbrowser.open(self.trailer_youtube_url)
+
+    def convert_to_xml(self):
+        content = '\n<anime>\n'
+        content += Video.convert_to_xml(self)
+        content += '  <poster_image_url>' + self.poster_image_url.replace('</', '').replace('>', '') + '</poster_image_url>\n'
+        content += '  <trailer_youtube_url>' + self.trailer_youtube_url.replace('</', '').replace('>', '') + '</trailer_youtube_url>\n'
+        content += '</anime>'
+        return content

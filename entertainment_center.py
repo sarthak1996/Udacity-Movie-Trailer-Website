@@ -53,5 +53,16 @@ def seeded_videos():
 # v = Video('abc', 'def', 1)
 # print(v.get_duration())
 movies, series, anime = seeded_videos()
-fresh_tomatoes.open_page()
+f = open("seed_data.xml", "w")
+content = ''
+for movie in movies:
+    content += movie.convert_to_xml()
+for series_element in series:
+    content += series_element.convert_to_xml()
+for anime_element in anime:
+    content += anime_element.convert_to_xml()
+content='<seed_data>'+content+'\n</seed_data>'
+f.write(content)
+f.close()
+# fresh_tomatoes.open_page()
 # fresh_tomatoes.open_page(movies, series, anime)

@@ -237,10 +237,11 @@ main_page_head = '''
         }
 
         .tab-content{
+            background: -webkit-linear-gradient(45deg, #d6306d, #fff581);
+            background: linear-gradient(45deg, #d6306d, #fff581);
         }
         .tab-pane{
            position: relative;
-        padding-top: 50px;
         }
         .tab-content .head{
             font-family: 'Roboto Condensed', sans-serif;
@@ -739,7 +740,7 @@ def create_no_tiles_content(type):
 def create_movie_tiles_content(movies):
     # The HTML content for this section of the page
     content = ''
-    if movies is None:
+    if not movies:
         return create_no_tiles_content('Movies')
     for movie in movies:
         # Extract the youtube ID from the url
@@ -762,7 +763,7 @@ def create_movie_tiles_content(movies):
 
 def create_series_tiles_content(series):
     content = ''
-    if series is None:
+    if not series:
         return create_no_tiles_content('Series')
     for series_element in series:
         # Extract the youtube ID from the url
@@ -785,7 +786,7 @@ def create_series_tiles_content(series):
 
 def create_anime_tiles_content(animes):
     content = ''
-    if animes is None:
+    if not animes:
         return create_no_tiles_content('Animes')
     for anime in animes:
         # Extract the youtube ID from the url
@@ -808,7 +809,7 @@ def create_anime_tiles_content(animes):
 
 def create_comment_tiles_content(videos):
     content = ''
-    if videos is None:
+    if not videos:
         return create_no_tiles_content('Comments')
 
     for video in videos:
@@ -827,12 +828,19 @@ def open_page(movies=None, series=None, animes=None):
     output_file = open('fresh_tomatoes.html', 'w')
 
     # Replace the movie tiles placeholder generated content
+    combined_list = []
+    if movies is not None:
+        combined_list += movies
+    if series is not None:
+        combined_list += series
+    if animes is not None:
+        combined_list += animes
 
     rendered_content = main_page_content.format(
         movie_tiles=create_movie_tiles_content(movies),
         series_tiles=create_series_tiles_content(series),
         anime_tile=create_anime_tiles_content(animes),
-        comments_tiles=create_comment_tiles_content(movies.append(series)),
+        comments_tiles=create_comment_tiles_content(combined_list),
         add_new_tile='create_movie_tiles_content(movies)'
     )
 

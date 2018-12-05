@@ -51,6 +51,14 @@ main_page_head = '''
             background-color: #EEE;
             cursor: pointer;
         }
+        .anime-tile {
+            margin-bottom: 20px;
+            padding-top: 20px;
+        }
+        .anime-tile:hover {
+            background-color: #EEE;
+            cursor: pointer;
+        }
         .scale-media {
             padding-bottom: 56.25%;
             position: relative;
@@ -394,6 +402,129 @@ main_page_head = '''
         .our-webcoderskull .cnt-block .follow-us li .fa:hover{
            color:#025a8e;
         }
+        @import "https://fonts.googleapis.com/css?family=Megrim";
+        .wrapper {
+          background: -webkit-linear-gradient(45deg, #d6306d, #fff581);
+          background: linear-gradient(45deg, #d6306d, #fff581);
+          width: 100%;
+          height: 100vh;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          -webkit-box-pack: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
+          z-index: -100;
+          -webkit-perspective: 500px;
+                  perspective: 500px;
+          box-sizing: border-box;
+          border: 14px solid white;
+        }
+
+        .floater {
+          height: 300px;
+          width: 300px;
+          background: white;
+          display: -webkit-box;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-align: center;
+              -ms-flex-align: center;
+                  align-items: center;
+          -webkit-box-pack: center;
+              -ms-flex-pack: center;
+                  justify-content: center;
+          border-radius: 10px;
+          box-shadow: 0px 13px 30px -10px rgba(0, 0, 0, 0.8);
+          -webkit-transition: all 600ms ease;
+          transition: all 600ms ease;
+          margin: 10px;
+          -webkit-animation: breathe 3s infinite;
+                  animation: breathe 3s infinite;
+          -webkit-animation-timing-function: easeOutBack;
+                  animation-timing-function: easeOutBack;
+          color: #d6306d;
+          font-size: 3rem;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+              -ms-flex-direction: column;
+                  flex-direction: column;
+        }
+        .floater .text {
+          display: block;
+          font-family: Megrim, cursive;
+          font-size: 4rem;
+          padding-top: .8rem;
+          border-top: 2px solid #d6306d;
+        }
+        .floater .text:last-child {
+          font-size: 5rem;
+          margin-top: -.8rem;
+          padding-bottom: 1rem;
+          border-top: none;
+          border-bottom: 2px solid #d6306d;
+        }
+        .floater:hover {
+          box-shadow: 0px 60px 30px -30px rgba(0, 0, 0, 0.3);
+          -webkit-transition: all 600ms ease;
+          transition: all 600ms ease;
+          -webkit-animation-play-state: paused;
+                  animation-play-state: paused;
+        }
+        .floater.right:hover {
+          -webkit-transform: rotate3d(-30, 0, -10, 5deg) translate3d(10px, -10px, 20px);
+                  transform: rotate3d(-30, 0, -10, 5deg) translate3d(10px, -10px, 20px);
+        }
+        .floater.left:hover {
+          -webkit-transform: rotate3d(30, 0, 10, 5deg) translate3d(-10px, -10px, 20px);
+                  transform: rotate3d(30, 0, 10, 5deg) translate3d(-10px, -10px, 20px);
+        }
+
+        @-webkit-keyframes breathe {
+          0% {
+            box-shadow: 0px 13px 30px -10px rgba(0, 0, 0, 0.8);
+            -webkit-transform: rotate3d(0, 0, 0, 5deg) translate3d(0, 0, 0);
+                    transform: rotate3d(0, 0, 0, 5deg) translate3d(0, 0, 0);
+            opacity: .4;
+          }
+          50% {
+            box-shadow: 0px 60px 30px -30px rgba(0, 0, 0, 0.3);
+            -webkit-transform: rotate3d(-30, 0, -10, 2deg) translate3d(2px, -2px, 30px);
+                    transform: rotate3d(-30, 0, -10, 2deg) translate3d(2px, -2px, 30px);
+            opacity: 1;
+          }
+          100% {
+            box-shadow: 0px 13px 30px -10px rgba(0, 0, 0, 0.8);
+            -webkit-transform: rotate3d(0, 0, 0, 5deg) translate3d(0, 0, 0);
+                    transform: rotate3d(0, 0, 0, 5deg) translate3d(0, 0, 0);
+            opacity: .4;
+          }
+        }
+
+        @keyframes breathe {
+          0% {
+            box-shadow: 0px 13px 30px -10px rgba(0, 0, 0, 0.8);
+            -webkit-transform: rotate3d(0, 0, 0, 5deg) translate3d(0, 0, 0);
+                    transform: rotate3d(0, 0, 0, 5deg) translate3d(0, 0, 0);
+            opacity: .4;
+          }
+          50% {
+            box-shadow: 0px 60px 30px -30px rgba(0, 0, 0, 0.3);
+            -webkit-transform: rotate3d(-30, 0, -10, 2deg) translate3d(2px, -2px, 30px);
+                    transform: rotate3d(-30, 0, -10, 2deg) translate3d(2px, -2px, 30px);
+            opacity: 1;
+          }
+          100% {
+            box-shadow: 0px 13px 30px -10px rgba(0, 0, 0, 0.8);
+            -webkit-transform: rotate3d(0, 0, 0, 5deg) translate3d(0, 0, 0);
+                    transform: rotate3d(0, 0, 0, 5deg) translate3d(0, 0, 0);
+            opacity: .4;
+          }
+        }
+
 
 
     </style>
@@ -491,7 +622,7 @@ main_page_content = '''
                             </li>
 
                             <li>
-                                <a href="#comments" data-toggle="tab" title="Important comments">
+                                <a href="#anime" data-toggle="tab" title="Anime">
                                      <span class="round-tabs three">
                                           <i class="glyphicon glyphicon-comment"></i>
                                      </span>
@@ -499,7 +630,7 @@ main_page_content = '''
                             </li>
 
                             <li>
-                                <a href="#anime" data-toggle="tab" title="Add new">
+                                <a href="#comments" data-toggle="tab" title="Comments">
                                     <span class="round-tabs four">
                                         <i class="glyphicon glyphicon-plus"></i>
                                     </span>
@@ -523,11 +654,11 @@ main_page_content = '''
                         <div class="tab-pane fade" id="series">
                           {series_tiles}
                         </div>
+                        <div class="tab-pane fade" id="anime">
+                          {anime_tile}
+                        </div>
                         <div class="tab-pane fade" id="comments">
                           {comments_tiles}
-                        </div>
-                        <div class="tab-pane fade" id="anime">
-                          {add_new_tile}
                         </div>
                         <div class="tab-pane fade" id="about">
                           {add_new_tile}
@@ -561,6 +692,13 @@ series_tile_content = '''
 </div>
 '''
 
+anime_tile_content = '''
+<div class="col-md-6 col-lg-4 anime-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
+    <img src="{poster_image_url}" width="220" height="342" title="{anime_description}">
+    <h2>{anime_title}</h2>
+</div>
+'''
+
 comments_tiles_header = '''
 <section class="our-webcoderskull padding-lg">
   <div class="container">
@@ -583,10 +721,26 @@ comments_tiles_footer = '''
 </section>
 '''
 
+no_tile_content = '''
+<div class="wrapper">
+  <div class="floater">
+    <div class="text">No {type}</div>
+    <div class="text">YeT</div>
+  </div>
+
+</div>
+'''
+
+
+def create_no_tiles_content(type):
+    return no_tile_content.format(type=type)
+
 
 def create_movie_tiles_content(movies):
     # The HTML content for this section of the page
     content = ''
+    if movies is None:
+        return create_no_tiles_content('Movies')
     for movie in movies:
         # Extract the youtube ID from the url
         youtube_id_match = re.search(
@@ -608,6 +762,8 @@ def create_movie_tiles_content(movies):
 
 def create_series_tiles_content(series):
     content = ''
+    if series is None:
+        return create_no_tiles_content('Series')
     for series_element in series:
         # Extract the youtube ID from the url
         youtube_id_match = re.search(
@@ -627,10 +783,33 @@ def create_series_tiles_content(series):
     return content
 
 
+def create_anime_tiles_content(animes):
+    content = ''
+    if animes is None:
+        return create_no_tiles_content('Animes')
+    for anime in animes:
+        # Extract the youtube ID from the url
+        youtube_id_match = re.search(
+            r'(?<=v=)[^&#]+', anime.trailer_youtube_url)
+        youtube_id_match = youtube_id_match or re.search(
+            r'(?<=be/)[^&#]+', anime.trailer_youtube_url)
+        trailer_youtube_id = (youtube_id_match.group(0) if youtube_id_match
+                              else None)
+
+        # Append the tile for the movie with its content filled in
+        content += anime_tile_content.format(
+            anime_title=anime.title,
+            poster_image_url=anime.poster_image_url,
+            trailer_youtube_id=trailer_youtube_id,
+            anime_description=anime.storyline
+        )
+    return content
+
+
 def create_comment_tiles_content(videos):
     content = ''
     if videos is None:
-        return "No comments yet!!"
+        return create_no_tiles_content('Comments')
 
     for video in videos:
         if video.has_comments():
@@ -643,7 +822,7 @@ def create_comment_tiles_content(videos):
     return comments_tiles_header + content + comments_tiles_footer
 
 
-def open_page(movies=None, series=None):
+def open_page(movies=None, series=None, animes=None):
     # Create or overwrite the output file
     output_file = open('fresh_tomatoes.html', 'w')
 
@@ -652,7 +831,8 @@ def open_page(movies=None, series=None):
     rendered_content = main_page_content.format(
         movie_tiles=create_movie_tiles_content(movies),
         series_tiles=create_series_tiles_content(series),
-        comments_tiles=create_comment_tiles_content(series),
+        anime_tile=create_anime_tiles_content(animes),
+        comments_tiles=create_comment_tiles_content(movies.append(series)),
         add_new_tile='create_movie_tiles_content(movies)'
     )
 

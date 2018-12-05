@@ -17,6 +17,12 @@ def seeded_videos():
     that_70s_show = media.Series("That '70s Show", "Eric, a high school student, and his group of teenage friends struggle to lead purposeful lives whilst going through the tumultuous phase of adolescence.", "https://images-na.ssl-images-amazon.com/images/I/51CR295PR1L._SY445_.jpg", "https://www.youtube.com/watch?v=WiyfT_w4GwQ")
     how_i_met_your_mother = media.Series("How I Met Your Mother", "Ted Mosby, an architect, recounts to his children the events that led him to meet their mother. His journey is made more eventful by the presence of his friends Lily, Marshall, Robin and Barney.", "http://www.gstatic.com/tv/thumb/tvbanners/9916255/p9916255_b_v8_aa.jpg", "https://www.youtube.com/watch?v=o96UB-B-0C4")
 
+    deathnote = media.Anime("Death Note", "Death Note (Japanese: デスノート Hepburn: Desu Nōto) is a Japanese manga series written by Tsugumi Ohba and illustrated by Takeshi Obata. The story follows Light Yagami, a high school student who stumbles across a mysterious otherworldly notebook: the 'Death Note', which belonged to the Shinigami Ryuk, and grants its user the power to kill anyone whose name and face he knows. The series centers around Light's subsequent attempts to use the Death Note to change the world into a utopian society without crime as a god-like vigilante named 'Kira' and the subsequent efforts of an elite task-force of law enforcement officials, consisting of members of the Japanese police agency led by L, an enigmatic international detective, to apprehend him and end his reign of terror.", "https://images-na.ssl-images-amazon.com/images/I/51c7O54CdkL.jpg", "https://www.youtube.com/watch?v=tJZtOrm-WPk")
+    naruto = media.Anime("Naruto", "Naruto is a Japanese manga series written and illustrated by Masashi Kishimoto. It tells the story of Naruto Uzumaki, an adolescent ninja who searches for recognition from his peers and the village and also dreams of becoming the Hokage, the leader of his village.", "https://i.pinimg.com/originals/d0/b8/d8/d0b8d8d5f5309a0c9ecc1b9454fbed31.jpg", "https://www.youtube.com/watch?v=j2hiC9BmJlQ")
+    full_metal = media.Anime("Fullmetal Alchemist: Brotherhood", "Brothers Edward and Alphonse Elric search for the Philsopher's Stone, hoping to restore their bodies, which were lost when they attempted to use their alchemy skills to resurrect their deceased mother. Edward, who lost only limbs, joins the State Military, which gives him the freedom to continue the search as he tries to restore his brother, whose soul is tethered to earth by a suit of armor. However, Edward and Alphonse are not the only ones seeking the powerful stone. And as they search, they learn of a plot to transmute the entire country for reasons they cannot comprehend.", "https://m.media-amazon.com/images/M/MV5BZmEzN2YzOTItMDI5MS00MGU4LWI1NWQtOTg5ZThhNGQwYTEzXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg", "https://www.youtube.com/watch?v=BOm_PAI2goo")
+    hunter_x_hunter = media.Anime("Hunter × Hunter", "The story focuses on a young boy named Gon Freecss, who discovers that his father, who he was told was dead, is actually alive and a world-renowned Hunter, a licensed profession for those who specialize in fantastic pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or hunting down lawless individuals. Despite being abandoned by his father, Gon departs upon a journey to follow in his footsteps, pass the rigorous Hunter Examination, and eventually find his father. Along the way, Gon meets various other Hunters and also encounters the paranormal.", "https://ae01.alicdn.com/kf/HTB1SMqNvAKWBuNjy1zjq6AOypXan/Hunter-x-Hunter-Poster-GI-Gon-Killua-Anime-Silk-Wall-Decor-Posters-24x34inch.jpg_640x640.jpg", "https://www.youtube.com/watch?v=d6kBeJjTGnY")
+    attack_on_titan = media.Anime("Attack on Titan", "The story of Attack on Titan revolves around the adventures of Eren Jeager who lives in the town of Shinganshina. When Wall Maria is breached by the Colossal Titan, with the Armored Titan further compromising the town, chaos ensues as the Titans enters Shinganshina causing a mass evacuation. Eren vows to kill all the Titans after watching in horror as a smiling Titan eats his mother, Carla, his father having mysteriously disappeared after giving him a key to their basement. He then enlists in the military with his friends following suit.", "http://img1.ak.crunchyroll.com/i/spire3/962b75cb9f4905f2fd9dfa543610955e1416664140_full.jpg", "https://www.youtube.com/watch?v=MGRm4IzK1SQ")
+
     dark_knight.add_comment('Best scenes: https://www.youtube.com/watch?v=dMribC2uAdQ')
     avengers_infinity_war.add_comment('Loved when thor comes to earth')
     friends.add_comment('Watch season 2,3 and 4!! Great seasons')
@@ -27,14 +33,24 @@ def seeded_videos():
     how_i_met_your_mother.add_comment('Jinx!!!! Enough to explain!')
     how_i_met_your_mother.add_comment("Barney's best moments search on Youtube")
     how_i_met_your_mother.add_comment("Last season was disappointing")
+    deathnote.add_comment('Loved L!!!.. Bad move killing him..')
+    naruto.add_comment('Sasuke vs Itachi')
+    naruto.add_comment('Naruto vs Pain')
+    naruto.add_comment('Naruto vs Sasuke End Fight')
+    full_metal.add_comment('Death of lust')
+    hunter_x_hunter.add_comment('Gon vs Pitou')
+    attack_on_titan.add_comment('Eren vs female titan end fight')
+    attack_on_titan.add_comment('Levi vs female titan')
+    attack_on_titan.add_comment('Eren awakens The Coordinate')
 
     movies = [pulp_fiction, deadpool, dark_knight, avengers_infinity_war]
     series = [friends, that_70s_show, how_i_met_your_mother]
+    anime = [deathnote, naruto, full_metal, hunter_x_hunter, attack_on_titan]
     print(friends.storyline)
-    return movies, series
+    return movies, series, anime
 
 
 # v = Video('abc', 'def', 1)
 # print(v.get_duration())
-movies, series = seeded_videos()
-fresh_tomatoes.open_page(movies, series)
+movies, series, anime = seeded_videos()
+fresh_tomatoes.open_page(movies, series, anime)

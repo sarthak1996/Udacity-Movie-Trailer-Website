@@ -3,3 +3,4 @@
 References:
 https://bootsnipp.com/snippets/featured/our-team-section-using-bootstrap-4
 https://bootsnipp.com/snippets/featured/content-in-bootstrap-tabs
+https://bootsnipp.com/snippets/1elPR

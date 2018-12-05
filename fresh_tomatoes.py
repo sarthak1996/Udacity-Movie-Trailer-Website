@@ -535,6 +535,73 @@ main_page_head = '''
         box-shadow: 0 1px 0 0 #4dd0e1;
         }
 
+        .pinkBg {
+            background-color: #ed184f!important;
+            background-image: linear-gradient(90deg, #fd5581, #fd8b55);
+        }
+        .intro-banner-vdo-play-btn{
+            height:60px;
+            width:60px;
+            position:absolute;
+            top:50%;
+            left:50%;
+            text-align:center;
+            margin:-30px 0 0 -30px;
+            border-radius:100px;
+            z-index:1
+        }
+        .intro-banner-vdo-play-btn i{
+            line-height:56px;
+            font-size:30px
+        }
+        .intro-banner-vdo-play-btn .ripple{
+            position:absolute;
+            width:160px;
+            height:160px;
+            z-index:-1;
+            left:50%;
+            top:50%;
+            opacity:0;
+            margin:-80px 0 0 -80px;
+            border-radius:100px;
+            -webkit-animation:ripple 1.8s infinite;
+            animation:ripple 1.8s infinite
+        }
+
+        @-webkit-keyframes ripple{
+            0%{
+                opacity:1;
+                -webkit-transform:scale(0);
+                transform:scale(0)
+            }
+            100%{
+                opacity:0;
+                -webkit-transform:scale(1);
+                transform:scale(1)
+            }
+        }
+        @keyframes ripple{
+            0%{
+                opacity:1;
+                -webkit-transform:scale(0);
+                transform:scale(0)
+            }
+            100%{
+                opacity:0;
+                -webkit-transform:scale(1);
+                transform:scale(1)
+            }
+        }
+        .intro-banner-vdo-play-btn .ripple:nth-child(2){
+            animation-delay:.3s;
+            -webkit-animation-delay:.3s
+        }
+        .intro-banner-vdo-play-btn .ripple:nth-child(3){
+            animation-delay:.6s;
+            -webkit-animation-delay:.6s
+        }
+
+
     </style>
     <script type="text/javascript" charset="utf-8">
         // Pause the video when the modal is closed
@@ -754,7 +821,22 @@ main_page_content = '''
                           {comments_tiles}
                         </div>
                         <div class="tab-pane fade" id="about">
-                          {add_new_tile}
+                            <div>
+                                <div class="wrapper">
+                                    <div class="floater">
+                                        <div class="text">About Site</div>
+                                        <div class="text">This site is made via python for Udacity Course</div>
+                                    </div>
+                                    <a class="intro-banner-vdo-play-btn pinkBg" target="_blank">
+                                        <i class="glyphicon glyphicon-play whiteText" aria-hidden="true"></i>
+                                        <span class="ripple pinkBg"></span>
+                                        <span class="ripple pinkBg"></span>
+                                        <span class="ripple pinkBg"></span>
+                                    </a>
+
+                                </div>
+
+                            </div>
                         </div>
 
                         <div class="clearfix"></div>

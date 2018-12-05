@@ -53,5 +53,5 @@ def seeded_videos():
 # v = Video('abc', 'def', 1)
 # print(v.get_duration())
 movies, series, anime = seeded_videos()
-# fresh_tomatoes.open_page()
-fresh_tomatoes.open_page(movies, series, anime)
+fresh_tomatoes.open_page()
+# fresh_tomatoes.open_page(movies, series, anime)

@@ -17,9 +17,7 @@ main_page_head = '''
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
     <style type="text/css" media="screen">
-        body {
-            padding-top: 80px;
-        }
+
         #trailer .modal-dialog {
             margin-top: 200px;
             width: 640px;
@@ -189,6 +187,8 @@ main_page_head = '''
         .nav-tabs > li {
             width: 20%;
         }
+
+
         /*li.active:before {
             content: " ";
             position: absolute;
@@ -391,18 +391,7 @@ main_page_head = '''
         .our-webcoderskull .cnt-block .follow-us{
             margin:20px 0 0;
         }
-        .our-webcoderskull .cnt-block .follow-us li{
-            display:inline-block;
-            width:auto;
-            margin:0 5px;
-        }
-        .our-webcoderskull .cnt-block .follow-us li .fa{
-           font-size:24px;
-           color:#767676;
-        }
-        .our-webcoderskull .cnt-block .follow-us li .fa:hover{
-           color:#025a8e;
-        }
+
         @import "https://fonts.googleapis.com/css?family=Megrim";
         .wrapper {
           background: -webkit-linear-gradient(45deg, #d6306d, #fff581);
@@ -422,13 +411,11 @@ main_page_head = '''
           -webkit-perspective: 500px;
                   perspective: 500px;
           box-sizing: border-box;
-          border: 14px solid white;
         }
 
         .floater {
           height: 300px;
           width: 300px;
-          background: white;
           display: -webkit-box;
           display: -ms-flexbox;
           display: flex;
@@ -535,71 +522,7 @@ main_page_head = '''
         box-shadow: 0 1px 0 0 #4dd0e1;
         }
 
-        .pinkBg {
-            background-color: #ed184f!important;
-            background-image: linear-gradient(90deg, #fd5581, #fd8b55);
-        }
-        .intro-banner-vdo-play-btn{
-            height:60px;
-            width:60px;
-            position:absolute;
-            top:50%;
-            left:50%;
-            text-align:center;
-            margin:-30px 0 0 -30px;
-            border-radius:100px;
-            z-index:1
-        }
-        .intro-banner-vdo-play-btn i{
-            line-height:56px;
-            font-size:30px
-        }
-        .intro-banner-vdo-play-btn .ripple{
-            position:absolute;
-            width:160px;
-            height:160px;
-            z-index:-1;
-            left:50%;
-            top:50%;
-            opacity:0;
-            margin:-80px 0 0 -80px;
-            border-radius:100px;
-            -webkit-animation:ripple 1.8s infinite;
-            animation:ripple 1.8s infinite
-        }
 
-        @-webkit-keyframes ripple{
-            0%{
-                opacity:1;
-                -webkit-transform:scale(0);
-                transform:scale(0)
-            }
-            100%{
-                opacity:0;
-                -webkit-transform:scale(1);
-                transform:scale(1)
-            }
-        }
-        @keyframes ripple{
-            0%{
-                opacity:1;
-                -webkit-transform:scale(0);
-                transform:scale(0)
-            }
-            100%{
-                opacity:0;
-                -webkit-transform:scale(1);
-                transform:scale(1)
-            }
-        }
-        .intro-banner-vdo-play-btn .ripple:nth-child(2){
-            animation-delay:.3s;
-            -webkit-animation-delay:.3s
-        }
-        .intro-banner-vdo-play-btn .ripple:nth-child(3){
-            animation-delay:.6s;
-            -webkit-animation-delay:.6s
-        }
 
 
     </style>
@@ -655,7 +578,7 @@ main_page_head = '''
             var input, filter, ul, li, a, i, txtValue;
             input = document.getElementById('movies_search_box');
             filter = input.value.toUpperCase();
-            li = document.getElementsByClassName("col-md-6 col-lg-4 movie-tile text-center");
+            li = document.getElementsByClassName("col-md-6 col-lg-2 movie-tile text-center");
 
             // Loop through all list items, and hide those who don't match the search query
             for (i = 0; i < li.length; i++) {
@@ -673,7 +596,7 @@ main_page_head = '''
             var input, filter, ul, li, a, i, txtValue;
             input = document.getElementById('series_search_box');
             filter = input.value.toUpperCase();
-            li = document.getElementsByClassName("col-md-6 col-lg-4 series-tile text-center");
+            li = document.getElementsByClassName("col-md-6 col-lg-2 series-tile text-center");
 
             // Loop through all list items, and hide those who don't match the search query
             for (i = 0; i < li.length; i++) {
@@ -691,7 +614,7 @@ main_page_head = '''
             var input, filter, ul, li, a, i, txtValue;
             input = document.getElementById('anime_search_box');
             filter = input.value.toUpperCase();
-            li = document.getElementsByClassName("col-md-6 col-lg-4 anime-tile text-center");
+            li = document.getElementsByClassName("col-md-6 col-lg-2 anime-tile text-center");
 
             // Loop through all list items, and hide those who don't match the search query
             for (i = 0; i < li.length; i++) {
@@ -747,12 +670,12 @@ main_page_content = '''
     <!-- Main Page Content -->
 
     <section style="background:#efefe9;">
-        <div class="container">
+
             <div class="row">
-                <div class="board">
+
                     <div class="board-inner">
                         <ul class="nav nav-tabs" id="myTab">
-                            <div class="liner"></div>
+
                             <li class="active">
                                 <a href="#movies" data-toggle="tab" title="Movies">
                                   <span class="round-tabs one">
@@ -824,17 +747,14 @@ main_page_content = '''
                             <div>
                                 <div class="wrapper">
                                     <div class="floater">
-                                        <div class="text">About Site</div>
-                                        <div class="text">This site is made via python for Udacity Course</div>
+                                        <div class="text">Site for</div>
+                                        <div class="text">Udacity</div>
+                                        <div class="text">Course</div>
                                     </div>
-                                    <a class="intro-banner-vdo-play-btn pinkBg" target="_blank">
-                                        <i class="glyphicon glyphicon-play whiteText" aria-hidden="true"></i>
-                                        <span class="ripple pinkBg"></span>
-                                        <span class="ripple pinkBg"></span>
-                                        <span class="ripple pinkBg"></span>
-                                    </a>
+
 
                                 </div>
+
 
                             </div>
                         </div>
@@ -842,9 +762,9 @@ main_page_content = '''
                         <div class="clearfix"></div>
                     </div>
 
-                </div>
+
             </div>
-        </div>
+
     </section>
 
   </body>
@@ -854,21 +774,21 @@ main_page_content = '''
 
 # A single movie entry html template
 movie_tile_content = '''
-<div class="col-md-6 col-lg-4 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
+<div class="col-md-6 col-lg-2 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster_image_url}" width="220" height="342" title="{movie_description}">
     <h2>{movie_title}</h2>
 </div>
 '''
 
 series_tile_content = '''
-<div class="col-md-6 col-lg-4 series-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
+<div class="col-md-6 col-lg-2 series-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster_image_url}" width="220" height="342" title="{series_description}">
     <h2>{series_title}</h2>
 </div>
 '''
 
 anime_tile_content = '''
-<div class="col-md-6 col-lg-4 anime-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
+<div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster_image_url}" width="220" height="342" title="{anime_description}">
     <h2>{anime_title}</h2>
 </div>

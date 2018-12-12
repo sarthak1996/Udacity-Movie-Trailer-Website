@@ -6,6 +6,11 @@ class Video():
         self.duration = duration
         self.storyline = storyline
 
+    def __init__(self):
+        self.title = None
+        self.duration = 0
+        self.storyline = None
+
     def get_title(self):
         return self.title
 

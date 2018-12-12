@@ -767,7 +767,7 @@ main_page_head = '''
         }
 
         $(document).ready(function(){
-            $('[data-toggle="popover"]').popover();
+            $('[data-toggle="popover"]').popover({container:'body'});
         });
     </script>
 </head>
@@ -920,7 +920,7 @@ movie_tile_content = '''
 <div class="col-md-6 col-lg-2 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster_image_url}" width="220" height="342">
     <h3>{movie_title}</h3>
-     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="{movie_description}" title="Movie Description" data-placement="auto"></div>
+     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="{movie_description}" title="{movie_title}" data-placement="auto"></div>
 </div>
 '''
 
@@ -929,7 +929,7 @@ series_tile_content = '''
 <div class="col-md-6 col-lg-2 series-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster_image_url}" width="220" height="342" title="{series_description}">
     <h3>{series_title}</h3>
-    <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="{series_description}" title="Series Description" data-placement="auto"></div>
+    <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="{series_description}" title="{series_title}" data-placement="auto"></div>
 </div>
 '''
 
@@ -937,7 +937,7 @@ anime_tile_content = '''
 <div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster_image_url}" width="220" height="342" title="{anime_description}">
     <h3>{anime_title}</h3>
-    <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="{anime_description}" title="Anime Description" data-placement="auto"></div>
+    <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="{anime_description}" title="{anime_title}" data-placement="auto"></div>
 </div>
 '''
 

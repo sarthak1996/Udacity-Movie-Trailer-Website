@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap-theme.min.css">
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style type="text/css" media="screen">
 
         #trailer .modal-dialog {
@@ -520,105 +517,121 @@
         }
 
 
-.movie-tile .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0);
-  transition: background 0.5s ease;
+        .movie-tile .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0);
+          transition: background 0.5s ease;
+        }
+
+        .movie-tile:hover .overlay {
+          display: block;
+          background: rgba(0, 0, 0, .5);
+        }
+
+
+        .series-tile .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0);
+          transition: background 0.5s ease;
+        }
+
+        .series-tile:hover .overlay {
+          display: block;
+          background: rgba(0, 0, 0, .5);
+        }
+        .anime-tile .overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0);
+          transition: background 0.5s ease;
+        }
+
+        .anime-tile:hover .overlay {
+          display: block;
+          background: rgba(0, 0, 0, .5);
+        }
+
+        .center-block {
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.movie-tile:hover .overlay {
-  display: block;
-  background: rgba(0, 0, 0, .5);
+.input-group .icon-addon .form-control {
+    border-radius: 0;
+}
+
+.form-group{
+    margin-left: 60%;
+    margin-right: 2%;
+}
+
+.icon-addon {
+    position: relative;
+    color: #555;
+    display: block;
+}
+
+.icon-addon:after,
+.icon-addon:before {
+    display: table;
+    content: " ";
+}
+
+.icon-addon:after {
+    clear: both;
+}
+
+.icon-addon.addon-md .glyphicon,
+.icon-addon .glyphicon,
+.icon-addon.addon-md .fa,
+.icon-addon .fa {
+    position: absolute;
+    z-index: 2;
+    left: 10px;
+    font-size: 14px;
+    width: 20px;
+    margin-left: -2.5px;
+    text-align: center;
+    padding: 10px 0;
+    top: 1px
+}
+
+.icon-addon.addon-lg .form-control {
+    line-height: 1.33;
+    height: 46px;
+    font-size: 18px;
+    padding: 10px 16px 10px 40px;
 }
 
 
-.series-tile .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0);
-  transition: background 0.5s ease;
-}
-
-.series-tile:hover .overlay {
-  display: block;
-  background: rgba(0, 0, 0, .5);
-}
-.anime-tile .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0);
-  transition: background 0.5s ease;
-}
-
-.anime-tile:hover .overlay {
-  display: block;
-  background: rgba(0, 0, 0, .5);
+.icon-addon.addon-lg .fa,
+.icon-addon.addon-lg .glyphicon {
+    font-size: 18px;
+    margin-left: 0;
+    left: 11px;
+    top: 4px;
 }
 
 
-.mat-label {
-  display: block;
-  font-size: 16px;
-  transform: translateY(25px);
-  color: #e2e2e2;
-  transition: all 0.5s;
-}
 
-.mat-input {
-  position: relative;
-  background: transparent;
-  width: 100%;
-  border: none;
-  outline: none;
-  padding: 8px 0;
-  font-size: 20px;
+.icon-addon .form-control:focus + .glyphicon,
+.icon-addon:hover .glyphicon,
+.icon-addon .form-control:focus + .fa,
+.icon-addon:hover .fa {
+    color: #2580db;
 }
-
-.mat-div {
-  padding: 30px 0 0 0;
-  position: relative;
-}
-
-.mat-div:after, .mat-div:before {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: #e2e2e2;
-  bottom: 0;
-  left: 0;
-  transition: all 0.5s;
-}
-
-.mat-div::after {
-  background-color: #8E8DBE;
-  transform: scaleX(0);
-}
-
-.is-active::after {
-  transform: scaleX(1);
-}
-
-.is-active .mat-label {
-  color: #8E8DBE;
-}
-
-.is-completed .mat-label {
-  font-size: 12px;
-  transform: translateY(0);
-}
-
 
 
     </style>
@@ -746,16 +759,6 @@
         $(document).ready(function(){
             $('[data-toggle="popover"]').popover();
         });
-
-    $(".mat-input").focus(function(){
-  $(this).parent().addClass("is-active is-completed");
-});
-
-$(".mat-input").focusout(function(){
-  if($(this).val() === "")
-    $(this).parent().removeClass("is-completed");
-  $(this).parent().removeClass("is-active");
-})
     </script>
 </head>
 
@@ -827,12 +830,12 @@ $(".mat-input").focusout(function(){
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="movies">
                             <div class="md-form active-cyan-2 mb-3">
-                            <div class="wrap">
-                                <div class="mat-div">
-    <label for="first-name" class="mat-label">First Name</label>
-    <input type="text" class="mat-input" id="first-name">
-  </div>
-  </div>
+                                <div class="form-group">
+                                    <div class="icon-addon addon-lg">
+                                        <input type="text" placeholder="Search for a movie..." class="form-control" id="movies_search_box" onkeyup="searchMovie()" >
+                                        <label for="movies_search_box" class="glyphicon glyphicon-search" rel="tooltip" title="movie"></label>
+                                    </div>
+                                </div>
                             </div>
                             
 <div class="col-md-6 col-lg-2 movie-tile text-center" data-trailer-youtube-id="tGpTpVyI_OQ" data-toggle="modal" data-target="#trailer">
@@ -862,7 +865,12 @@ $(".mat-input").focusout(function(){
                         </div>
                         <div class="tab-pane fade" id="series">
                             <div class="md-form active-cyan-2 mb-3">
-                                <input id="series_search_box" onkeyup="searchSeries()" class="form-control" type="text" placeholder="Search for Series.." aria-label="Search">
+                                <div class="form-group">
+                                    <div class="icon-addon addon-lg">
+                                        <input type="text" placeholder="Search for a series..." class="form-control" id="series_search_box" onkeyup="searchSeries()" >
+                                        <label for="series_search_box" class="glyphicon glyphicon-search" rel="tooltip" title="series"></label>
+                                    </div>
+                                </div>
                             </div>
                           
 <div class="col-md-6 col-lg-2 series-tile text-center" data-trailer-youtube-id="XzaGBihfREw" data-toggle="modal" data-target="#trailer">
@@ -886,7 +894,12 @@ $(".mat-input").focusout(function(){
                         </div>
                         <div class="tab-pane fade" id="anime">
                             <div class="md-form active-cyan-2 mb-3">
-                                <input id="anime_search_box" onkeyup="searchAnime()" class="form-control" type="text" placeholder="Search for Anime.." aria-label="Search">
+                                <div class="form-group">
+                                    <div class="icon-addon addon-lg">
+                                        <input type="text" placeholder="Search for a anime..." class="form-control" id="anime_search_box" onkeyup="searchAnime()" >
+                                        <label for="anime_search_box" class="glyphicon glyphicon-search" rel="tooltip" title="anime"></label>
+                                    </div>
+                                </div>
                             </div>
                           
 <div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="tJZtOrm-WPk" data-toggle="modal" data-target="#trailer">
@@ -922,7 +935,12 @@ $(".mat-input").focusout(function(){
                         </div>
                         <div class="tab-pane fade" id="comments">
                             <div class="md-form active-cyan-2 mb-3">
-                                <input id="comments_search_box" onkeyup="searchComments()" class="form-control" type="text" placeholder="Search for Comments..(Type title of movie/series/anime)" aria-label="Search">
+                                <div class="form-group">
+                                    <div class="icon-addon addon-lg">
+                                        <input type="text" placeholder="Search for Comments..(Type title of movie/series/anime)" class="form-control" id="comments_search_box" onkeyup="searchComments()" >
+                                        <label for="comments_search_box" class="glyphicon glyphicon-search" rel="tooltip" title="comments"></label>
+                                    </div>
+                                </div>
                             </div>
                           
 <section class="our-webcoderskull padding-lg">

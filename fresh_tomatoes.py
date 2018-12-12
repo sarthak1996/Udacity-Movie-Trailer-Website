@@ -568,7 +568,76 @@ main_page_head = '''
           background: rgba(0, 0, 0, .5);
         }
 
+        .center-block {
+            float: none;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
+        .input-group .icon-addon .form-control {
+            border-radius: 0;
+        }
+
+        .form-group{
+            margin-left: 60%;
+            margin-right: 2%;
+        }
+
+        .icon-addon {
+            position: relative;
+            color: #555;
+            display: block;
+        }
+
+        .icon-addon:after,
+        .icon-addon:before {
+            display: table;
+            content: " ";
+        }
+
+        .icon-addon:after {
+            clear: both;
+        }
+
+        .icon-addon.addon-md .glyphicon,
+        .icon-addon .glyphicon,
+        .icon-addon.addon-md .fa,
+        .icon-addon .fa {
+            position: absolute;
+            z-index: 2;
+            left: 10px;
+            font-size: 14px;
+            width: 20px;
+            margin-left: -2.5px;
+            text-align: center;
+            padding: 10px 0;
+            top: 1px
+        }
+
+        .icon-addon.addon-lg .form-control {
+            line-height: 1.33;
+            height: 46px;
+            font-size: 18px;
+            padding: 10px 16px 10px 40px;
+        }
+
+
+        .icon-addon.addon-lg .fa,
+        .icon-addon.addon-lg .glyphicon {
+            font-size: 18px;
+            margin-left: 0;
+            left: 11px;
+            top: 4px;
+        }
+
+
+
+        .icon-addon .form-control:focus + .glyphicon,
+        .icon-addon:hover .glyphicon,
+        .icon-addon .form-control:focus + .fa,
+        .icon-addon:hover .fa {
+            color: #2580db;
+        }
 
 
     </style>
@@ -771,25 +840,45 @@ main_page_content = '''
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="movies">
                             <div class="md-form active-cyan-2 mb-3">
-                                <input id="movies_search_box" onkeyup="searchMovie()" class="form-control" type="text" placeholder="Search for Movies.." aria-label="Search">
+                                <div class="form-group">
+                                    <div class="icon-addon addon-lg">
+                                        <input type="text" placeholder="Search for a movie..." class="form-control" id="movies_search_box" onkeyup="searchMovie()" >
+                                        <label for="movies_search_box" class="glyphicon glyphicon-search" rel="tooltip" title="movie"></label>
+                                    </div>
+                                </div>
                             </div>
                             {movie_tiles}
                         </div>
                         <div class="tab-pane fade" id="series">
                             <div class="md-form active-cyan-2 mb-3">
-                                <input id="series_search_box" onkeyup="searchSeries()" class="form-control" type="text" placeholder="Search for Series.." aria-label="Search">
+                                <div class="form-group">
+                                    <div class="icon-addon addon-lg">
+                                        <input type="text" placeholder="Search for a series..." class="form-control" id="series_search_box" onkeyup="searchSeries()" >
+                                        <label for="series_search_box" class="glyphicon glyphicon-search" rel="tooltip" title="series"></label>
+                                    </div>
+                                </div>
                             </div>
                           {series_tiles}
                         </div>
                         <div class="tab-pane fade" id="anime">
                             <div class="md-form active-cyan-2 mb-3">
-                                <input id="anime_search_box" onkeyup="searchAnime()" class="form-control" type="text" placeholder="Search for Anime.." aria-label="Search">
+                                <div class="form-group">
+                                    <div class="icon-addon addon-lg">
+                                        <input type="text" placeholder="Search for a anime..." class="form-control" id="anime_search_box" onkeyup="searchAnime()" >
+                                        <label for="anime_search_box" class="glyphicon glyphicon-search" rel="tooltip" title="anime"></label>
+                                    </div>
+                                </div>
                             </div>
                           {anime_tile}
                         </div>
                         <div class="tab-pane fade" id="comments">
                             <div class="md-form active-cyan-2 mb-3">
-                                <input id="comments_search_box" onkeyup="searchComments()" class="form-control" type="text" placeholder="Search for Comments..(Type title of movie/series/anime)" aria-label="Search">
+                                <div class="form-group">
+                                    <div class="icon-addon addon-lg">
+                                        <input type="text" placeholder="Search for Comments..(Type title of movie/series/anime)" class="form-control" id="comments_search_box" onkeyup="searchComments()" >
+                                        <label for="comments_search_box" class="glyphicon glyphicon-search" rel="tooltip" title="comments"></label>
+                                    </div>
+                                </div>
                             </div>
                           {comments_tiles}
                         </div>

@@ -239,9 +239,13 @@ main_page_head = '''
         .tab-content{
             background: -webkit-linear-gradient(45deg, #d6306d, #fff581);
             background: linear-gradient(45deg, #d6306d, #fff581);
+
         }
         .tab-pane{
-           position: relative;
+            position: relative;
+            height: -webkit-fill-available;
+            width: -webkit-fill-available;
+            overflow-y:scroll;
         }
         .tab-content .head{
             font-family: 'Roboto Condensed', sans-serif;
@@ -915,26 +919,16 @@ main_page_content = '''
 movie_tile_content = '''
 <div class="col-md-6 col-lg-2 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster_image_url}" width="220" height="342">
-    <h2>{movie_title}</h2>
+    <h3>{movie_title}</h3>
      <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="{movie_description}" title="Movie Description" data-placement="auto"></div>
 </div>
 '''
 
-# movie_tile_content = '''
-# <div class="col-md-6 col-lg-2 movie-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
-# <div class="hovereffect">
-#         <img class="img-responsive" src="{poster_image_url}" width="220" height="342"  alt="">
-#         <div class="overlay">
-#            <h2>{movie_description}</h2>
-#         </div>
-#     </div>
-#     </div>
-# '''
 
 series_tile_content = '''
 <div class="col-md-6 col-lg-2 series-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster_image_url}" width="220" height="342" title="{series_description}">
-    <h2>{series_title}</h2>
+    <h3>{series_title}</h3>
     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="{series_description}" title="Series Description" data-placement="auto"></div>
 </div>
 '''
@@ -942,7 +936,7 @@ series_tile_content = '''
 anime_tile_content = '''
 <div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
     <img src="{poster_image_url}" width="220" height="342" title="{anime_description}">
-    <h2>{anime_title}</h2>
+    <h3>{anime_title}</h3>
     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="{anime_description}" title="Anime Description" data-placement="auto"></div>
 </div>
 '''

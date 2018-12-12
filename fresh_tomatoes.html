@@ -233,9 +233,13 @@
         .tab-content{
             background: -webkit-linear-gradient(45deg, #d6306d, #fff581);
             background: linear-gradient(45deg, #d6306d, #fff581);
+
         }
         .tab-pane{
-           position: relative;
+            position: relative;
+            height: -webkit-fill-available;
+            width: -webkit-fill-available;
+            overflow-y:scroll;
         }
         .tab-content .head{
             font-family: 'Roboto Condensed', sans-serif;
@@ -563,75 +567,75 @@
         }
 
         .center-block {
-    float: none;
-    margin-left: auto;
-    margin-right: auto;
-}
+            float: none;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-.input-group .icon-addon .form-control {
-    border-radius: 0;
-}
+        .input-group .icon-addon .form-control {
+            border-radius: 0;
+        }
 
-.form-group{
-    margin-left: 60%;
-    margin-right: 2%;
-}
+        .form-group{
+            margin-left: 60%;
+            margin-right: 2%;
+        }
 
-.icon-addon {
-    position: relative;
-    color: #555;
-    display: block;
-}
+        .icon-addon {
+            position: relative;
+            color: #555;
+            display: block;
+        }
 
-.icon-addon:after,
-.icon-addon:before {
-    display: table;
-    content: " ";
-}
+        .icon-addon:after,
+        .icon-addon:before {
+            display: table;
+            content: " ";
+        }
 
-.icon-addon:after {
-    clear: both;
-}
+        .icon-addon:after {
+            clear: both;
+        }
 
-.icon-addon.addon-md .glyphicon,
-.icon-addon .glyphicon,
-.icon-addon.addon-md .fa,
-.icon-addon .fa {
-    position: absolute;
-    z-index: 2;
-    left: 10px;
-    font-size: 14px;
-    width: 20px;
-    margin-left: -2.5px;
-    text-align: center;
-    padding: 10px 0;
-    top: 1px
-}
+        .icon-addon.addon-md .glyphicon,
+        .icon-addon .glyphicon,
+        .icon-addon.addon-md .fa,
+        .icon-addon .fa {
+            position: absolute;
+            z-index: 2;
+            left: 10px;
+            font-size: 14px;
+            width: 20px;
+            margin-left: -2.5px;
+            text-align: center;
+            padding: 10px 0;
+            top: 1px
+        }
 
-.icon-addon.addon-lg .form-control {
-    line-height: 1.33;
-    height: 46px;
-    font-size: 18px;
-    padding: 10px 16px 10px 40px;
-}
-
-
-.icon-addon.addon-lg .fa,
-.icon-addon.addon-lg .glyphicon {
-    font-size: 18px;
-    margin-left: 0;
-    left: 11px;
-    top: 4px;
-}
+        .icon-addon.addon-lg .form-control {
+            line-height: 1.33;
+            height: 46px;
+            font-size: 18px;
+            padding: 10px 16px 10px 40px;
+        }
 
 
+        .icon-addon.addon-lg .fa,
+        .icon-addon.addon-lg .glyphicon {
+            font-size: 18px;
+            margin-left: 0;
+            left: 11px;
+            top: 4px;
+        }
 
-.icon-addon .form-control:focus + .glyphicon,
-.icon-addon:hover .glyphicon,
-.icon-addon .form-control:focus + .fa,
-.icon-addon:hover .fa {
-    color: #2580db;
-}
+
+
+        .icon-addon .form-control:focus + .glyphicon,
+        .icon-addon:hover .glyphicon,
+        .icon-addon .form-control:focus + .fa,
+        .icon-addon:hover .fa {
+            color: #2580db;
+        }
 
 
     </style>
@@ -840,25 +844,25 @@
                             
 <div class="col-md-6 col-lg-2 movie-tile text-center" data-trailer-youtube-id="tGpTpVyI_OQ" data-toggle="modal" data-target="#trailer">
     <img src="https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg" width="220" height="342">
-    <h2>Pulp Fiction</h2>
+    <h3>Pulp Fiction</h3>
      <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="In the realm of underworld, a series of incidents intertwines the lives of two Los Angeles mobsters, a gangster's wife, a boxer and two small-time criminals." title="Movie Description" data-placement="auto"></div>
 </div>
 
 <div class="col-md-6 col-lg-2 movie-tile text-center" data-trailer-youtube-id="9vN6DHB6bJc" data-toggle="modal" data-target="#trailer">
     <img src="http://www.gstatic.com/tv/thumb/v22vodart/11098044/p11098044_v_v8_af.jpg" width="220" height="342">
-    <h2>Deadpool</h2>
+    <h3>Deadpool</h3>
      <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="Mercenary Wade Wilson, subjected to an experiment to heal himself of cancer, obtains healing powers, but at the cost of becoming awfully disfigured. He then adopts the alter ego of Deadpool." title="Movie Description" data-placement="auto"></div>
 </div>
 
 <div class="col-md-6 col-lg-2 movie-tile text-center" data-trailer-youtube-id="EXeTwQWrcwY" data-toggle="modal" data-target="#trailer">
     <img src="http://www.gstatic.com/tv/thumb/v22vodart/173378/p173378_v_v8_at.jpg" width="220" height="342">
-    <h2>The Dark Knight</h2>
+    <h3>The Dark Knight</h3>
      <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="With the help of allies Lt. Jim Gordon (Gary Oldman) and DA Harvey Dent (Aaron Eckhart), Batman (Christian Bale) has been able to keep a tight lid on crime in Gotham City. But when a vile young criminal calling himself the Joker (Heath Ledger) suddenly throws the town into chaos, the caped Crusader begins to tread a fine line between heroism and vigilantism." title="Movie Description" data-placement="auto"></div>
 </div>
 
 <div class="col-md-6 col-lg-2 movie-tile text-center" data-trailer-youtube-id="6ZfuNTqbHE8" data-toggle="modal" data-target="#trailer">
     <img src="http://www.gstatic.com/tv/thumb/v22vodart/12863030/p12863030_v_v8_ae.jpg" width="220" height="342">
-    <h2>Avengers: Infinity War</h2>
+    <h3>Avengers: Infinity War</h3>
      <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="Iron Man, Thor, the Hulk and the rest of the Avengers unite to battle their most powerful enemy yet -- the evil Thanos. On a mission to collect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twisted will on reality. The fate of the planet and existence itself has never been more uncertain as everything the Avengers have fought for has led up to this moment." title="Movie Description" data-placement="auto"></div>
 </div>
 
@@ -875,19 +879,19 @@
                           
 <div class="col-md-6 col-lg-2 series-tile text-center" data-trailer-youtube-id="XzaGBihfREw" data-toggle="modal" data-target="#trailer">
     <img src="https://peopledotcom.files.wordpress.com/2016/08/friends-435-5.jpg" width="220" height="342" title="Follow the lives of six reckless adults living in Manhattan, as they indulge in adventures which make their lives both troublesome and happening.">
-    <h2>Friends</h2>
+    <h3>Friends</h3>
     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="Follow the lives of six reckless adults living in Manhattan, as they indulge in adventures which make their lives both troublesome and happening." title="Series Description" data-placement="auto"></div>
 </div>
 
 <div class="col-md-6 col-lg-2 series-tile text-center" data-trailer-youtube-id="WiyfT_w4GwQ" data-toggle="modal" data-target="#trailer">
     <img src="https://images-na.ssl-images-amazon.com/images/I/51CR295PR1L._SY445_.jpg" width="220" height="342" title="Eric, a high school student, and his group of teenage friends struggle to lead purposeful lives whilst going through the tumultuous phase of adolescence.">
-    <h2>That '70s Show</h2>
+    <h3>That '70s Show</h3>
     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="Eric, a high school student, and his group of teenage friends struggle to lead purposeful lives whilst going through the tumultuous phase of adolescence." title="Series Description" data-placement="auto"></div>
 </div>
 
 <div class="col-md-6 col-lg-2 series-tile text-center" data-trailer-youtube-id="o96UB-B-0C4" data-toggle="modal" data-target="#trailer">
     <img src="http://www.gstatic.com/tv/thumb/tvbanners/9916255/p9916255_b_v8_aa.jpg" width="220" height="342" title="Ted Mosby, an architect, recounts to his children the events that led him to meet their mother. His journey is made more eventful by the presence of his friends Lily, Marshall, Robin and Barney.">
-    <h2>How I Met Your Mother</h2>
+    <h3>How I Met Your Mother</h3>
     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="Ted Mosby, an architect, recounts to his children the events that led him to meet their mother. His journey is made more eventful by the presence of his friends Lily, Marshall, Robin and Barney." title="Series Description" data-placement="auto"></div>
 </div>
 
@@ -904,31 +908,31 @@
                           
 <div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="tJZtOrm-WPk" data-toggle="modal" data-target="#trailer">
     <img src="https://images-na.ssl-images-amazon.com/images/I/51c7O54CdkL.jpg" width="220" height="342" title="Death Note is a Japanese manga series written by Tsugumi Ohba and illustrated by Takeshi Obata. The story follows Light Yagami, a high school student who stumbles across a mysterious otherworldly notebook: the 'Death Note', which belonged to the Shinigami Ryuk, and grants its user the power to kill anyone whose name and face he knows. The series centers around Light's subsequent attempts to use the Death Note to change the world into a utopian society without crime as a god-like vigilante named 'Kira' and the subsequent efforts of an elite task-force of law enforcement officials, consisting of members of the Japanese police agency led by L, an enigmatic international detective, to apprehend him and end his reign of terror.">
-    <h2>Death Note</h2>
+    <h3>Death Note</h3>
     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="Death Note is a Japanese manga series written by Tsugumi Ohba and illustrated by Takeshi Obata. The story follows Light Yagami, a high school student who stumbles across a mysterious otherworldly notebook: the 'Death Note', which belonged to the Shinigami Ryuk, and grants its user the power to kill anyone whose name and face he knows. The series centers around Light's subsequent attempts to use the Death Note to change the world into a utopian society without crime as a god-like vigilante named 'Kira' and the subsequent efforts of an elite task-force of law enforcement officials, consisting of members of the Japanese police agency led by L, an enigmatic international detective, to apprehend him and end his reign of terror." title="Anime Description" data-placement="auto"></div>
 </div>
 
 <div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="j2hiC9BmJlQ" data-toggle="modal" data-target="#trailer">
     <img src="https://i.pinimg.com/originals/d0/b8/d8/d0b8d8d5f5309a0c9ecc1b9454fbed31.jpg" width="220" height="342" title="Naruto is a Japanese manga series written and illustrated by Masashi Kishimoto. It tells the story of Naruto Uzumaki, an adolescent ninja who searches for recognition from his peers and the village and also dreams of becoming the Hokage, the leader of his village.">
-    <h2>Naruto</h2>
+    <h3>Naruto</h3>
     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="Naruto is a Japanese manga series written and illustrated by Masashi Kishimoto. It tells the story of Naruto Uzumaki, an adolescent ninja who searches for recognition from his peers and the village and also dreams of becoming the Hokage, the leader of his village." title="Anime Description" data-placement="auto"></div>
 </div>
 
 <div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="BOm_PAI2goo" data-toggle="modal" data-target="#trailer">
     <img src="https://m.media-amazon.com/images/M/MV5BZmEzN2YzOTItMDI5MS00MGU4LWI1NWQtOTg5ZThhNGQwYTEzXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg" width="220" height="342" title="Brothers Edward and Alphonse Elric search for the Philsopher's Stone, hoping to restore their bodies, which were lost when they attempted to use their alchemy skills to resurrect their deceased mother. Edward, who lost only limbs, joins the State Military, which gives him the freedom to continue the search as he tries to restore his brother, whose soul is tethered to earth by a suit of armor. However, Edward and Alphonse are not the only ones seeking the powerful stone. And as they search, they learn of a plot to transmute the entire country for reasons they cannot comprehend.">
-    <h2>Fullmetal Alchemist: Brotherhood</h2>
+    <h3>Fullmetal Alchemist: Brotherhood</h3>
     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="Brothers Edward and Alphonse Elric search for the Philsopher's Stone, hoping to restore their bodies, which were lost when they attempted to use their alchemy skills to resurrect their deceased mother. Edward, who lost only limbs, joins the State Military, which gives him the freedom to continue the search as he tries to restore his brother, whose soul is tethered to earth by a suit of armor. However, Edward and Alphonse are not the only ones seeking the powerful stone. And as they search, they learn of a plot to transmute the entire country for reasons they cannot comprehend." title="Anime Description" data-placement="auto"></div>
 </div>
 
 <div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="d6kBeJjTGnY" data-toggle="modal" data-target="#trailer">
     <img src="https://ae01.alicdn.com/kf/HTB1SMqNvAKWBuNjy1zjq6AOypXan/Hunter-x-Hunter-Poster-GI-Gon-Killua-Anime-Silk-Wall-Decor-Posters-24x34inch.jpg_640x640.jpg" width="220" height="342" title="The story focuses on a young boy named Gon Freecss, who discovers that his father, who he was told was dead, is actually alive and a world-renowned Hunter, a licensed profession for those who specialize in fantastic pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or hunting down lawless individuals. Despite being abandoned by his father, Gon departs upon a journey to follow in his footsteps, pass the rigorous Hunter Examination, and eventually find his father. Along the way, Gon meets various other Hunters and also encounters the paranormal.">
-    <h2>Hunter × Hunter</h2>
+    <h3>Hunter × Hunter</h3>
     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="The story focuses on a young boy named Gon Freecss, who discovers that his father, who he was told was dead, is actually alive and a world-renowned Hunter, a licensed profession for those who specialize in fantastic pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or hunting down lawless individuals. Despite being abandoned by his father, Gon departs upon a journey to follow in his footsteps, pass the rigorous Hunter Examination, and eventually find his father. Along the way, Gon meets various other Hunters and also encounters the paranormal." title="Anime Description" data-placement="auto"></div>
 </div>
 
 <div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="MGRm4IzK1SQ" data-toggle="modal" data-target="#trailer">
     <img src="http://img1.ak.crunchyroll.com/i/spire3/962b75cb9f4905f2fd9dfa543610955e1416664140_full.jpg" width="220" height="342" title="The story of Attack on Titan revolves around the adventures of Eren Jeager who lives in the town of Shinganshina. When Wall Maria is breached by the Colossal Titan, with the Armored Titan further compromising the town, chaos ensues as the Titans enters Shinganshina causing a mass evacuation. Eren vows to kill all the Titans after watching in horror as a smiling Titan eats his mother, Carla, his father having mysteriously disappeared after giving him a key to their basement. He then enlists in the military with his friends following suit.">
-    <h2>Attack on Titan</h2>
+    <h3>Attack on Titan</h3>
     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="The story of Attack on Titan revolves around the adventures of Eren Jeager who lives in the town of Shinganshina. When Wall Maria is breached by the Colossal Titan, with the Armored Titan further compromising the town, chaos ensues as the Titans enters Shinganshina causing a mass evacuation. Eren vows to kill all the Titans after watching in horror as a smiling Titan eats his mother, Carla, his father having mysteriously disappeared after giving him a key to their basement. He then enlists in the military with his friends following suit." title="Anime Description" data-placement="auto"></div>
 </div>
 

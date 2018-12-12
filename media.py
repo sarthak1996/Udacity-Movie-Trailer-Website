@@ -8,6 +8,11 @@ class Movie(Video):
         self.poster_image_url = movie_poster
         self.trailer_youtube_url = movie_trailer
 
+    def __init__(self):
+        Video.__init__(self)
+        self.poster_image_url = None
+        self.trailer_youtube_url = None
+
     def show_trailer(self):
         webbrowser.open(self.trailer_youtube_url)
 
@@ -26,6 +31,11 @@ class Series(Video):
         self.poster_image_url = series_poster
         self.trailer_youtube_url = series_trailer
 
+    def __init__(self):
+        Video.__init__(self)
+        self.poster_image_url = None
+        self.trailer_youtube_url = None
+
     def show_trailer(self):
         webbrowser.open(self.trailer_youtube_url)
 
@@ -43,6 +53,11 @@ class Anime(Video):
         Video.__init__(self, series_title, series_storyline, series_duration)
         self.poster_image_url = series_poster
         self.trailer_youtube_url = series_trailer
+
+    def __init__(self):
+        Video.__init__(self)
+        self.poster_image_url = None
+        self.trailer_youtube_url = None
 
     def show_trailer(self):
         webbrowser.open(self.trailer_youtube_url)

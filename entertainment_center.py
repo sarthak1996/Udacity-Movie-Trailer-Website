@@ -2,6 +2,19 @@ import media
 import fresh_tomatoes
 from video import Video
 
+seeded_videos_allowed = True
+movies = []
+anime = []
+series = []
+
+'''
+CONSTANTS START
+'''
+INV_INPUT = 'Invalid Input'
+
+'''
+CONSTANTS END
+'''
 
 def seeded_videos():
     pulp_fiction = media.Movie('Pulp Fiction', "In the realm of underworld, a series of incidents intertwines the lives of two Los Angeles mobsters, a gangster's wife, a boxer and two small-time criminals.", 'https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg', "https://www.youtube.com/watch?v=tGpTpVyI_OQ")
@@ -50,19 +63,88 @@ def seeded_videos():
     return movies, series, anime
 
 
-# v = Video('abc', 'def', 1)
-# print(v.get_duration())
-movies, series, anime = seeded_videos()
-# f = open("seed_data.xml", "w")
-# content = ''
-# for movie in movies:
-#     content += movie.convert_to_xml()
-# for series_element in series:
-#     content += series_element.convert_to_xml()
-# for anime_element in anime:
-#     content += anime_element.convert_to_xml()
-# content='<seed_data>'+content+'\n</seed_data>'
-# f.write(content)
-# f.close()
-# fresh_tomatoes.open_page()
+def input_seeded_or_not():
+    global seeded_videos_allowed
+    tmp_mov, tmp_ser, temp_ani = seeded_videos()
+    mov_str = '\n'.join([(i + 1) + '. ' + movie for i, movie in enumerate(tmp_mov)])
+    ser_str = '\n'.join([(i + 1) + '. ' + series for i, series in enumerate(tmp_ser)])
+    anime_str = '\n'.join([(i + 1) + '. ' + anime for i, anime in enumerate(tmp_ani)])
+    print('Here are the seeded videos:')
+    print('Movies:')
+    print(mov_str)
+    print('Series:')
+    print(ser_str)
+    print('Animes:')
+    print(anime_str)
+    print('\n\n')
+    inp = input('Want to add seeded videos to the website?\nPress Enter to include seeded videos! Any other key + Enter to exclude!')
+    if(inp is None):
+        seeded_videos_allowed = True
+    else:
+        seeded_videos_allowed = False
+
+
+def validate_before_commit(videos, video_type):
+    print('Here is the list of {video_type} you entered:'.format(video_type=video_type))
+    for video in videos:
+        video.print_formatted_output()
+    choice = input('Please double check all the information provided!\nPress Enter to accept! Any other key + Enter to modify:')
+    if choice is None:
+        return True
+    else:
+        return False
+
+
+def print_formatted_title(videos):
+    video_str_arr = [(i + 1) + '. ' + video for i, video in enumerate(videos)]
+    video_str = '\n'.join(video_str_arr)
+    return video_str
+
+
+def show_error(code):
+    if code == INV_INPUT:
+        print('It seems you have entered data incorrectly!!\nPlease enter again!')
+
+
+def update_video_at(videos, index):
+    video = videos[index]
+    attrb = video.get_attr()
+
+
+
+def update_list_of_videos(videos, video_type):
+    print('Here are the {video_type}s you added:')
+    print_formatted_title(videos)
+    choice = input('Choose a number:')
+    while(1):
+        if choice in range(1, len(videos) + 1):
+            videos = update_video_at(videos, choice - 1)
+        else:
+            show_error(INV_INPUT)
+            print_formatted_title(videos)
+            choice = input('Choose a number:')
+    is_safe_to_commit = validate_before_commit(videos)
+    if not is_safe_to_commit:
+        update_list_of_videos(videos, video_type)
+    else:
+        return videos
+
+
+def input_movies():
+    n = input('Please enter number of movies that you want to add :')
+    user_defined_movies = []
+    while(n > 0):
+        movie = media.Movie()
+        movie.title = input('Enter movie name :')
+        movie.storyline = input('Enter movie description :')
+        movie.poster_image_url = input('Enter movie poster url :')
+        movie.trailer_youtube_url = input('Enter movie trailer :')
+        user_defined_movies += movie
+    is_safe_to_commit = validate_before_commit(user_defined_movies)
+    if not is_safe_to_commit:
+        user_defined_movies = update_list_of_videos(user_defined_movies)
+    else:
+        return user_defined_movies
+
+
 fresh_tomatoes.open_page(movies, series, anime)

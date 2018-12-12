@@ -818,7 +818,7 @@ main_page_content = '''
                             <li>
                                 <a href="#anime" data-toggle="tab" title="Anime">
                                      <span class="round-tabs three">
-                                          <i class="glyphicon glyphicon-comment"></i>
+                                          <i class="glyphicon glyphicon-fire"></i>
                                      </span>
                                  </a>
                             </li>
@@ -826,14 +826,14 @@ main_page_content = '''
                             <li>
                                 <a href="#comments" data-toggle="tab" title="Comments">
                                     <span class="round-tabs four">
-                                        <i class="glyphicon glyphicon-plus"></i>
+                                        <i class="glyphicon glyphicon-comment"></i>
                                     </span>
                                 </a>
                             </li>
                             <li>
                                 <a href="#about" data-toggle="tab" title="About">
                                     <span class="round-tabs five">
-                                        <i class="glyphicon glyphicon-cog"></i>
+                                        <i class="glyphicon glyphicon-info-sign"></i>
                                     </span>
                                 </a>
                             </li>

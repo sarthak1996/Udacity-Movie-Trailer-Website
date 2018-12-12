@@ -39,7 +39,7 @@ class Video():
         return not(self.comments is None)
 
     def convert_to_xml(self):
-        content = '  <title>' + self.title + '</title>\n'
-        content += '  <storyline>' + self.storyline + '</storyline>\n'
+        content = '  <title>' + self.title.replace('</', '').replace('>', '') + '</title>\n'
+        content += '  <storyline>' + self.storyline.replace('</', '').replace('>', '') + '</storyline>\n'
         content += '  <duration>' + str(self.duration) + '</duration>\n'
         return content

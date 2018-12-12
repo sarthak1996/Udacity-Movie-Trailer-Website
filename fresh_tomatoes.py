@@ -669,7 +669,7 @@ main_page_head = '''
             $(this).next("div").show("fast", showNext);
           });
         });
-
+        // Start playing the video whenever the trailer modal is opened
         $(document).on('click', '.series-tile', function (event) {
             var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
             var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
@@ -687,6 +687,23 @@ main_page_head = '''
           });
         });
 
+        // Start playing the video whenever the trailer modal is opened
+        $(document).on('click', '.anime-tile', function (event) {
+            var trailerYouTubeId = $(this).attr('data-trailer-youtube-id')
+            var sourceUrl = 'http://www.youtube.com/embed/' + trailerYouTubeId + '?autoplay=1&html5=1';
+            $("#trailer-video-container").empty().append($("<iframe></iframe>", {
+              'id': 'trailer-video',
+              'type': 'text-html',
+              'src': sourceUrl,
+              'frameborder': 0
+            }));
+        });
+        // Animate in the movies when the page loads
+        $(document).ready(function () {
+          $('.anime-tile').hide().first().show("fast", function showNext() {
+            $(this).next("div").show("fast", showNext);
+          });
+        });
 
         $(function(){
             $('a[title]').tooltip();
@@ -1081,8 +1098,7 @@ def open_page(movies=None, series=None, animes=None):
         movie_tiles=create_movie_tiles_content(movies),
         series_tiles=create_series_tiles_content(series),
         anime_tile=create_anime_tiles_content(animes),
-        comments_tiles=create_comment_tiles_content(combined_list),
-        add_new_tile='create_movie_tiles_content(movies)'
+        comments_tiles=create_comment_tiles_content(combined_list)
     )
 
     # Output the file

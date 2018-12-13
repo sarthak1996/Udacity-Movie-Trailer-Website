@@ -1,71 +1,49 @@
-import webbrowser
 from video import Video
 
 
 class Movie(Video):
+    '''
+    XML TAGS
+    '''
+    MOVIE_TAG = '<movie>{content}</movie>\n'
+
     def __init__(self, movie_title, movie_storyline, movie_poster, movie_trailer, movie_duration=0):
-        Video.__init__(self, movie_title, movie_storyline, movie_duration)
-        self.poster_image_url = movie_poster
-        self.trailer_youtube_url = movie_trailer
+        Video.__init__(self, movie_title, movie_storyline, movie_poster, movie_trailer, movie_duration)
 
     def __init__(self):
         Video.__init__(self)
-        self.poster_image_url = None
-        self.trailer_youtube_url = None
-
-    def show_trailer(self):
-        webbrowser.open(self.trailer_youtube_url)
 
     def convert_to_xml(self):
-        content = '\n<movie>\n'
-        content += Video.convert_to_xml(self)
-        content += '  <poster_image_url>' + self.poster_image_url.replace('</', '').replace('>', '') + '</poster_image_url>\n'
-        content += '  <trailer_youtube_url>' + self.trailer_youtube_url.replace('</', '').replace('>', '') + '</trailer_youtube_url>\n'
-        content += '</movie>'
-        return content
+        return Video.convert_to_xml(self, self.MOVIE_TAG)
 
 
 class Series(Video):
+    '''
+    XML TAGS
+    '''
+    SERIES_TAG = '<series>{content}</series>\n'
+
     def __init__(self, series_title, series_storyline, series_poster, series_trailer, series_duration=0):
-        Video.__init__(self, series_title, series_storyline, series_duration)
-        self.poster_image_url = series_poster
-        self.trailer_youtube_url = series_trailer
+        Video.__init__(self, series_title, series_storyline, series_poster, series_trailer, series_duration)
 
     def __init__(self):
         Video.__init__(self)
-        self.poster_image_url = None
-        self.trailer_youtube_url = None
-
-    def show_trailer(self):
-        webbrowser.open(self.trailer_youtube_url)
 
     def convert_to_xml(self):
-        content = '\n<series>\n'
-        content += Video.convert_to_xml(self)
-        content += '  <poster_image_url>' + self.poster_image_url.replace('</', '').replace('>', '') + '</poster_image_url>\n'
-        content += '  <trailer_youtube_url>' + self.trailer_youtube_url.replace('</', '').replace('>', '') + '</trailer_youtube_url>\n'
-        content += '</series>'
-        return content
+        return Video.convert_to_xml(self, self.SERIES_TAG)
 
 
 class Anime(Video):
-    def __init__(self, series_title, series_storyline, series_poster, series_trailer, series_duration=0):
-        Video.__init__(self, series_title, series_storyline, series_duration)
-        self.poster_image_url = series_poster
-        self.trailer_youtube_url = series_trailer
+    '''
+    XML TAGS
+    '''
+    ANIME_TAG = '<anime>{content}</anime>\n'
+
+    def __init__(self, anime_title, anime_storyline, anime_poster, anime_trailer, anime_duration=0):
+        Video.__init__(self, anime_title, anime_storyline, anime_poster, anime_trailer, anime_duration)
 
     def __init__(self):
         Video.__init__(self)
-        self.poster_image_url = None
-        self.trailer_youtube_url = None
-
-    def show_trailer(self):
-        webbrowser.open(self.trailer_youtube_url)
 
     def convert_to_xml(self):
-        content = '\n<anime>\n'
-        content += Video.convert_to_xml(self)
-        content += '  <poster_image_url>' + self.poster_image_url.replace('</', '').replace('>', '') + '</poster_image_url>\n'
-        content += '  <trailer_youtube_url>' + self.trailer_youtube_url.replace('</', '').replace('>', '') + '</trailer_youtube_url>\n'
-        content += '</anime>'
-        return content
+        return Video.convert_to_xml(self, self.ANIME_TAG)

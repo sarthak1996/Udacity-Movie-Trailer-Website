@@ -47,8 +47,20 @@ class Video():
         content = container_tag.format(content=content)
         return content
 
-    def get_attr(self):
+    def get_attrs_string(self):
         return self.attrs
+
+    def get_attr(self, attr_index):
+        if attr_index == 0:
+            return self.title
+        elif attr_index == 1:
+            return self.storyline
+        elif attr_index == 2:
+            return self.duration
+        elif attr_index == 3:
+            return self.poster_image_url
+        elif attr_index == 4:
+            return self.trailer_youtube_url
 
     def set_attr_value(self, attr_index, value):
         if attr_index == 0:
@@ -66,13 +78,10 @@ class Video():
             return -1
         return 1
 
-    def set_attr(self, attr_indices, values):
-        if len(attr_indices) != len(values):
-            print('ERROR: Length of indices and values do not match!')
-            return -1
+    def set_attr(self, attr_indices, upd_video_obj):
         for chosen_attr in attr_indices:
-            if chosen_attr in attrs:
-                if (self.set_attr_value(self, chosen_attr, values[chosen_attr])) == -1:
+            if chosen_attr in self.attrs:
+                if (self.set_attr_value(self, chosen_attr, upd_video_obj.get_attr(self, chosen_attr))) == -1:
                     return -1
             else:
                 print('ERROR: Entered index is not a valid index for attribute!')
@@ -81,3 +90,15 @@ class Video():
 
     def show_trailer(self):
         webbrowser.open(self.trailer_youtube_url)
+
+    def print_formatted_attrs(self):
+        print(self.attrs)
+
+    def validate_attr_list(self, attr_indices):
+        for index in attr_indices:
+            if index not in self.attrs:
+                return False
+        return True
+
+    def input_attr_values(self):
+        print()

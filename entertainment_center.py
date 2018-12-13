@@ -16,6 +16,7 @@ INV_INPUT = 'Invalid Input'
 CONSTANTS END
 '''
 
+
 def seeded_videos():
     pulp_fiction = media.Movie('Pulp Fiction', "In the realm of underworld, a series of incidents intertwines the lives of two Los Angeles mobsters, a gangster's wife, a boxer and two small-time criminals.", 'https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg', "https://www.youtube.com/watch?v=tGpTpVyI_OQ")
 
@@ -108,8 +109,13 @@ def show_error(code):
 
 def update_video_at(videos, index):
     video = videos[index]
-    attrb = video.get_attr()
-
+    video.print_formatted_attrs()
+    attr_indices = input('Choose from the above attributes: ')
+    attr_indices = map(int, attr_indices.split(','))
+    if video.validate_attr_list(attr_indices):
+        video.input_attr_values()
+    else:
+        print('Please enter a valid attr')
 
 
 def update_list_of_videos(videos, video_type):

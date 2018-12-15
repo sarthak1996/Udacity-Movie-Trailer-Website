@@ -10,9 +10,6 @@ class Movie(Video):
     def __init__(self, movie_title, movie_storyline, movie_poster, movie_trailer, movie_duration=0):
         Video.__init__(self, movie_title, movie_storyline, movie_poster, movie_trailer, movie_duration)
 
-    def __init__(self):
-        Video.__init__(self)
-
     def convert_to_xml(self):
         return Video.convert_to_xml(self, self.MOVIE_TAG)
 
@@ -26,9 +23,6 @@ class Series(Video):
     def __init__(self, series_title, series_storyline, series_poster, series_trailer, series_duration=0):
         Video.__init__(self, series_title, series_storyline, series_poster, series_trailer, series_duration)
 
-    def __init__(self):
-        Video.__init__(self)
-
     def convert_to_xml(self):
         return Video.convert_to_xml(self, self.SERIES_TAG)
 
@@ -41,9 +35,6 @@ class Anime(Video):
 
     def __init__(self, anime_title, anime_storyline, anime_poster, anime_trailer, anime_duration=0):
         Video.__init__(self, anime_title, anime_storyline, anime_poster, anime_trailer, anime_duration)
-
-    def __init__(self):
-        Video.__init__(self)
 
     def convert_to_xml(self):
         return Video.convert_to_xml(self, self.ANIME_TAG)

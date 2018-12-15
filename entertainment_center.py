@@ -1,7 +1,9 @@
 import media
 import fresh_tomatoes
 from video import Video
+import sys
 
+run_mode = 'main'
 seeded_videos_allowed = True
 
 '''
@@ -66,10 +68,20 @@ def seeded_videos():
 
 def input_seeded_or_not():
     global seeded_videos_allowed
-    tmp_mov, tmp_ser, temp_ani = seeded_videos()
-    mov_str = '\n'.join([(i + 1) + '. ' + movie for i, movie in enumerate(tmp_mov)])
-    ser_str = '\n'.join([(i + 1) + '. ' + series for i, series in enumerate(tmp_ser)])
-    anime_str = '\n'.join([(i + 1) + '. ' + anime for i, anime in enumerate(tmp_ani)])
+    tmp_mov, tmp_ser, tmp_ani = [], [], []
+    seeded_vids = seeded_videos()
+    for video in seeded_vids:
+        if type(video) is media.Movie:
+            tmp_mov.append(video)
+        elif type(video) is media.Series:
+            tmp_ser.append(video)
+        elif type(video) is media.Anime:
+            tmp_ani.append(video)
+        else:
+            print('ERROR: Incorrect object type initialization')
+    mov_str = '\n'.join([str(i + 1) + '. ' + movie.title for i, movie in enumerate(tmp_mov)])
+    ser_str = '\n'.join([str(i + 1) + '. ' + series.title for i, series in enumerate(tmp_ser)])
+    anime_str = '\n'.join([str(i + 1) + '. ' + anime.title for i, anime in enumerate(tmp_ani)])
     print('Here are the seeded videos:')
     print('Movies:')
     print(mov_str)
@@ -79,7 +91,7 @@ def input_seeded_or_not():
     print(anime_str)
     print('\n\n')
     inp = input('Want to add seeded videos to the website?\nPress Enter to include seeded videos! Any other key + Enter to exclude!')
-    if(inp is None):
+    if(inp == ''):
         seeded_videos_allowed = True
     else:
         seeded_videos_allowed = False
@@ -174,21 +186,38 @@ def input_videos(input_type, upd_mode=False, video_upd=None):
         update_list_of_videos(video_upd, current_input)
 
 
-# fresh_tomatoes.open_page(movies, series, anime)
+def log(message, wait=False):
+    '''
+    This method prints or waits till the input is entered only when testing the code
+    '''
+    if run_mode == 'test' and wait:
+        input(message)
+    elif run_mode == 'test':
+        print(message)
+    return
+
+
 if __name__ == '__main__':
+    run_mode = 'main'
+    if len(sys.argv) == 2:
+        if sys.argv[1] == 'test':
+            run_mode = sys.argv[1]
     input_type_choice_list = ['Movie', 'Series', 'Anime']
     input_seeded_or_not()
-    print('Adding seeded videos.!')
+
     videos = []
     if seeded_videos_allowed:
+        print('Adding seeded videos.!')
         videos = seeded_videos()
     print('Please choose which types you want to add!')
-    print('\n'.join([(i + 1) + '. ' + temp for i, temp in enumerate(input_type_choice_list)]))
-    choice = input('Enter your choice:')
+    print('\n'.join([str(i + 1) + '. ' + temp for i, temp in enumerate(input_type_choice_list)]))
+    choice = int(input('Enter your choice:'))
 
-    if choice == INPUT_MOVIE_DTLS - 1:
+    if choice == INPUT_MOVIE_DTLS + 1:
         videos += input_videos(INPUT_MOVIE_DTLS)
-    elif choice == INPUT_SERIES_DTLS - 1:
+    elif choice == INPUT_SERIES_DTLS + 1:
         videos += input_videos(INPUT_SERIES_DTLS)
-    elif choice == INPUT_ANIME_DTLS - 1:
+    elif choice == INPUT_ANIME_DTLS + 1:
         videos += input_videos(INPUT_ANIME_DTLS)
+    else:
+        print('Invalid choice' + choice)

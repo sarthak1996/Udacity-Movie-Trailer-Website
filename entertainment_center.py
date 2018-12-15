@@ -3,14 +3,14 @@ import fresh_tomatoes
 from video import Video
 
 seeded_videos_allowed = True
-movies = []
-anime = []
-series = []
 
 '''
 CONSTANTS START
 '''
 INV_INPUT = 'Invalid Input'
+INPUT_MOVIE_DTLS = 0
+INPUT_SERIES_DTLS = 1
+INPUT_ANIME_DTLS = 2
 
 '''
 CONSTANTS END
@@ -61,7 +61,7 @@ def seeded_videos():
     series = [friends, that_70s_show, how_i_met_your_mother]
     anime = [deathnote, naruto, full_metal, hunter_x_hunter, attack_on_titan]
 
-    return movies, series, anime
+    return movies + series + anime
 
 
 def input_seeded_or_not():
@@ -118,39 +118,77 @@ def update_video_at(videos, index):
         print('Please enter a valid attr')
 
 
-def update_list_of_videos(videos, video_type):
-    print('Here are the {video_type}s you added:')
-    print_formatted_title(videos)
-    choice = input('Choose a number:')
-    while(1):
-        if choice in range(1, len(videos) + 1):
-            videos = update_video_at(videos, choice - 1)
+def update_list_of_videos(videos, video_type, single_mode=False):
+    if not single_mode:
+        print('Here are the {video_type}s you added:')
+        print_formatted_title(videos)
+        choice = input('Choose a number:')
+        while(1):
+            if choice in range(1, len(videos) + 1):
+                videos = update_video_at(videos, choice - 1)
+            else:
+                show_error(INV_INPUT)
+                print_formatted_title(videos)
+                choice = input('Choose a number:')
+        is_safe_to_commit = validate_before_commit(videos)
+        if not is_safe_to_commit:
+            update_list_of_videos(videos, video_type)
         else:
-            show_error(INV_INPUT)
-            print_formatted_title(videos)
-            choice = input('Choose a number:')
-    is_safe_to_commit = validate_before_commit(videos)
-    if not is_safe_to_commit:
-        update_list_of_videos(videos, video_type)
+            return videos
     else:
-        return videos
+        print('Logic to update movie')
 
 
-def input_movies():
-    n = input('Please enter number of movies that you want to add :')
-    user_defined_movies = []
-    while(n > 0):
-        movie = media.Movie()
-        movie.title = input('Enter movie name :')
-        movie.storyline = input('Enter movie description :')
-        movie.poster_image_url = input('Enter movie poster url :')
-        movie.trailer_youtube_url = input('Enter movie trailer :')
-        user_defined_movies += movie
-    is_safe_to_commit = validate_before_commit(user_defined_movies)
-    if not is_safe_to_commit:
-        user_defined_movies = update_list_of_videos(user_defined_movies)
+def input_videos(input_type, upd_mode=False, video_upd=None):
+    current_input = 'NONE'
+    current_input_obj = None
+    if input_type == INPUT_MOVIE_DTLS:
+        current_input = 'movies'
+        current_input_obj = media.Movie()
+    elif input_type == INPUT_SERIES_DTLS:
+        current_input = 'series'
+        current_input_obj = media.Series()
+    elif input_type == INPUT_ANIME_DTLS:
+        current_input = 'anime'
+        current_input_obj = media.Anime()
+
+    if not upd_mode:
+        n = input('Please enter number of ' + current_input + ' that you want to add :')
+        if input_type == INPUT_MOVIE_DTLS:
+            current_input = 'movie'
+        user_defined_videos = []
+
+        while(n > 0):
+            if current_input_obj is None:
+                print('There is some error!! Object not initialised properly!')
+            video = current_input_obj.input_attr_values(current_input)
+            user_defined_videos += video
+        is_safe_to_commit = validate_before_commit(user_defined_videos)
+        if not is_safe_to_commit:
+            user_defined_videos = update_list_of_videos(user_defined_videos)
+        else:
+            return user_defined_videos
     else:
-        return user_defined_movies
+        if video_upd is None:
+            print('Incorrect object initialization')
+        update_list_of_videos(video_upd, current_input)
 
 
-fresh_tomatoes.open_page(movies, series, anime)
+# fresh_tomatoes.open_page(movies, series, anime)
+if __name__ == '__main__':
+    input_type_choice_list = ['Movie', 'Series', 'Anime']
+    input_seeded_or_not()
+    print('Adding seeded videos.!')
+    videos = []
+    if seeded_videos_allowed:
+        videos = seeded_videos()
+    print('Please choose which types you want to add!')
+    print('\n'.join([(i + 1) + '. ' + temp for i, temp in enumerate(input_type_choice_list)]))
+    choice = input('Enter your choice:')
+
+    if choice == INPUT_MOVIE_DTLS - 1:
+        videos += input_videos(INPUT_MOVIE_DTLS)
+    elif choice == INPUT_SERIES_DTLS - 1:
+        videos += input_videos(INPUT_SERIES_DTLS)
+    elif choice == INPUT_ANIME_DTLS - 1:
+        videos += input_videos(INPUT_ANIME_DTLS)

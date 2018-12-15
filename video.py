@@ -42,13 +42,6 @@ class Video():
         self.poster_image_url = poster
         self.trailer_youtube_url = trailer
 
-    def __init__(self):
-        self.title = None
-        self.duration = 0
-        self.storyline = None
-        self.poster_image_url = None
-        self.trailer_youtube_url = None
-
     def add_comment(self, comment):
         if self.comments is None:
             self.comments = []

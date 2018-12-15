@@ -4,6 +4,7 @@ import webbrowser
 class Video():
     comments = None
     attrs = {0: 'title', 1: 'storyline', 2: 'duration', 3: 'poster_image_url', 4: 'trailer_youtube_url'}
+    attrs_display_names = ['Title', 'Storyline', 'Duration', 'Poster Image link', 'Trailer youtube link']
 
     '''
     XML tags
@@ -13,8 +14,26 @@ class Video():
     DURATION_TAG = '    <duration>{content}</duration>\n'
     POSTER_URL_TAG = '    <poster>{content}</poster>\n'
     TRAILER_TAG = '    <trailer>{content}</trailer>\n'
+
     '''
+    ATTRIBUTE INDEX_NUM
     '''
+    ATTR_INDEX_TITLE = 0
+    ATTR_INDEX_STORYLINE = 1
+    ATTR_INDEX_DURATION = 2
+    ATTR_INDEX_POSTER_IMAGE_URL = 3
+    ATTR_INDEX_TRAILER_YOUTUBE_URL = 4
+
+    '''
+    INPUT VALIDATION MESSAGES
+    '''
+    ERR_INV_TITLE = 1
+    ERR_INV_STORY_LINE = 2
+    ERR_INV_DURATION = 3
+    ERR_INV_POSTER = 4
+    ERR_INV_TRAILER = 5
+    INV_SUCCESS = 6
+    INV_GENERIC_ERROR = 7
 
     def __init__(self, title, storyline, poster, trailer, duration=0):
         self.title = title
@@ -51,27 +70,27 @@ class Video():
         return self.attrs
 
     def get_attr(self, attr_index):
-        if attr_index == 0:
+        if attr_index == self.ATTR_INDEX_TITLE:
             return self.title
-        elif attr_index == 1:
+        elif attr_index == self.ATTR_INDEX_STORYLINE:
             return self.storyline
-        elif attr_index == 2:
+        elif attr_index == self.ATTR_INDEX_DURATION:
             return self.duration
-        elif attr_index == 3:
+        elif attr_index == self.ATTR_INDEX_POSTER_IMAGE_URL:
             return self.poster_image_url
-        elif attr_index == 4:
+        elif attr_index == self.ATTR_INDEX_TRAILER_YOUTUBE_URL:
             return self.trailer_youtube_url
 
     def set_attr_value(self, attr_index, value):
-        if attr_index == 0:
+        if attr_index == self.ATTR_INDEX_TITLE:
             self.title = value
-        elif attr_index == 1:
+        elif attr_index == self.ATTR_INDEX_STORYLINE:
             self.storyline = value
-        elif attr_index == 2:
+        elif attr_index == self.ATTR_INDEX_DURATION:
             self.duration = value
-        elif attr_index == 3:
+        elif attr_index == self.ATTR_INDEX_POSTER_IMAGE_URL:
             self.poster_image_url = value
-        elif attr_index == 4:
+        elif attr_index == self.ATTR_INDEX_TRAILER_YOUTUBE_URL:
             self.trailer_youtube_url = value
         else:
             print('Atrb exists but update method is not defined for it!')
@@ -100,5 +119,60 @@ class Video():
                 return False
         return True
 
-    def input_attr_values(self):
-        print()
+    def validate_input_attr_value(self, attr_index, attr_input_value):
+        if attr_index == self.ATTR_INDEX_TITLE:
+            # title
+            if attr_input_value is not None:
+                return self.INV_SUCCESS
+            return self.ERR_INV_TITLE
+        elif attr_index == self.ATTR_INDEX_STORYLINE:
+            # storyline
+            return self.INV_SUCCESS
+        elif attr_index == self.ATTR_INDEX_DURATION:
+            # duration
+            return self.INV_SUCCESS
+        elif attr_index == self.ATTR_INDEX_POSTER_IMAGE_URL:
+            # poster image
+            return self.INV_SUCCESS
+        elif attr_index == self.ATTR_INDEX_TRAILER_YOUTUBE_URL:
+            if 'youtube' not in attr_input_value:
+                return self.ERR_INV_TRAILER
+            return self.INV_SUCCESS
+
+    def print_validation_error(self, attr_index):
+        print('Error validating:' + attr_index)
+
+    def input_attr_values(self, type):
+        print("Enter " + type + " details:")
+        validation_status = self.INV_GENERIC_ERROR
+        val1, val2, val3, val4, val5 = 'Random title', None, 0, None, None
+        while(validation_status != self.INV_SUCCESS):
+            val1 = input('Enter ' + type + ' title:')
+            validation_status = self.validate_input_attr_value(self, self.ATTR_INDEX_TITLE, val1)
+            self.print_validation_error(self.ATTR_INDEX_TITLE)
+        validation_status = self.INV_GENERIC_ERROR
+        while(validation_status != self.INV_SUCCESS):
+            val2 = input('Enter ' + type + ' storyline:')
+            validation_status = self.validate_input_attr_value(self, self.ATTR_INDEX_STORYLINE, val2)
+            self.print_validation_error(self.ATTR_INDEX_STORYLINE)
+        validation_status = self.INV_GENERIC_ERROR
+        while(validation_status != self.INV_SUCCESS):
+            val3 = input('Enter ' + type + ' duration:')
+            validation_status = self.validate_input_attr_value(self, self.ATTR_INDEX_DURATION, val3)
+            self.print_validation_error(self.ATTR_INDEX_DURATION)
+        validation_status = self.INV_GENERIC_ERROR
+        while(validation_status != self.INV_SUCCESS):
+            val4 = input('Enter ' + type + "'s poster image link:")
+            validation_status = self.validate_input_attr_value(self, self.ATTR_INDEX_POSTER_IMAGE_URL, val4)
+            self.print_validation_error(self.ATTR_INDEX_POSTER_IMAGE_URL)
+        validation_status = self.INV_GENERIC_ERROR
+        while(validation_status != self.INV_SUCCESS):
+            val5 = input('Enter ' + type + "'s trailer youtube link:")
+            validation_status = self.validate_input_attr_value(self, self.ATTR_INDEX_TRAILER_YOUTUBE_URL, val5)
+            self.print_validation_error(self.ATTR_INDEX_TRAILER_YOUTUBE_URL)
+        self.set_attr_value(self, self.ATTR_INDEX_TITLE, val1)
+        self.set_attr_value(self, self.ATTR_INDEX_STORYLINE, val2)
+        self.set_attr_value(self, self.ATTR_INDEX_DURATION, val3)
+        self.set_attr_value(self, self.ATTR_INDEX_POSTER_IMAGE_URL, val4)
+        self.set_attr_value(self, self.ATTR_INDEX_TRAILER_YOUTUBE_URL, val5)
+        return self

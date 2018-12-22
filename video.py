@@ -1,4 +1,6 @@
 import webbrowser
+import textwrap
+import str_operations
 
 
 class Video():
@@ -179,11 +181,18 @@ class Video():
 
     def print_formatted_output(self):
         print('*' * self.disp_size)
-        print(('Title:' + self.title).center(self.disp_size, ' '))
-        print('Storyline' + self.storyline)
-        print('Duration' + str(self.duration))
-        print('Poster' + self.poster_image_url)
-        print('utube' + self.trailer_youtube_url)
+        title_str = 'Title:'
+        l_padding = str_operations.get_str_left_allign(title_str.center(self.disp_size))
+        title_split = str_operations.fit_string_to_width(self.title, width=self.disp_size - l_padding + 10)
+        title_str += title_split[0]
+        title_str = title_str.center(self.disp_size)
+        print(title_str)
+        print('\n'.join((' ' * self.get_str_left_allign(title_str)) + title_split[i] for i in range(1, len(title_split))))
+        # print(('Title:' + self.title).center(self.disp_size, ' '))
+        # print('Storyline' + self.storyline)
+        # print('Duration' + str(self.duration))
+        # print('Poster' + self.poster_image_url)
+        # print('utube' + self.trailer_youtube_url)
         print('*' * self.disp_size)
 
     def initialize_undefined_vals(self):

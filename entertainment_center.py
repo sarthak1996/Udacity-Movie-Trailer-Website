@@ -14,10 +14,22 @@ INV_INPUT = 'Invalid Input'
 INPUT_MOVIE_DTLS = 0
 INPUT_SERIES_DTLS = 1
 INPUT_ANIME_DTLS = 2
-
+PHASE_SEEDED_DECIDE = 'Seeded Videos'
+PHASE_VALIDATION = 'Validate added videos'
+PHASE_ADD_MOVIE = 'Add Movies'
+PHASE_ADD_SERIES = 'Add Series'
+PHASE_ADD_ANIME = 'Add Anime'
+PHASE_UPD_MOVIES = 'Update Movies'
+PHASE_UPD_SERIES = 'Update Series'
+PHASE_UPD_ANIME = 'Update Animes'
+PHASE_CONFIRM_END = 'Display Page'
 '''
 CONSTANTS END
 '''
+
+add_num_videos = None
+disp_size = 70
+curr_add_at = None
 
 
 def seeded_videos():
@@ -83,16 +95,52 @@ def clear():
     # return
 
 
+def print_input_filters(phase, videos=None):
+    clear()
+    clear()
+    clear()
+    curr_video_type = None
+
+    if phase == PHASE_UPD_MOVIES or phase == PHASE_ADD_MOVIE:
+        curr_video_type = 'Movie'
+    elif phase == PHASE_UPD_SERIES or phase == PHASE_ADD_SERIES:
+        curr_video_type = 'Series'
+    elif phase == PHASE_UPD_ANIME or phase == PHASE_ADD_ANIME:
+        curr_video_type = 'Anime'
+
+    print(('Phase: ' + phase).center(disp_size, ':'))
+    print('*' * disp_size)
+    print(('Use seeded videos:' + str(seeded_videos_allowed)).center(disp_size, ' '))
+    if phase == PHASE_ADD_MOVIE and add_num_videos is not None:
+        print(('Movies to add:' + str(add_num_videos)).center(disp_size, ' '))
+        if curr_add_at is not None:
+            print(('Adding movie at:' + str(add_num_videos - curr_add_at + 1)).center(disp_size, ' '))
+    elif phase == PHASE_ADD_SERIES and add_num_videos is not None:
+        print(('Series to add:' + str(add_num_videos)).center(disp_size, ' '))
+        if curr_add_at is not None:
+            print(('Adding series at:' + str(add_num_videos - curr_add_at + 1)).center(disp_size, ' '))
+    elif phase == PHASE_ADD_ANIME and add_num_videos is not None:
+
+        print(('Animes to add:' + str(add_num_videos)).center(disp_size, ' '))
+        if curr_add_at is not None:
+            print(('Adding anime at:' + str(add_num_videos - curr_add_at + 1)).center(disp_size, ' '))
+    if videos is not None:
+        str_title = curr_video_type + ' title:' + videos.title
+        print(str_title.center(disp_size, ' '))
+    print('*' * disp_size)
+    print('\n\n')
+
+
 def input_seeded_or_not():
     global seeded_videos_allowed
     tmp_mov, tmp_ser, tmp_ani = [], [], []
     seeded_vids = seeded_videos()
     for video in seeded_vids:
-        if video.type=='M':
+        if video.type == 'M':
             tmp_mov.append(video)
-        elif video.type=='S':
+        elif video.type == 'S':
             tmp_ser.append(video)
-        elif video.type=='A':
+        elif video.type == 'A':
             tmp_ani.append(video)
         else:
             print('ERROR: Incorrect object type initialization')
@@ -115,7 +163,8 @@ def input_seeded_or_not():
 
 
 def validate_before_commit(videos, video_type):
-    print('Here is the {video_type} you entered:'.format(video_type=video_type))
+    print_input_filters(PHASE_VALIDATION)
+    print('Here are the {video_type} you entered:'.format(video_type=video_type))
     for video in videos:
         video.print_formatted_output()
     choice = input('Please double check all the information provided!\nPress Enter to accept! Any other key + Enter to modify:')
@@ -141,9 +190,20 @@ def show_error(code):
 def update_video_at(videos, index, video_type):
     log('Entering update_video_at')
     video = videos[index]
+    if video_type == 'movies':
+        print_input_filters(PHASE_UPD_MOVIES, video)
+    if video_type == 'series':
+        print_input_filters(PHASE_UPD_SERIES, video)
+    if video_type == 'anime':
+        print_input_filters(PHASE_UPD_ANIME, video)
     video.print_formatted_attrs()
-    attr_indices = input('Choose from the above attributes: ')
-    attr_indices = list(map(int, attr_indices.split(',')))
+    while(1):
+        try:
+            attr_indices = input('Choose from the above attributes: ')
+            attr_indices = list(map(int, attr_indices.split(',')))
+            break
+        except:
+            show_error('Invalid input.. expected int got string')
     if video.validate_attr_list(attr_indices):
         video.update_video_attrs(video_type, attr_indices)
     else:
@@ -153,31 +213,51 @@ def update_video_at(videos, index, video_type):
 
 
 def update_list_of_videos(videos, video_type, single_mode=False):
+    global curr_add_at, add_num_videos
+    curr_add_at = None
+    add_num_videos = None
     log('Entering update_list_of_videos')
-    if not single_mode:
-        print('Here are the {video_type}s you added:'.format(video_type=video_type))
-        log('updating in batch mode')
-        print_formatted_title(videos)
-        choice = int(input('Choose a number:'))
-        log('Choice' + str(choice))
-        while(1):
-            if choice in range(1, len(videos) + 1):
-                videos = update_video_at(videos, choice - 1, video_type)
-                break
-            else:
-                show_error(INV_INPUT)
-                print_formatted_title(videos)
-                choice = input('Choose a number:')
-        is_safe_to_commit = validate_before_commit(videos, video_type)
-        if not is_safe_to_commit:
-            update_list_of_videos(videos, video_type)
+    if video_type == 'movies':
+        print_input_filters(PHASE_UPD_MOVIES)
+    if video_type == 'series':
+        print_input_filters(PHASE_UPD_SERIES)
+    if video_type == 'anime':
+        print_input_filters(PHASE_UPD_ANIME)
+    log(video_type)
+    print('Here are the {video_type} you added:'.format(video_type=video_type))
+    log('updating in batch mode')
+    print_formatted_title(videos)
+    while(1):
+        try:
+            choice = int(input('Choose a number:'))
+            break
+        except:
+            show_error('Invalid input expected number got string')
+    log('Choice' + str(choice))
+    while(1):
+        if choice in range(1, len(videos) + 1):
+            videos = update_video_at(videos, choice - 1, video_type)
+            break
         else:
-            return videos
+            show_error(INV_INPUT)
+            print_formatted_title(videos)
+            while(1):
+                try:
+                    choice = int(input('Choose a number:'))
+                    break
+                except:
+                    show_error('Invalid input expected number got string')
+    is_safe_to_commit = validate_before_commit(videos, video_type)
+    if not is_safe_to_commit:
+        return update_list_of_videos(videos, video_type)
     else:
-        print('Logic to update movie')
+        log('in upd_individual')
+        log('here: ' + ' '.join([v.title for v in videos]))
+        return videos
 
 
 def input_videos(input_type, upd_mode=False, video_upd=None):
+    global add_num_videos, curr_add_at
     current_input = 'NONE'
     current_input_obj = None
     if input_type == INPUT_MOVIE_DTLS:
@@ -198,13 +278,28 @@ def input_videos(input_type, upd_mode=False, video_upd=None):
             except:
                 show_error('Invalid input expected number got string')
 
-        # converting multi to single movie text
-        if input_type == INPUT_MOVIE_DTLS:
-            current_input = 'movie'
-
         user_defined_videos = []
-
+        add_num_videos = n
+        if input_type == INPUT_MOVIE_DTLS:
+            print_input_filters(PHASE_ADD_MOVIE)
+        elif input_type == INPUT_SERIES_DTLS:
+            print_input_filters(PHASE_ADD_SERIES)
+        elif input_type == INPUT_ANIME_DTLS:
+            print_input_filters(PHASE_ADD_ANIME)
         while(n > 0):
+            curr_add_at = n
+            if input_type == INPUT_MOVIE_DTLS:
+                current_input = 'movies'
+                current_input_obj = media.Movie()
+                print_input_filters(PHASE_ADD_MOVIE)
+            elif input_type == INPUT_SERIES_DTLS:
+                current_input = 'series'
+                current_input_obj = media.Series()
+                print_input_filters(PHASE_ADD_SERIES)
+            elif input_type == INPUT_ANIME_DTLS:
+                current_input = 'anime'
+                current_input_obj = media.Anime()
+                print_input_filters(PHASE_ADD_ANIME)
             if current_input_obj is None:
                 print('There is some error!! Object not initialised properly!')
             video = current_input_obj.input_attr_values(current_input)
@@ -216,9 +311,10 @@ def input_videos(input_type, upd_mode=False, video_upd=None):
         if not is_safe_to_commit:
             log('entering update')
             user_defined_videos = update_list_of_videos(user_defined_videos, current_input)
+            log('here: ' + ' '.join([v.title for v in user_defined_videos]))
             log('exiting update')
-        else:
-            return user_defined_videos
+
+        return user_defined_videos
     else:
         if video_upd is None:
             print('Incorrect object initialization')
@@ -244,10 +340,10 @@ if __name__ == '__main__':
             run_mode = sys.argv[1]
     input_type_choice_list = ['Movie', 'Series', 'Anime']
     input_seeded_or_not()
-    clear()
+    print_input_filters(PHASE_SEEDED_DECIDE)
     videos = []
     if seeded_videos_allowed:
-        print('Adding seeded videos.!')
+        log('Adding seeded videos.!')
         videos = seeded_videos()
     print('Please choose which types you want to add!')
     print('\n'.join([str(i + 1) + '. ' + temp for i, temp in enumerate(input_type_choice_list)]))
@@ -260,12 +356,14 @@ if __name__ == '__main__':
                 show_error('Invalid input! Expected a number less than ' + str(len(input_type_choice_list) + 1))
         except:
             show_error('Invalid input.. expected number got string')
-    clear()
     if choice == INPUT_MOVIE_DTLS + 1:
+        print_input_filters(PHASE_ADD_MOVIE)
         videos += input_videos(INPUT_MOVIE_DTLS)
     elif choice == INPUT_SERIES_DTLS + 1:
+        print_input_filters(PHASE_ADD_SERIES)
         videos += input_videos(INPUT_SERIES_DTLS)
     elif choice == INPUT_ANIME_DTLS + 1:
+        print_input_filters(PHASE_ADD_ANIME)
         videos += input_videos(INPUT_ANIME_DTLS)
     else:
         print('Invalid choice' + choice)

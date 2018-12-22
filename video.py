@@ -136,8 +136,6 @@ class Video():
         print('Error validating:' + str(attr_index))
 
     def input_attr_values(self, type, attr_update=False, attr_index=None):
-
-        print("Enter " + type + " details:")
         validation_status = self.INV_GENERIC_ERROR
         val1, val2, val3, val4, val5 = 'Random title', None, 0, None, None
         while(validation_status != self.INV_SUCCESS):

@@ -5,15 +5,7 @@ class Video():
     comments = None
     attrs = {0: 'title', 1: 'storyline', 2: 'duration', 3: 'poster_image_url', 4: 'trailer_youtube_url'}
     attrs_display_names = ['Title', 'Storyline', 'Duration', 'Poster Image link', 'Trailer youtube link']
-
-    '''
-    XML tags
-    '''
-    TITLE_TAG = '    <title>{content}</title>\n'
-    STORYLINE_TAG = '    <storyline>{content}</storyline>\n'
-    DURATION_TAG = '    <duration>{content}</duration>\n'
-    POSTER_URL_TAG = '    <poster>{content}</poster>\n'
-    TRAILER_TAG = '    <trailer>{content}</trailer>\n'
+    disp_size = 70
 
     '''
     ATTRIBUTE INDEX_NUM
@@ -49,15 +41,6 @@ class Video():
 
     def has_comments(self):
         return not(self.comments is None)
-
-    def convert_to_xml(self, container_tag):
-        content = self.TITLE_TAG.format(content=self.title)
-        content += self.STORYLINE_TAG.format(content=self.storyline)
-        content += self.DURATION_TAG.format(content=self.duration)
-        content += self.POSTER_URL_TAG.format(content=self.poster_image_url)
-        content += self.TRAILER_TAG.format(content=self.trailer_youtube_url)
-        content = container_tag.format(content=content)
-        return content
 
     def get_attrs_string(self):
         return self.attrs
@@ -115,7 +98,7 @@ class Video():
     def validate_input_attr_value(self, attr_index, attr_input_value):
         if attr_index == self.ATTR_INDEX_TITLE:
             # title
-            if attr_input_value is not None:
+            if attr_input_value is not None and attr_input_value != '':
                 return self.INV_SUCCESS
             return self.ERR_INV_TITLE
         elif attr_index == self.ATTR_INDEX_STORYLINE:
@@ -123,6 +106,10 @@ class Video():
             return self.INV_SUCCESS
         elif attr_index == self.ATTR_INDEX_DURATION:
             # duration
+            try:
+                _ = float(attr_input_value)
+            except:
+                return self.ERR_INV_DURATION
             return self.INV_SUCCESS
         elif attr_index == self.ATTR_INDEX_POSTER_IMAGE_URL:
             # poster image
@@ -191,8 +178,16 @@ class Video():
         return
 
     def print_formatted_output(self):
-        print('Title:' + self.title)
+        print('*' * self.disp_size)
+        print(('Title:' + self.title).center(self.disp_size, ' '))
         print('Storyline' + self.storyline)
         print('Duration' + str(self.duration))
         print('Poster' + self.poster_image_url)
         print('utube' + self.trailer_youtube_url)
+        print('*' * self.disp_size)
+
+    def initialize_undefined_vals(self):
+        if self.storyline is None or self.storyline == '':
+            self.storyline = 'No description available'
+        if self.poster_image_url is None or self.poster_image_url is '':
+            self.poster_image_url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBBzFzubK-Pjf3RXpLSSG5Ujb4hxZxaA65uoo7qFSBFwKOO-jT'

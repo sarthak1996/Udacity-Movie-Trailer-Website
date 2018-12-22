@@ -98,20 +98,20 @@ def input_seeded_or_not():
 
 
 def validate_before_commit(videos, video_type):
-    print('Here is the list of {video_type} you entered:'.format(video_type=video_type))
+    print('Here is the {video_type} you entered:'.format(video_type=video_type))
     for video in videos:
         video.print_formatted_output()
     choice = input('Please double check all the information provided!\nPress Enter to accept! Any other key + Enter to modify:')
-    if choice is None:
+    if choice == '':
         return True
     else:
         return False
 
 
 def print_formatted_title(videos):
-    video_str_arr = [(i + 1) + '. ' + video for i, video in enumerate(videos)]
+    video_str_arr = [str(i + 1) + '. ' + video.title for i, video in enumerate(videos)]
     video_str = '\n'.join(video_str_arr)
-    return video_str
+    print(video_str)
 
 
 def show_error(code):
@@ -119,30 +119,37 @@ def show_error(code):
         print('It seems you have entered data incorrectly!!\nPlease enter again!')
 
 
-def update_video_at(videos, index):
+def update_video_at(videos, index, video_type):
+    log('Entering update_video_at')
     video = videos[index]
     video.print_formatted_attrs()
     attr_indices = input('Choose from the above attributes: ')
-    attr_indices = map(int, attr_indices.split(','))
+    attr_indices = list(map(int, attr_indices.split(',')))
     if video.validate_attr_list(attr_indices):
-        video.input_attr_values()
+        video.update_video_attrs(video_type, attr_indices)
     else:
         print('Please enter a valid attr')
+    videos[index] = video
+    return videos
 
 
 def update_list_of_videos(videos, video_type, single_mode=False):
+    log('Entering update_list_of_videos')
     if not single_mode:
-        print('Here are the {video_type}s you added:')
+        print('Here are the {video_type}s you added:'.format(video_type=video_type))
+        log('updating in batch mode')
         print_formatted_title(videos)
-        choice = input('Choose a number:')
+        choice = int(input('Choose a number:'))
+        log('Choice' + str(choice))
         while(1):
             if choice in range(1, len(videos) + 1):
-                videos = update_video_at(videos, choice - 1)
+                videos = update_video_at(videos, choice - 1, video_type)
+                break
             else:
                 show_error(INV_INPUT)
                 print_formatted_title(videos)
                 choice = input('Choose a number:')
-        is_safe_to_commit = validate_before_commit(videos)
+        is_safe_to_commit = validate_before_commit(videos, video_type)
         if not is_safe_to_commit:
             update_list_of_videos(videos, video_type)
         else:
@@ -165,7 +172,7 @@ def input_videos(input_type, upd_mode=False, video_upd=None):
         current_input_obj = media.Anime()
 
     if not upd_mode:
-        n = input('Please enter number of ' + current_input + ' that you want to add :')
+        n = int(input('Please enter number of ' + current_input + ' that you want to add :'))
         if input_type == INPUT_MOVIE_DTLS:
             current_input = 'movie'
         user_defined_videos = []
@@ -174,15 +181,21 @@ def input_videos(input_type, upd_mode=False, video_upd=None):
             if current_input_obj is None:
                 print('There is some error!! Object not initialised properly!')
             video = current_input_obj.input_attr_values(current_input)
-            user_defined_videos += video
-        is_safe_to_commit = validate_before_commit(user_defined_videos)
+            user_defined_videos.append(video)
+            n -= 1
+        is_safe_to_commit = validate_before_commit(user_defined_videos, current_input)
+        for video in user_defined_videos:
+            video.print_formatted_output()
         if not is_safe_to_commit:
-            user_defined_videos = update_list_of_videos(user_defined_videos)
+            log('entering update')
+            user_defined_videos = update_list_of_videos(user_defined_videos, current_input)
+            log('exiting update')
         else:
             return user_defined_videos
     else:
         if video_upd is None:
             print('Incorrect object initialization')
+            return
         update_list_of_videos(video_upd, current_input)
 
 

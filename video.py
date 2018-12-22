@@ -133,39 +133,68 @@ class Video():
             return self.INV_SUCCESS
 
     def print_validation_error(self, attr_index):
-        print('Error validating:' + attr_index)
+        print('Error validating:' + str(attr_index))
 
-    def input_attr_values(self, type):
+    def input_attr_values(self, type, attr_update=False, attr_index=None):
+
         print("Enter " + type + " details:")
         validation_status = self.INV_GENERIC_ERROR
         val1, val2, val3, val4, val5 = 'Random title', None, 0, None, None
         while(validation_status != self.INV_SUCCESS):
             val1 = input('Enter ' + type + ' title:')
-            validation_status = self.validate_input_attr_value(self, self.ATTR_INDEX_TITLE, val1)
-            self.print_validation_error(self.ATTR_INDEX_TITLE)
+            validation_status = self.validate_input_attr_value(self.ATTR_INDEX_TITLE, val1)
+            if validation_status != self.INV_SUCCESS:
+                self.print_validation_error(self.ATTR_INDEX_TITLE)
         validation_status = self.INV_GENERIC_ERROR
         while(validation_status != self.INV_SUCCESS):
             val2 = input('Enter ' + type + ' storyline:')
-            validation_status = self.validate_input_attr_value(self, self.ATTR_INDEX_STORYLINE, val2)
-            self.print_validation_error(self.ATTR_INDEX_STORYLINE)
+            validation_status = self.validate_input_attr_value(self.ATTR_INDEX_STORYLINE, val2)
+            if validation_status != self.INV_SUCCESS:
+                self.print_validation_error(self.ATTR_INDEX_STORYLINE)
         validation_status = self.INV_GENERIC_ERROR
         while(validation_status != self.INV_SUCCESS):
             val3 = input('Enter ' + type + ' duration:')
-            validation_status = self.validate_input_attr_value(self, self.ATTR_INDEX_DURATION, val3)
-            self.print_validation_error(self.ATTR_INDEX_DURATION)
+            validation_status = self.validate_input_attr_value(self.ATTR_INDEX_DURATION, val3)
+            if validation_status != self.INV_SUCCESS:
+                self.print_validation_error(self.ATTR_INDEX_DURATION)
         validation_status = self.INV_GENERIC_ERROR
         while(validation_status != self.INV_SUCCESS):
             val4 = input('Enter ' + type + "'s poster image link:")
-            validation_status = self.validate_input_attr_value(self, self.ATTR_INDEX_POSTER_IMAGE_URL, val4)
-            self.print_validation_error(self.ATTR_INDEX_POSTER_IMAGE_URL)
+            validation_status = self.validate_input_attr_value(self.ATTR_INDEX_POSTER_IMAGE_URL, val4)
+            if validation_status != self.INV_SUCCESS:
+                self.print_validation_error(self.ATTR_INDEX_POSTER_IMAGE_URL)
         validation_status = self.INV_GENERIC_ERROR
         while(validation_status != self.INV_SUCCESS):
             val5 = input('Enter ' + type + "'s trailer youtube link:")
-            validation_status = self.validate_input_attr_value(self, self.ATTR_INDEX_TRAILER_YOUTUBE_URL, val5)
-            self.print_validation_error(self.ATTR_INDEX_TRAILER_YOUTUBE_URL)
-        self.set_attr_value(self, self.ATTR_INDEX_TITLE, val1)
-        self.set_attr_value(self, self.ATTR_INDEX_STORYLINE, val2)
-        self.set_attr_value(self, self.ATTR_INDEX_DURATION, val3)
-        self.set_attr_value(self, self.ATTR_INDEX_POSTER_IMAGE_URL, val4)
-        self.set_attr_value(self, self.ATTR_INDEX_TRAILER_YOUTUBE_URL, val5)
+            validation_status = self.validate_input_attr_value(self.ATTR_INDEX_TRAILER_YOUTUBE_URL, val5)
+            if validation_status != self.INV_SUCCESS:
+                self.print_validation_error(self.ATTR_INDEX_TRAILER_YOUTUBE_URL)
+        self.set_attr_value(self.ATTR_INDEX_TITLE, val1)
+        self.set_attr_value(self.ATTR_INDEX_STORYLINE, val2)
+        self.set_attr_value(self.ATTR_INDEX_DURATION, val3)
+        self.set_attr_value(self.ATTR_INDEX_POSTER_IMAGE_URL, val4)
+        self.set_attr_value(self.ATTR_INDEX_TRAILER_YOUTUBE_URL, val5)
         return self
+
+    def update_video_attrs(self, video_type, attr_indices):
+
+        print('Updating {type} attributes'.format(type=video_type))
+        for attr_index in attr_indices:
+            validation_status = self.INV_GENERIC_ERROR
+            print(self.attrs)
+            print(self.attrs.get(0))
+            print(attr_index)
+            while(validation_status != self.INV_SUCCESS):
+                val = input('Enter {type} {attr_name} :'.format(type=video_type, attr_name=self.attrs.get(attr_index)))
+                validation_status = self.validate_input_attr_value(attr_index, val)
+                print('here!')
+                print(validation_status)
+            self.set_attr_value(attr_index, val)
+        return
+
+    def print_formatted_output(self):
+        print('Title:' + self.title)
+        print('Storyline' + self.storyline)
+        print('Duration' + str(self.duration))
+        print('Poster' + self.poster_image_url)
+        print('utube' + self.trailer_youtube_url)

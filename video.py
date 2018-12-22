@@ -1,6 +1,6 @@
 import webbrowser
-import textwrap
 import str_operations
+import urllib.request
 
 
 class Video():
@@ -46,6 +46,9 @@ class Video():
 
     def get_attrs_string(self):
         return self.attrs
+
+    def get_comments(self):
+        return self.comments
 
     def get_attr(self, attr_index):
         if attr_index == self.ATTR_INDEX_TITLE:
@@ -109,17 +112,27 @@ class Video():
         elif attr_index == self.ATTR_INDEX_DURATION:
             # duration
             try:
-                _ = float(attr_input_value)
+                float(attr_input_value)
             except:
                 return self.ERR_INV_DURATION
             return self.INV_SUCCESS
         elif attr_index == self.ATTR_INDEX_POSTER_IMAGE_URL:
             # poster image
-            return self.INV_SUCCESS
+            try:
+                if urllib.request.urlopen(attr_input_value).code == 200:
+                    return self.INV_SUCCESS
+            except:
+                return self.ERR_INV_POSTER
+            return self.ERR_INV_POSTER
         elif attr_index == self.ATTR_INDEX_TRAILER_YOUTUBE_URL:
             if 'youtube' not in attr_input_value:
                 return self.ERR_INV_TRAILER
-            return self.INV_SUCCESS
+            try:
+                if urllib.request.urlopen(attr_input_value).code == 200:
+                    return self.INV_SUCCESS
+            except:
+                return self.ERR_INV_TRAILER
+            return self.ERR_INV_TRAILER
 
     def print_validation_error(self, attr_index):
         print('Error validating:' + str(attr_index))
@@ -197,4 +210,10 @@ class Video():
         if self.storyline is None or self.storyline == '':
             self.storyline = 'No description available'
         if self.poster_image_url is None or self.poster_image_url is '':
-            self.poster_image_url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBBzFzubK-Pjf3RXpLSSG5Ujb4hxZxaA65uoo7qFSBFwKOO-jT'
+            self.poster_image_url = 'https://avatars3.githubusercontent.com/u/1785581?s=88&v=4'
+
+    def escape_chars(self):
+        self.title = self.title.replace('"', '\'')
+        self.storyline = self.storyline.replace('"', '\'')
+        self.poster_image_url = self.poster_image_url.replace('"', '\'')
+        self.trailer_youtube_url = self.trailer_youtube_url.replace('"', '\'')

@@ -944,7 +944,7 @@ movie_tile_content = '''
 
 series_tile_content = '''
 <div class="col-md-6 col-lg-2 series-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
-    <img src="{poster_image_url}" width="220" height="342" title="{series_description}">
+    <img src="{poster_image_url}" width="220" height="342">
     <h3>{series_title}</h3>
     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="{series_description}" title="{series_title}" data-placement="auto"></div>
 </div>
@@ -952,7 +952,7 @@ series_tile_content = '''
 
 anime_tile_content = '''
 <div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="{trailer_youtube_id}" data-toggle="modal" data-target="#trailer">
-    <img src="{poster_image_url}" width="220" height="342" title="{anime_description}">
+    <img src="{poster_image_url}" width="220" height="342">
     <h3>{anime_title}</h3>
     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="{anime_description}" title="{anime_title}" data-placement="auto"></div>
 </div>

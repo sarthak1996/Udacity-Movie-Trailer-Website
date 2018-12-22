@@ -339,6 +339,20 @@ def initialize_undefined_vals(videos):
     return
 
 
+def categorise_videos(videos):
+    tmp_mov, tmp_ser, tmp_ani = [], [], []
+    for video in videos:
+        if video.type == 'M':
+            tmp_mov.append(video)
+        elif video.type == 'S':
+            tmp_ser.append(video)
+        elif video.type == 'A':
+            tmp_ani.append(video)
+        else:
+            print('Invalid video obj initialization')
+    return tmp_mov, tmp_ser, tmp_ani
+
+
 if __name__ == '__main__':
     clear()
     clear()
@@ -375,3 +389,7 @@ if __name__ == '__main__':
         print_input_filters(PHASE_ADD_ANIME)
         videos += input_videos(INPUT_ANIME_DTLS)
     initialize_undefined_vals(videos)
+    for video in videos:
+        video.escape_chars()
+    movies, series, animes = categorise_videos(videos)
+    fresh_tomatoes.open_page(movies, series, animes)

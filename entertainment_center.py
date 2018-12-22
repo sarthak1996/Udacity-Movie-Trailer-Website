@@ -144,16 +144,16 @@ def input_seeded_or_not():
             tmp_ani.append(video)
         else:
             print('ERROR: Incorrect object type initialization')
-    mov_str = '\n'.join([str(i + 1) + '. ' + movie.title for i, movie in enumerate(tmp_mov)])
-    ser_str = '\n'.join([str(i + 1) + '. ' + series.title for i, series in enumerate(tmp_ser)])
-    anime_str = '\n'.join([str(i + 1) + '. ' + anime.title for i, anime in enumerate(tmp_ani)])
+    mov_str = '\n\t'.join([str(i + 1) + '. ' + movie.title for i, movie in enumerate(tmp_mov)])
+    ser_str = '\n\t'.join([str(i + 1) + '. ' + series.title for i, series in enumerate(tmp_ser)])
+    anime_str = '\n\t'.join([str(i + 1) + '. ' + anime.title for i, anime in enumerate(tmp_ani)])
     print('Here are the seeded videos:')
-    print('Movies:')
-    print(mov_str)
-    print('Series:')
-    print(ser_str)
-    print('Animes:')
-    print(anime_str)
+    print('\nMovies:')
+    print('\t' + mov_str)
+    print('\nSeries:')
+    print('\t' + ser_str)
+    print('\nAnimes:')
+    print('\t' + anime_str)
     print('\n\n')
     inp = input('Want to add seeded videos to the website?\nPress Enter to include seeded videos! Any other key + Enter to exclude!')
     if(inp == ''):
@@ -167,7 +167,7 @@ def validate_before_commit(videos, video_type):
     print('Here are the {video_type} you entered:'.format(video_type=video_type))
     for video in videos:
         video.print_formatted_output()
-    choice = input('Please double check all the information provided!\nPress Enter to accept! Any other key + Enter to modify:')
+    choice = input('\n\nPlease double check all the information provided!\nPress Enter to accept! Any other key + Enter to modify:')
     if choice == '':
         return True
     else:
@@ -333,7 +333,16 @@ def log(message, wait=False):
     return
 
 
+def initialize_undefined_vals(videos):
+    for video in videos:
+        video.initialize_undefined_vals()
+    return
+
+
 if __name__ == '__main__':
+    clear()
+    clear()
+    clear()
     run_mode = 'main'
     if len(sys.argv) == 2:
         if sys.argv[1] == 'test':
@@ -365,5 +374,4 @@ if __name__ == '__main__':
     elif choice == INPUT_ANIME_DTLS + 1:
         print_input_filters(PHASE_ADD_ANIME)
         videos += input_videos(INPUT_ANIME_DTLS)
-    else:
-        print('Invalid choice' + choice)
+    initialize_undefined_vals(videos)

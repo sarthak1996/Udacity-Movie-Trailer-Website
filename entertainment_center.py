@@ -117,6 +117,8 @@ def print_formatted_title(videos):
 def show_error(code):
     if code == INV_INPUT:
         print('It seems you have entered data incorrectly!!\nPlease enter again!')
+    else:
+        print(code)
 
 
 def update_video_at(videos, index, video_type):
@@ -172,7 +174,12 @@ def input_videos(input_type, upd_mode=False, video_upd=None):
         current_input_obj = media.Anime()
 
     if not upd_mode:
-        n = int(input('Please enter number of ' + current_input + ' that you want to add :'))
+        while(1):
+            try:
+                n = int(input('Please enter number of ' + current_input + ' that you want to add :'))
+                break
+            except:
+                show_error('Invalid input expected number got string')
         if input_type == INPUT_MOVIE_DTLS:
             current_input = 'movie'
         user_defined_videos = []
@@ -224,8 +231,12 @@ if __name__ == '__main__':
         videos = seeded_videos()
     print('Please choose which types you want to add!')
     print('\n'.join([str(i + 1) + '. ' + temp for i, temp in enumerate(input_type_choice_list)]))
-    choice = int(input('Enter your choice:'))
-
+    while(1):
+        try:
+            choice = int(input('Enter your choice:'))
+            break
+        except:
+            show_error('Invalid input.. expected number got string')
     if choice == INPUT_MOVIE_DTLS + 1:
         videos += input_videos(INPUT_MOVIE_DTLS)
     elif choice == INPUT_SERIES_DTLS + 1:

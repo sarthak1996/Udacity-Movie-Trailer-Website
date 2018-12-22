@@ -2,6 +2,7 @@ import media
 import fresh_tomatoes
 from video import Video
 import sys
+from os import system, name
 
 run_mode = 'main'
 seeded_videos_allowed = True
@@ -66,16 +67,32 @@ def seeded_videos():
     return movies + series + anime
 
 
+def clear():
+    '''
+    Function that clears the screen
+    Args: None
+    Returns: Nothing
+    '''
+    # for windows
+    if name == 'nt':
+        _ = system('cls')
+
+    # for mac and linux(here, os.name is 'posix')
+    else:
+        _ = system('clear')
+    # return
+
+
 def input_seeded_or_not():
     global seeded_videos_allowed
     tmp_mov, tmp_ser, tmp_ani = [], [], []
     seeded_vids = seeded_videos()
     for video in seeded_vids:
-        if type(video) is media.Movie:
+        if video.type=='M':
             tmp_mov.append(video)
-        elif type(video) is media.Series:
+        elif video.type=='S':
             tmp_ser.append(video)
-        elif type(video) is media.Anime:
+        elif video.type=='A':
             tmp_ani.append(video)
         else:
             print('ERROR: Incorrect object type initialization')
@@ -180,8 +197,11 @@ def input_videos(input_type, upd_mode=False, video_upd=None):
                 break
             except:
                 show_error('Invalid input expected number got string')
+
+        # converting multi to single movie text
         if input_type == INPUT_MOVIE_DTLS:
             current_input = 'movie'
+
         user_defined_videos = []
 
         while(n > 0):
@@ -224,7 +244,7 @@ if __name__ == '__main__':
             run_mode = sys.argv[1]
     input_type_choice_list = ['Movie', 'Series', 'Anime']
     input_seeded_or_not()
-
+    clear()
     videos = []
     if seeded_videos_allowed:
         print('Adding seeded videos.!')
@@ -234,9 +254,13 @@ if __name__ == '__main__':
     while(1):
         try:
             choice = int(input('Enter your choice:'))
-            break
+            if choice in range(1, len(input_type_choice_list) + 1):
+                break
+            else:
+                show_error('Invalid input! Expected a number less than ' + str(len(input_type_choice_list) + 1))
         except:
             show_error('Invalid input.. expected number got string')
+    clear()
     if choice == INPUT_MOVIE_DTLS + 1:
         videos += input_videos(INPUT_MOVIE_DTLS)
     elif choice == INPUT_SERIES_DTLS + 1:

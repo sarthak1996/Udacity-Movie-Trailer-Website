@@ -135,7 +135,18 @@ class Video():
             return self.ERR_INV_TRAILER
 
     def print_validation_error(self, attr_index):
-        print('Error validating:' + str(attr_index))
+        if attr_index == self.ATTR_INDEX_TITLE:
+            print('ERROR: Title can not be empty!')
+        if attr_index == self.ATTR_INDEX_STORYLINE:
+            print('No validations on storyline! Safe to continue')
+        if attr_index == self.ATTR_INDEX_DURATION:
+            print('ERROR: Duration must be a float or int!')
+        if attr_index == self.ATTR_INDEX_POSTER_IMAGE_URL:
+            print('ERROR: Did not receive a success response when hitting the url')
+            print('PS: Include https://')
+        if attr_index == self.ATTR_INDEX_TRAILER_YOUTUBE_URL:
+            print('ERROR: Either the url does not contain youtube or did not receive a success response when hitting the url')
+            print('PS: Include https://')
 
     def input_attr_values(self, type, attr_update=False, attr_index=None):
         validation_status = self.INV_GENERIC_ERROR

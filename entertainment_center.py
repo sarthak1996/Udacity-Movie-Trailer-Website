@@ -256,6 +256,8 @@ def update_video_at(videos, index, video_type):
             break
         except:
             show_error(INV_INPUT, phase, video)
+            print()
+            video.print_formatted_attrs()
     if video.validate_attr_list(attr_indices):
         video.update_video_attrs(video_type, attr_indices)
     else:

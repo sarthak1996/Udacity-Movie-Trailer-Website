@@ -32,7 +32,7 @@ disp_size = 70
 curr_add_at = None
 
 
-def seeded_videos():
+def seeded_videos(allowed_movies=True, allowed_series=True, allowed_anime=True):
     pulp_fiction = media.Movie('Pulp Fiction', "In the realm of underworld, a series of incidents intertwines the lives of two Los Angeles mobsters, a gangster's wife, a boxer and two small-time criminals.", 'https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg', "https://www.youtube.com/watch?v=tGpTpVyI_OQ")
 
     deadpool = media.Movie('Deadpool', "Mercenary Wade Wilson, subjected to an experiment to heal himself of cancer, obtains healing powers, but at the cost of becoming awfully disfigured. He then adopts the alter ego of Deadpool.", 'http://www.gstatic.com/tv/thumb/v22vodart/11098044/p11098044_v_v8_af.jpg', 'https://www.youtube.com/watch?v=9vN6DHB6bJc')
@@ -76,7 +76,14 @@ def seeded_videos():
     series = [friends, that_70s_show, how_i_met_your_mother]
     anime = [deathnote, naruto, full_metal, hunter_x_hunter, attack_on_titan]
 
-    return movies + series + anime
+    return_seeded_list = []
+    if allowed_movies:
+        return_seeded_list += movies
+    if allowed_series:
+        return_seeded_list += series
+    if allowed_anime:
+        return_seeded_list += anime
+    return return_seeded_list
 
 
 def clear():

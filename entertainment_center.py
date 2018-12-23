@@ -180,6 +180,7 @@ def input_seeded_or_not():
 
         if(inp == ''):
             seeded_videos_allowed = False
+            return
         else:
             seeded_videos_allowed = True
             split_comma_inp = inp.split(',')
@@ -491,12 +492,18 @@ if __name__ == '__main__':
             if i == INPUT_MOVIE_DTLS + 1:
                 print_input_filters(PHASE_ADD_MOVIE)
                 videos += input_videos(INPUT_MOVIE_DTLS)
+                curr_add_at = None
+                add_num_videos = None
             elif i == INPUT_SERIES_DTLS + 1:
                 print_input_filters(PHASE_ADD_SERIES)
                 videos += input_videos(INPUT_SERIES_DTLS)
+                curr_add_at = None
+                add_num_videos = None
             elif i == INPUT_ANIME_DTLS + 1:
                 print_input_filters(PHASE_ADD_ANIME)
                 videos += input_videos(INPUT_ANIME_DTLS)
+                curr_add_at = None
+                add_num_videos = None
         break
 
     initialize_undefined_vals(videos)

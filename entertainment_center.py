@@ -472,25 +472,36 @@ if __name__ == '__main__':
         videos = seeded_videos(seeded_movies_allowed, seeded_series_allowed, seeded_animes_allowed)
 
     while(1):
+        print('Please choose which types you want to add!')
+        print('\n'.join([str(i + 1) + '. ' + temp for i, temp in enumerate(input_type_choice_list)]))
+        print('Enter either individual number choice or comma separated value without space')
+        print('Press enter to not add any values')
+        choice = input('Enter your choice:')
+        if choice == '':
+            break
+        split_comma_inp = choice.split(',')
         try:
-            print('Please choose which types you want to add!')
-            print('\n'.join([str(i + 1) + '. ' + temp for i, temp in enumerate(input_type_choice_list)]))
-            choice = int(input('Enter your choice:'))
-            if choice in range(1, len(input_type_choice_list) + 1):
-                break
-            else:
-                show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
+            split_comma_inp = list(map(int, split_comma_inp))
         except:
             show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
-    if choice == INPUT_MOVIE_DTLS + 1:
-        print_input_filters(PHASE_ADD_MOVIE)
-        videos += input_videos(INPUT_MOVIE_DTLS)
-    elif choice == INPUT_SERIES_DTLS + 1:
-        print_input_filters(PHASE_ADD_SERIES)
-        videos += input_videos(INPUT_SERIES_DTLS)
-    elif choice == INPUT_ANIME_DTLS + 1:
-        print_input_filters(PHASE_ADD_ANIME)
-        videos += input_videos(INPUT_ANIME_DTLS)
+            continue
+        for i in split_comma_inp:
+            if i not in range(1, len(input_type_choice_list) + 1):
+                show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
+                continue
+        split_comma_inp = remove_duplicate_values(split_comma_inp)
+        for i in split_comma_inp:
+            if i == INPUT_MOVIE_DTLS + 1:
+                print_input_filters(PHASE_ADD_MOVIE)
+                videos += input_videos(INPUT_MOVIE_DTLS)
+            elif i == INPUT_SERIES_DTLS + 1:
+                print_input_filters(PHASE_ADD_SERIES)
+                videos += input_videos(INPUT_SERIES_DTLS)
+            elif i == INPUT_ANIME_DTLS + 1:
+                print_input_filters(PHASE_ADD_ANIME)
+                videos += input_videos(INPUT_ANIME_DTLS)
+        break
+
     initialize_undefined_vals(videos)
     videos = add_comments_interface_ui(videos)
     for video in videos:

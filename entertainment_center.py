@@ -253,15 +253,18 @@ def update_video_at(videos, index, video_type):
         try:
             attr_indices = input('Choose from the above attributes: ')
             attr_indices = list(map(int, attr_indices.split(',')))
+            if not video.validate_attr_list(attr_indices):
+                show_error(INV_INPUT, phase, video)
+                print()
+                video.print_formatted_attrs()
+                continue
             break
         except:
             show_error(INV_INPUT, phase, video)
             print()
             video.print_formatted_attrs()
-    if video.validate_attr_list(attr_indices):
-        video.update_video_attrs(video_type, attr_indices)
-    else:
-        print('Please enter a valid attr')
+
+    video.update_video_attrs(video_type, attr_indices)
     videos[index] = video
     return videos
 

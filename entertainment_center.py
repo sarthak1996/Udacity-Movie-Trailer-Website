@@ -286,6 +286,9 @@ def update_list_of_videos(videos, video_type, single_mode=False):
             break
         except:
             show_error(INV_INPUT, phase)
+            print()
+            print('Here are the {video_type} you added:'.format(video_type=video_type))
+            print_formatted_title(videos)
     log('Choice' + str(choice))
     while(1):
         if choice in range(1, len(videos) + 1):

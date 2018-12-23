@@ -189,10 +189,14 @@ def input_seeded_or_not():
             except:
                 show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
                 continue
+            invalid_input = False
             for i in split_comma_inp:
                 if i not in range(1, 4):
                     show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
-                    continue
+                    invalid_input = True
+                    break
+            if invalid_input:
+                continue
         break
     inp = remove_duplicate_values(list(map(int, inp.split(','))))
     for i in inp:
@@ -427,11 +431,13 @@ def add_comments_interface_ui(videos):
     print_input_filters(PHASE_ADD_COMMENTS)
     print('Here are the videos you added:')
     print_formatted_title(videos)
+    print('\n\n')
     print('Instructions to enter comments:')
     print('<Number>:<Comment>')
     print('Eg: 1:Comment 1')
     print('You can enter multiple comments for one video')
     print('Enter q to exit input')
+    print()
     inp = ''
     while(inp != 'q'):
         while(1):
@@ -445,11 +451,13 @@ def add_comments_interface_ui(videos):
                 show_error(INV_INPUT, PHASE_ADD_COMMENTS)
                 print('Here are the videos you added:')
                 print_formatted_title(videos)
+                print('\n\n')
                 print('Instructions to enter comments:')
                 print('<Number>:<Comment>')
                 print('Eg: 1:Comment 1')
                 print('You can enter multiple comments for one video')
                 print('Enter q to exit input')
+                print()
     return videos
 
 

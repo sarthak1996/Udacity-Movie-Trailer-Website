@@ -24,6 +24,7 @@ PHASE_ADD_ANIME = 'Add Anime'
 PHASE_UPD_MOVIES = 'Update Movies'
 PHASE_UPD_SERIES = 'Update Series'
 PHASE_UPD_ANIME = 'Update Animes'
+PHASE_ADD_COMMENTS = 'Add Comments'
 PHASE_CONFIRM_END = 'Display Page'
 '''
 CONSTANTS END
@@ -405,6 +406,47 @@ def categorise_videos(videos):
     return tmp_mov, tmp_ser, tmp_ani
 
 
+def add_comments_commit(comment, videos):
+    params = comment.split(':')
+    param_index = params[0]
+    if len(params) < 2:
+        return (False, videos)
+    if len(params) > 2:
+        param_val = ':'.join([params[i] for i in range(1, len(params))])
+    else:
+        param_val = params[1]
+    try:
+        param_index = int(param_index)
+    except:
+        return (False, videos)
+    if param_index not in range(1, len(videos) + 1):
+        return (False, videos)
+    videos[param_index - 1].add_comment(param_val)
+    return (True, videos)
+
+
+def add_comments_interface_ui(videos):
+    print('Here are the videos you added:')
+    print_formatted_title(videos)
+    print('Instructions to enter comments:')
+    print('<Number>:<Comment>')
+    print('Eg: 1:Comment 1')
+    print('You can enter multiple comments for one video')
+    print('Enter q to exit input')
+    inp = ''
+    while(inp != 'q'):
+        while(1):
+            inp = input('Enter comments:')
+            if inp == 'q':
+                break
+            return_bool, videos = add_comments_commit(inp, videos)
+            if (return_bool):
+                break
+            else:
+                show_error(INV_INPUT)
+    return videos
+
+
 if __name__ == '__main__':
     clear()
     clear()
@@ -442,6 +484,7 @@ if __name__ == '__main__':
         print_input_filters(PHASE_ADD_ANIME)
         videos += input_videos(INPUT_ANIME_DTLS)
     initialize_undefined_vals(videos)
+    videos = add_comments_interface_ui(videos)
     for video in videos:
         video.escape_chars()
     movies, series, animes = categorise_videos(videos)

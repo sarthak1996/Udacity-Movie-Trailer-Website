@@ -177,25 +177,22 @@ def input_seeded_or_not():
         print('Want to add seeded videos to the website?\nPress :\n1. For adding seeded movies\n2. For adding seeded series\n3. For adding seeded animes')
         print('PS: You can add comma separated values without space separator')
         inp = input('Press Enter to exclude seeded videos or else choose from above!\nYour choice')
-        is_valid_input = True
+
         if(inp == ''):
             seeded_videos_allowed = False
         else:
             seeded_videos_allowed = True
             split_comma_inp = inp.split(',')
-            while(1):
-                try:
-                    split_comma_inp = list(map(int, split_comma_inp))
-                    break
-                except:
-                    show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
-                    continue
+            try:
+                split_comma_inp = list(map(int, split_comma_inp))
+            except:
+                show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
+                continue
             for i in split_comma_inp:
                 if i not in range(1, 4):
-                    is_valid_input = False
                     show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
-        if is_valid_input:
-            break
+                    continue
+        break
     inp = remove_duplicate_values(list(map(int, inp.split(','))))
     for i in inp:
         if i == 1:

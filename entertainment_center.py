@@ -5,8 +5,10 @@ import sys
 from os import system, name
 
 run_mode = 'main'
-seeded_videos_allowed = True
-
+seeded_videos_allowed = False
+seeded_movies_allowed = False
+seeded_series_allowed = False
+seeded_animes_allowed = False
 '''
 CONSTANTS START
 '''
@@ -22,6 +24,7 @@ PHASE_ADD_ANIME = 'Add Anime'
 PHASE_UPD_MOVIES = 'Update Movies'
 PHASE_UPD_SERIES = 'Update Series'
 PHASE_UPD_ANIME = 'Update Animes'
+PHASE_ADD_COMMENTS = 'Add Comments'
 PHASE_CONFIRM_END = 'Display Page'
 '''
 CONSTANTS END
@@ -32,7 +35,7 @@ disp_size = 70
 curr_add_at = None
 
 
-def seeded_videos():
+def seeded_videos(allowed_movies=True, allowed_series=True, allowed_anime=True):
     pulp_fiction = media.Movie('Pulp Fiction', "In the realm of underworld, a series of incidents intertwines the lives of two Los Angeles mobsters, a gangster's wife, a boxer and two small-time criminals.", 'https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg', "https://www.youtube.com/watch?v=tGpTpVyI_OQ")
 
     deadpool = media.Movie('Deadpool', "Mercenary Wade Wilson, subjected to an experiment to heal himself of cancer, obtains healing powers, but at the cost of becoming awfully disfigured. He then adopts the alter ego of Deadpool.", 'http://www.gstatic.com/tv/thumb/v22vodart/11098044/p11098044_v_v8_af.jpg', 'https://www.youtube.com/watch?v=9vN6DHB6bJc')
@@ -76,7 +79,14 @@ def seeded_videos():
     series = [friends, that_70s_show, how_i_met_your_mother]
     anime = [deathnote, naruto, full_metal, hunter_x_hunter, attack_on_titan]
 
-    return movies + series + anime
+    return_seeded_list = []
+    if allowed_movies:
+        return_seeded_list += movies
+    if allowed_series:
+        return_seeded_list += series
+    if allowed_anime:
+        return_seeded_list += anime
+    return return_seeded_list
 
 
 def clear():
@@ -111,6 +121,9 @@ def print_input_filters(phase, videos=None):
     print(('Phase: ' + phase).center(disp_size, ':'))
     print('*' * disp_size)
     print(('Use seeded videos:' + str(seeded_videos_allowed)).center(disp_size, ' '))
+    print(('Use seeded movies: ' + str(seeded_movies_allowed)).center(disp_size, ' '))
+    print(('Use seeded series: ' + str(seeded_series_allowed)).center(disp_size, ' '))
+    print(('Use seeded animes: ' + str(seeded_animes_allowed)).center(disp_size, ' '))
     if phase == PHASE_ADD_MOVIE and add_num_videos is not None:
         print(('Movies to add:' + str(add_num_videos)).center(disp_size, ' '))
         if curr_add_at is not None:
@@ -131,8 +144,12 @@ def print_input_filters(phase, videos=None):
     print('\n\n')
 
 
+def remove_duplicate_values(duplicate_list):
+    return list(set(duplicate_list))
+
+
 def input_seeded_or_not():
-    global seeded_videos_allowed
+    global seeded_videos_allowed, seeded_animes_allowed, seeded_movies_allowed, seeded_series_allowed
     tmp_mov, tmp_ser, tmp_ani = [], [], []
     seeded_vids = seeded_videos()
     for video in seeded_vids:
@@ -147,19 +164,46 @@ def input_seeded_or_not():
     mov_str = '\n\t'.join([str(i + 1) + '. ' + movie.title for i, movie in enumerate(tmp_mov)])
     ser_str = '\n\t'.join([str(i + 1) + '. ' + series.title for i, series in enumerate(tmp_ser)])
     anime_str = '\n\t'.join([str(i + 1) + '. ' + anime.title for i, anime in enumerate(tmp_ani)])
-    print('Here are the seeded videos:')
-    print('\nMovies:')
-    print('\t' + mov_str)
-    print('\nSeries:')
-    print('\t' + ser_str)
-    print('\nAnimes:')
-    print('\t' + anime_str)
-    print('\n\n')
-    inp = input('Want to add seeded videos to the website?\nPress Enter to include seeded videos! Any other key + Enter to exclude!')
-    if(inp == ''):
-        seeded_videos_allowed = True
-    else:
-        seeded_videos_allowed = False
+    inp = ''
+    while(1):
+        print('Here are the seeded videos:')
+        print('\nMovies:')
+        print('\t' + mov_str)
+        print('\nSeries:')
+        print('\t' + ser_str)
+        print('\nAnimes:')
+        print('\t' + anime_str)
+        print('\n\n')
+        print('Want to add seeded videos to the website?\nPress :\n1. For adding seeded movies\n2. For adding seeded series\n3. For adding seeded animes')
+        print('PS: You can add comma separated values without space separator')
+        inp = input('Press Enter to exclude seeded videos or else choose from above!\nYour choice')
+        is_valid_input = True
+        if(inp == ''):
+            seeded_videos_allowed = False
+        else:
+            seeded_videos_allowed = True
+            split_comma_inp = inp.split(',')
+            while(1):
+                try:
+                    split_comma_inp = list(map(int, split_comma_inp))
+                    break
+                except:
+                    show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
+                    continue
+            for i in split_comma_inp:
+                if i not in range(1, 4):
+                    is_valid_input = False
+                    show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
+        if is_valid_input:
+            break
+    inp = remove_duplicate_values(list(map(int, inp.split(','))))
+    for i in inp:
+        if i == 1:
+            seeded_movies_allowed = True
+        elif i == 2:
+            seeded_series_allowed = True
+        elif i == 3:
+            seeded_animes_allowed = True
 
 
 def validate_before_commit(videos, video_type):
@@ -180,9 +224,14 @@ def print_formatted_title(videos):
     print(video_str)
 
 
-def show_error(code):
+def show_error(code, phase=None, videos=None):
+    if phase is not None:
+        print_input_filters(phase, videos)
     if code == INV_INPUT:
-        print('It seems you have entered data incorrectly!!\nPlease enter again!')
+        print('Error'.center(disp_size, '+'))
+        print('It appears you have entered incorrect data!'.center(disp_size, ' '))
+        print('Please enter the correct value!!'.center(disp_size, ' '))
+        print('+' * disp_size)
     else:
         print(code)
 
@@ -191,11 +240,12 @@ def update_video_at(videos, index, video_type):
     log('Entering update_video_at')
     video = videos[index]
     if video_type == 'movies':
-        print_input_filters(PHASE_UPD_MOVIES, video)
+        phase = PHASE_UPD_MOVIES
     if video_type == 'series':
-        print_input_filters(PHASE_UPD_SERIES, video)
+        phase = PHASE_UPD_SERIES
     if video_type == 'anime':
-        print_input_filters(PHASE_UPD_ANIME, video)
+        phase = PHASE_UPD_ANIME
+    print_input_filters(phase, video)
     video.print_formatted_attrs()
     while(1):
         try:
@@ -203,7 +253,7 @@ def update_video_at(videos, index, video_type):
             attr_indices = list(map(int, attr_indices.split(',')))
             break
         except:
-            show_error('Invalid input.. expected int got string')
+            show_error(INV_INPUT, phase, video)
     if video.validate_attr_list(attr_indices):
         video.update_video_attrs(video_type, attr_indices)
     else:
@@ -218,11 +268,12 @@ def update_list_of_videos(videos, video_type, single_mode=False):
     add_num_videos = None
     log('Entering update_list_of_videos')
     if video_type == 'movies':
-        print_input_filters(PHASE_UPD_MOVIES)
+        phase = PHASE_UPD_MOVIES
     if video_type == 'series':
-        print_input_filters(PHASE_UPD_SERIES)
+        phase = PHASE_UPD_SERIES
     if video_type == 'anime':
-        print_input_filters(PHASE_UPD_ANIME)
+        phase = PHASE_UPD_ANIME
+    print_input_filters(phase)
     log(video_type)
     print('Here are the {video_type} you added:'.format(video_type=video_type))
     log('updating in batch mode')
@@ -232,21 +283,21 @@ def update_list_of_videos(videos, video_type, single_mode=False):
             choice = int(input('Choose a number:'))
             break
         except:
-            show_error('Invalid input expected number got string')
+            show_error(INV_INPUT, phase)
     log('Choice' + str(choice))
     while(1):
         if choice in range(1, len(videos) + 1):
             videos = update_video_at(videos, choice - 1, video_type)
             break
         else:
-            show_error(INV_INPUT)
+            show_error(INV_INPUT, phase)
             print_formatted_title(videos)
             while(1):
                 try:
                     choice = int(input('Choose a number:'))
                     break
                 except:
-                    show_error('Invalid input expected number got string')
+                    show_error(INV_INPUT, phase)
     is_safe_to_commit = validate_before_commit(videos, video_type)
     if not is_safe_to_commit:
         return update_list_of_videos(videos, video_type)
@@ -271,21 +322,23 @@ def input_videos(input_type, upd_mode=False, video_upd=None):
         current_input_obj = media.Anime()
 
     if not upd_mode:
+        if input_type == INPUT_MOVIE_DTLS:
+            phase = PHASE_ADD_MOVIE
+        elif input_type == INPUT_SERIES_DTLS:
+            phase = PHASE_ADD_SERIES
+        elif input_type == INPUT_ANIME_DTLS:
+            phase = PHASE_ADD_ANIME
+        print_input_filters(phase)
         while(1):
             try:
                 n = int(input('Please enter number of ' + current_input + ' that you want to add :'))
                 break
             except:
-                show_error('Invalid input expected number got string')
+                show_error(INV_INPUT, phase)
 
         user_defined_videos = []
         add_num_videos = n
-        if input_type == INPUT_MOVIE_DTLS:
-            print_input_filters(PHASE_ADD_MOVIE)
-        elif input_type == INPUT_SERIES_DTLS:
-            print_input_filters(PHASE_ADD_SERIES)
-        elif input_type == INPUT_ANIME_DTLS:
-            print_input_filters(PHASE_ADD_ANIME)
+
         while(n > 0):
             curr_add_at = n
             if input_type == INPUT_MOVIE_DTLS:
@@ -339,6 +392,69 @@ def initialize_undefined_vals(videos):
     return
 
 
+def categorise_videos(videos):
+    tmp_mov, tmp_ser, tmp_ani = [], [], []
+    for video in videos:
+        if video.type == 'M':
+            tmp_mov.append(video)
+        elif video.type == 'S':
+            tmp_ser.append(video)
+        elif video.type == 'A':
+            tmp_ani.append(video)
+        else:
+            print('Invalid video obj initialization')
+    return tmp_mov, tmp_ser, tmp_ani
+
+
+def add_comments_commit(comment, videos):
+    params = comment.split(':')
+    param_index = params[0]
+    if len(params) < 2:
+        return (False, videos)
+    if len(params) > 2:
+        param_val = ':'.join([params[i] for i in range(1, len(params))])
+    else:
+        param_val = params[1]
+    try:
+        param_index = int(param_index)
+    except:
+        return (False, videos)
+    if param_index not in range(1, len(videos) + 1):
+        return (False, videos)
+    videos[param_index - 1].add_comment(param_val)
+    return (True, videos)
+
+
+def add_comments_interface_ui(videos):
+    print_input_filters(PHASE_ADD_COMMENTS)
+    print('Here are the videos you added:')
+    print_formatted_title(videos)
+    print('Instructions to enter comments:')
+    print('<Number>:<Comment>')
+    print('Eg: 1:Comment 1')
+    print('You can enter multiple comments for one video')
+    print('Enter q to exit input')
+    inp = ''
+    while(inp != 'q'):
+        while(1):
+            inp = input('Enter comments:')
+            if inp == 'q':
+                break
+            return_bool, videos = add_comments_commit(inp, videos)
+            if (return_bool):
+                break
+            else:
+                show_error(INV_INPUT, PHASE_ADD_COMMENTS)
+                print('Here are the videos you added:')
+                print_formatted_title(videos)
+                print('Instructions to enter comments:')
+                print('<Number>:<Comment>')
+                print('Eg: 1:Comment 1')
+                print('You can enter multiple comments for one video')
+                print('Enter q to exit input')
+    return videos
+
+
 if __name__ == '__main__':
     clear()
     clear()
@@ -353,18 +469,19 @@ if __name__ == '__main__':
     videos = []
     if seeded_videos_allowed:
         log('Adding seeded videos.!')
-        videos = seeded_videos()
-    print('Please choose which types you want to add!')
-    print('\n'.join([str(i + 1) + '. ' + temp for i, temp in enumerate(input_type_choice_list)]))
+        videos = seeded_videos(seeded_movies_allowed, seeded_series_allowed, seeded_animes_allowed)
+
     while(1):
         try:
+            print('Please choose which types you want to add!')
+            print('\n'.join([str(i + 1) + '. ' + temp for i, temp in enumerate(input_type_choice_list)]))
             choice = int(input('Enter your choice:'))
             if choice in range(1, len(input_type_choice_list) + 1):
                 break
             else:
-                show_error('Invalid input! Expected a number less than ' + str(len(input_type_choice_list) + 1))
+                show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
         except:
-            show_error('Invalid input.. expected number got string')
+            show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
     if choice == INPUT_MOVIE_DTLS + 1:
         print_input_filters(PHASE_ADD_MOVIE)
         videos += input_videos(INPUT_MOVIE_DTLS)
@@ -375,3 +492,8 @@ if __name__ == '__main__':
         print_input_filters(PHASE_ADD_ANIME)
         videos += input_videos(INPUT_ANIME_DTLS)
     initialize_undefined_vals(videos)
+    videos = add_comments_interface_ui(videos)
+    for video in videos:
+        video.escape_chars()
+    movies, series, animes = categorise_videos(videos)
+    fresh_tomatoes.open_page(movies, series, animes)

@@ -712,7 +712,7 @@
 
             // Loop through all list items, and hide those who don't match the search query
             for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("h2")[0];
+                a = li[i].getElementsByTagName("h3")[0];
                 txtValue = a.textContent || a.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
                     li[i].style.display = "";
@@ -730,7 +730,7 @@
 
             // Loop through all list items, and hide those who don't match the search query
             for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("h2")[0];
+                a = li[i].getElementsByTagName("h3")[0];
                 txtValue = a.textContent || a.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
                     li[i].style.display = "";
@@ -748,7 +748,7 @@
 
             // Loop through all list items, and hide those who don't match the search query
             for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName("h2")[0];
+                a = li[i].getElementsByTagName("h3")[0];
                 txtValue = a.textContent || a.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
                     li[i].style.display = "";
@@ -883,12 +883,6 @@
      <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="Iron Man, Thor, the Hulk and the rest of the Avengers unite to battle their most powerful enemy yet -- the evil Thanos. On a mission to collect all six Infinity Stones, Thanos plans to use the artifacts to inflict his twisted will on reality. The fate of the planet and existence itself has never been more uncertain as everything the Avengers have fought for has led up to this moment." title="Avengers: Infinity War" data-placement="auto"></div>
 </div>
 
-<div class="col-md-6 col-lg-2 movie-tile text-center" data-trailer-youtube-id="None" data-toggle="modal" data-target="#trailer">
-    <img src="http://www.google.com" width="220" height="342">
-    <h3>title 1</h3>
-     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="No description available" title="title 1" data-placement="auto"></div>
-</div>
-
                         </div>
                         <div class="tab-pane fade" id="series">
                             <div class="md-form active-cyan-2 mb-3">
@@ -918,18 +912,6 @@
     <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="Ted Mosby, an architect, recounts to his children the events that led him to meet their mother. His journey is made more eventful by the presence of his friends Lily, Marshall, Robin and Barney." title="How I Met Your Mother" data-placement="auto"></div>
 </div>
 
-<div class="col-md-6 col-lg-2 series-tile text-center" data-trailer-youtube-id="None" data-toggle="modal" data-target="#trailer">
-    <img src="https://www.google.com" width="220" height="342">
-    <h3>1</h3>
-    <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="1" title="1" data-placement="auto"></div>
-</div>
-
-<div class="col-md-6 col-lg-2 series-tile text-center" data-trailer-youtube-id="None" data-toggle="modal" data-target="#trailer">
-    <img src="https://www.google.com" width="220" height="342">
-    <h3>3</h3>
-    <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="title" title="3" data-placement="auto"></div>
-</div>
-
                         </div>
                         <div class="tab-pane fade" id="anime">
                             <div class="md-form active-cyan-2 mb-3">
@@ -941,12 +923,34 @@
                                 </div>
                             </div>
                           
-<div class="wrapper">
-  <div class="floater">
-    <div class="text">No Animes</div>
-    <div class="text">YeT</div>
-  </div>
+<div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="tJZtOrm-WPk" data-toggle="modal" data-target="#trailer">
+    <img src="https://images-na.ssl-images-amazon.com/images/I/51c7O54CdkL.jpg" width="220" height="342">
+    <h3>Death Note</h3>
+    <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="Death Note is a Japanese manga series written by Tsugumi Ohba and illustrated by Takeshi Obata. The story follows Light Yagami, a high school student who stumbles across a mysterious otherworldly notebook: the 'Death Note', which belonged to the Shinigami Ryuk, and grants its user the power to kill anyone whose name and face he knows. The series centers around Light's subsequent attempts to use the Death Note to change the world into a utopian society without crime as a god-like vigilante named 'Kira' and the subsequent efforts of an elite task-force of law enforcement officials, consisting of members of the Japanese police agency led by L, an enigmatic international detective, to apprehend him and end his reign of terror." title="Death Note" data-placement="auto"></div>
+</div>
 
+<div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="j2hiC9BmJlQ" data-toggle="modal" data-target="#trailer">
+    <img src="https://i.pinimg.com/originals/d0/b8/d8/d0b8d8d5f5309a0c9ecc1b9454fbed31.jpg" width="220" height="342">
+    <h3>Naruto</h3>
+    <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="Naruto is a Japanese manga series written and illustrated by Masashi Kishimoto. It tells the story of Naruto Uzumaki, an adolescent ninja who searches for recognition from his peers and the village and also dreams of becoming the Hokage, the leader of his village." title="Naruto" data-placement="auto"></div>
+</div>
+
+<div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="BOm_PAI2goo" data-toggle="modal" data-target="#trailer">
+    <img src="https://m.media-amazon.com/images/M/MV5BZmEzN2YzOTItMDI5MS00MGU4LWI1NWQtOTg5ZThhNGQwYTEzXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg" width="220" height="342">
+    <h3>Fullmetal Alchemist: Brotherhood</h3>
+    <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="Brothers Edward and Alphonse Elric search for the Philsopher's Stone, hoping to restore their bodies, which were lost when they attempted to use their alchemy skills to resurrect their deceased mother. Edward, who lost only limbs, joins the State Military, which gives him the freedom to continue the search as he tries to restore his brother, whose soul is tethered to earth by a suit of armor. However, Edward and Alphonse are not the only ones seeking the powerful stone. And as they search, they learn of a plot to transmute the entire country for reasons they cannot comprehend." title="Fullmetal Alchemist: Brotherhood" data-placement="auto"></div>
+</div>
+
+<div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="d6kBeJjTGnY" data-toggle="modal" data-target="#trailer">
+    <img src="https://ae01.alicdn.com/kf/HTB1SMqNvAKWBuNjy1zjq6AOypXan/Hunter-x-Hunter-Poster-GI-Gon-Killua-Anime-Silk-Wall-Decor-Posters-24x34inch.jpg_640x640.jpg" width="220" height="342">
+    <h3>Hunter × Hunter</h3>
+    <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="The story focuses on a young boy named Gon Freecss, who discovers that his father, who he was told was dead, is actually alive and a world-renowned Hunter, a licensed profession for those who specialize in fantastic pursuits such as locating rare or unidentified animal species, treasure hunting, surveying unexplored enclaves, or hunting down lawless individuals. Despite being abandoned by his father, Gon departs upon a journey to follow in his footsteps, pass the rigorous Hunter Examination, and eventually find his father. Along the way, Gon meets various other Hunters and also encounters the paranormal." title="Hunter × Hunter" data-placement="auto"></div>
+</div>
+
+<div class="col-md-6 col-lg-2 anime-tile text-center" data-trailer-youtube-id="MGRm4IzK1SQ" data-toggle="modal" data-target="#trailer">
+    <img src="http://img1.ak.crunchyroll.com/i/spire3/962b75cb9f4905f2fd9dfa543610955e1416664140_full.jpg" width="220" height="342">
+    <h3>Attack on Titan</h3>
+    <div class="overlay" data-toggle="popover" data-trigger="hover" data-content="The story of Attack on Titan revolves around the adventures of Eren Jeager who lives in the town of Shinganshina. When Wall Maria is breached by the Colossal Titan, with the Armored Titan further compromising the town, chaos ensues as the Titans enters Shinganshina causing a mass evacuation. Eren vows to kill all the Titans after watching in horror as a smiling Titan eats his mother, Carla, his father having mysteriously disappeared after giving him a key to their basement. He then enlists in the military with his friends following suit." title="Attack on Titan" data-placement="auto"></div>
 </div>
 
                         </div>
@@ -1056,27 +1060,81 @@
 
 <li class="col-12 col-md-6 col-lg-3">
           <div class="cnt-block equal-hight" style="height: 349px;">
-            <figure><img src="https://www.google.com" class="img-responsive" alt=""></figure>
-            <h3>1</h3>
-            <p>b</p>
+            <figure><img src="https://images-na.ssl-images-amazon.com/images/I/51c7O54CdkL.jpg" class="img-responsive" alt=""></figure>
+            <h3>Death Note</h3>
+            <p>Loved L!!!.. Bad move killing him..</p>
 
           </div>
 </li>
 
 <li class="col-12 col-md-6 col-lg-3">
           <div class="cnt-block equal-hight" style="height: 349px;">
-            <figure><img src="https://www.google.com" class="img-responsive" alt=""></figure>
-            <h3>3</h3>
-            <p> a</p>
+            <figure><img src="https://i.pinimg.com/originals/d0/b8/d8/d0b8d8d5f5309a0c9ecc1b9454fbed31.jpg" class="img-responsive" alt=""></figure>
+            <h3>Naruto</h3>
+            <p>Sasuke vs Itachi</p>
 
           </div>
 </li>
 
 <li class="col-12 col-md-6 col-lg-3">
           <div class="cnt-block equal-hight" style="height: 349px;">
-            <figure><img src="https://www.google.com" class="img-responsive" alt=""></figure>
-            <h3>3</h3>
-            <p>c</p>
+            <figure><img src="https://i.pinimg.com/originals/d0/b8/d8/d0b8d8d5f5309a0c9ecc1b9454fbed31.jpg" class="img-responsive" alt=""></figure>
+            <h3>Naruto</h3>
+            <p>Naruto vs Pain</p>
+
+          </div>
+</li>
+
+<li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="https://i.pinimg.com/originals/d0/b8/d8/d0b8d8d5f5309a0c9ecc1b9454fbed31.jpg" class="img-responsive" alt=""></figure>
+            <h3>Naruto</h3>
+            <p>Naruto vs Sasuke End Fight</p>
+
+          </div>
+</li>
+
+<li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="https://m.media-amazon.com/images/M/MV5BZmEzN2YzOTItMDI5MS00MGU4LWI1NWQtOTg5ZThhNGQwYTEzXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_.jpg" class="img-responsive" alt=""></figure>
+            <h3>Fullmetal Alchemist: Brotherhood</h3>
+            <p>Death of lust</p>
+
+          </div>
+</li>
+
+<li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="https://ae01.alicdn.com/kf/HTB1SMqNvAKWBuNjy1zjq6AOypXan/Hunter-x-Hunter-Poster-GI-Gon-Killua-Anime-Silk-Wall-Decor-Posters-24x34inch.jpg_640x640.jpg" class="img-responsive" alt=""></figure>
+            <h3>Hunter × Hunter</h3>
+            <p>Gon vs Pitou</p>
+
+          </div>
+</li>
+
+<li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="http://img1.ak.crunchyroll.com/i/spire3/962b75cb9f4905f2fd9dfa543610955e1416664140_full.jpg" class="img-responsive" alt=""></figure>
+            <h3>Attack on Titan</h3>
+            <p>Eren vs female titan end fight</p>
+
+          </div>
+</li>
+
+<li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="http://img1.ak.crunchyroll.com/i/spire3/962b75cb9f4905f2fd9dfa543610955e1416664140_full.jpg" class="img-responsive" alt=""></figure>
+            <h3>Attack on Titan</h3>
+            <p>Levi vs female titan</p>
+
+          </div>
+</li>
+
+<li class="col-12 col-md-6 col-lg-3">
+          <div class="cnt-block equal-hight" style="height: 349px;">
+            <figure><img src="http://img1.ak.crunchyroll.com/i/spire3/962b75cb9f4905f2fd9dfa543610955e1416664140_full.jpg" class="img-responsive" alt=""></figure>
+            <h3>Attack on Titan</h3>
+            <p>Eren awakens The Coordinate</p>
 
           </div>
 </li>

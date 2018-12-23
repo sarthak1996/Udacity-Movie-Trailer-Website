@@ -1,6 +1,11 @@
 import webbrowser
+<<<<<<< HEAD
 import str_operations
 import urllib.request
+=======
+import textwrap
+import str_operations
+>>>>>>> 88dc2fb027ece15b28c6c53095dc50a729b71f47
 
 
 class Video():
@@ -17,6 +22,7 @@ class Video():
     ATTR_INDEX_DURATION = 2
     ATTR_INDEX_POSTER_IMAGE_URL = 3
     ATTR_INDEX_TRAILER_YOUTUBE_URL = 4
+<<<<<<< HEAD
 
     '''
     INPUT VALIDATION MESSAGES
@@ -29,6 +35,20 @@ class Video():
     INV_SUCCESS = 6
     INV_GENERIC_ERROR = 7
 
+=======
+
+    '''
+    INPUT VALIDATION MESSAGES
+    '''
+    ERR_INV_TITLE = 1
+    ERR_INV_STORY_LINE = 2
+    ERR_INV_DURATION = 3
+    ERR_INV_POSTER = 4
+    ERR_INV_TRAILER = 5
+    INV_SUCCESS = 6
+    INV_GENERIC_ERROR = 7
+
+>>>>>>> 88dc2fb027ece15b28c6c53095dc50a729b71f47
     def __init__(self, title, storyline, poster, trailer, duration=0):
         self.title = title
         self.duration = duration
@@ -47,6 +67,7 @@ class Video():
     def get_attrs_string(self):
         return self.attrs
 
+<<<<<<< HEAD
     def get_comments(self):
         return self.comments
 
@@ -100,6 +121,58 @@ class Video():
                 return False
         return True
 
+=======
+    def get_attr(self, attr_index):
+        if attr_index == self.ATTR_INDEX_TITLE:
+            return self.title
+        elif attr_index == self.ATTR_INDEX_STORYLINE:
+            return self.storyline
+        elif attr_index == self.ATTR_INDEX_DURATION:
+            return self.duration
+        elif attr_index == self.ATTR_INDEX_POSTER_IMAGE_URL:
+            return self.poster_image_url
+        elif attr_index == self.ATTR_INDEX_TRAILER_YOUTUBE_URL:
+            return self.trailer_youtube_url
+
+    def set_attr_value(self, attr_index, value):
+        if attr_index == self.ATTR_INDEX_TITLE:
+            self.title = value
+        elif attr_index == self.ATTR_INDEX_STORYLINE:
+            self.storyline = value
+        elif attr_index == self.ATTR_INDEX_DURATION:
+            self.duration = value
+        elif attr_index == self.ATTR_INDEX_POSTER_IMAGE_URL:
+            self.poster_image_url = value
+        elif attr_index == self.ATTR_INDEX_TRAILER_YOUTUBE_URL:
+            self.trailer_youtube_url = value
+        else:
+            print('Atrb exists but update method is not defined for it!')
+            return -1
+        return 1
+
+    def set_attr(self, attr_indices, upd_video_obj):
+        for chosen_attr in attr_indices:
+            if chosen_attr in self.attrs:
+                if (self.set_attr_value(self, chosen_attr, upd_video_obj.get_attr(self, chosen_attr))) == -1:
+                    return -1
+            else:
+                print('ERROR: Entered index is not a valid index for attribute!')
+                return -1
+        return self
+
+    def show_trailer(self):
+        webbrowser.open(self.trailer_youtube_url)
+
+    def print_formatted_attrs(self):
+        print(self.attrs)
+
+    def validate_attr_list(self, attr_indices):
+        for index in attr_indices:
+            if index not in self.attrs:
+                return False
+        return True
+
+>>>>>>> 88dc2fb027ece15b28c6c53095dc50a729b71f47
     def validate_input_attr_value(self, attr_index, attr_input_value):
         if attr_index == self.ATTR_INDEX_TITLE:
             # title
@@ -112,12 +185,17 @@ class Video():
         elif attr_index == self.ATTR_INDEX_DURATION:
             # duration
             try:
+<<<<<<< HEAD
                 float(attr_input_value)
+=======
+                _ = float(attr_input_value)
+>>>>>>> 88dc2fb027ece15b28c6c53095dc50a729b71f47
             except:
                 return self.ERR_INV_DURATION
             return self.INV_SUCCESS
         elif attr_index == self.ATTR_INDEX_POSTER_IMAGE_URL:
             # poster image
+<<<<<<< HEAD
             try:
                 if urllib.request.urlopen(attr_input_value).code == 200:
                     return self.INV_SUCCESS
@@ -147,6 +225,16 @@ class Video():
         if attr_index == self.ATTR_INDEX_TRAILER_YOUTUBE_URL:
             print('ERROR: Either the url does not contain youtube or did not receive a success response when hitting the url')
             print('PS: Include https://')
+=======
+            return self.INV_SUCCESS
+        elif attr_index == self.ATTR_INDEX_TRAILER_YOUTUBE_URL:
+            if 'youtube' not in attr_input_value:
+                return self.ERR_INV_TRAILER
+            return self.INV_SUCCESS
+
+    def print_validation_error(self, attr_index):
+        print('Error validating:' + str(attr_index))
+>>>>>>> 88dc2fb027ece15b28c6c53095dc50a729b71f47
 
     def input_attr_values(self, type, attr_update=False, attr_index=None):
         validation_status = self.INV_GENERIC_ERROR
@@ -216,6 +304,7 @@ class Video():
         print(str_operations.convert_values_to_fit_display('Trailer:', self.trailer_youtube_url, self.disp_size, enable_hyphen=True))
         print()
         print('*' * self.disp_size)
+<<<<<<< HEAD
 
     def initialize_undefined_vals(self):
         if self.storyline is None or self.storyline == '':
@@ -228,3 +317,11 @@ class Video():
         self.storyline = self.storyline.replace('"', '\'')
         self.poster_image_url = self.poster_image_url.replace('"', '\'')
         self.trailer_youtube_url = self.trailer_youtube_url.replace('"', '\'')
+=======
+
+    def initialize_undefined_vals(self):
+        if self.storyline is None or self.storyline == '':
+            self.storyline = 'No description available'
+        if self.poster_image_url is None or self.poster_image_url is '':
+            self.poster_image_url = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBBzFzubK-Pjf3RXpLSSG5Ujb4hxZxaA65uoo7qFSBFwKOO-jT'
+>>>>>>> 88dc2fb027ece15b28c6c53095dc50a729b71f47

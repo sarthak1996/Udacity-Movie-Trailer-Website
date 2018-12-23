@@ -426,6 +426,7 @@ def add_comments_commit(comment, videos):
 
 
 def add_comments_interface_ui(videos):
+    print_input_filters(PHASE_ADD_COMMENTS)
     print('Here are the videos you added:')
     print_formatted_title(videos)
     print('Instructions to enter comments:')
@@ -443,7 +444,14 @@ def add_comments_interface_ui(videos):
             if (return_bool):
                 break
             else:
-                show_error(INV_INPUT)
+                show_error(INV_INPUT, PHASE_ADD_COMMENTS)
+                print('Here are the videos you added:')
+                print_formatted_title(videos)
+                print('Instructions to enter comments:')
+                print('<Number>:<Comment>')
+                print('Eg: 1:Comment 1')
+                print('You can enter multiple comments for one video')
+                print('Enter q to exit input')
     return videos
 
 

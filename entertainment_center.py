@@ -5,8 +5,10 @@ import sys
 from os import system, name
 
 run_mode = 'main'
-seeded_videos_allowed = True
-
+seeded_videos_allowed = False
+seeded_movies_allowed = False
+seeded_series_allowed = False
+seeded_animes_allowed = False
 '''
 CONSTANTS START
 '''
@@ -118,6 +120,9 @@ def print_input_filters(phase, videos=None):
     print(('Phase: ' + phase).center(disp_size, ':'))
     print('*' * disp_size)
     print(('Use seeded videos:' + str(seeded_videos_allowed)).center(disp_size, ' '))
+    print(('Use seeded movies: ' + str(seeded_movies_allowed)).center(disp_size, ' '))
+    print(('Use seeded series: ' + str(seeded_series_allowed)).center(disp_size, ' '))
+    print(('Use seeded animes: ' + str(seeded_animes_allowed)).center(disp_size, ' '))
     if phase == PHASE_ADD_MOVIE and add_num_videos is not None:
         print(('Movies to add:' + str(add_num_videos)).center(disp_size, ' '))
         if curr_add_at is not None:
@@ -138,8 +143,12 @@ def print_input_filters(phase, videos=None):
     print('\n\n')
 
 
+def remove_duplicate_values(duplicate_list):
+    return list(set(duplicate_list))
+
+
 def input_seeded_or_not():
-    global seeded_videos_allowed
+    global seeded_videos_allowed, seeded_animes_allowed, seeded_movies_allowed, seeded_series_allowed
     tmp_mov, tmp_ser, tmp_ani = [], [], []
     seeded_vids = seeded_videos()
     for video in seeded_vids:
@@ -154,19 +163,46 @@ def input_seeded_or_not():
     mov_str = '\n\t'.join([str(i + 1) + '. ' + movie.title for i, movie in enumerate(tmp_mov)])
     ser_str = '\n\t'.join([str(i + 1) + '. ' + series.title for i, series in enumerate(tmp_ser)])
     anime_str = '\n\t'.join([str(i + 1) + '. ' + anime.title for i, anime in enumerate(tmp_ani)])
-    print('Here are the seeded videos:')
-    print('\nMovies:')
-    print('\t' + mov_str)
-    print('\nSeries:')
-    print('\t' + ser_str)
-    print('\nAnimes:')
-    print('\t' + anime_str)
-    print('\n\n')
-    inp = input('Want to add seeded videos to the website?\nPress Enter to include seeded videos! Any other key + Enter to exclude!')
-    if(inp == ''):
-        seeded_videos_allowed = True
-    else:
-        seeded_videos_allowed = False
+    inp = ''
+    while(1):
+        print('Here are the seeded videos:')
+        print('\nMovies:')
+        print('\t' + mov_str)
+        print('\nSeries:')
+        print('\t' + ser_str)
+        print('\nAnimes:')
+        print('\t' + anime_str)
+        print('\n\n')
+        print('Want to add seeded videos to the website?\nPress :\n1. For adding seeded movies\n2. For adding seeded series\n3. For adding seeded animes')
+        print('PS: You can add comma separated values without space separator')
+        inp = input('Press Enter to exclude seeded videos or else choose from above!\nYour choice')
+        is_valid_input = True
+        if(inp == ''):
+            seeded_videos_allowed = False
+        else:
+            seeded_videos_allowed = True
+            split_comma_inp = inp.split(',')
+            while(1):
+                try:
+                    split_comma_inp = list(map(int, split_comma_inp))
+                    break
+                except:
+                    show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
+                    continue
+            for i in split_comma_inp:
+                if i not in range(1, 4):
+                    is_valid_input = False
+                    show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
+        if is_valid_input:
+            break
+    inp = remove_duplicate_values(list(map(int, inp.split(','))))
+    for i in inp:
+        if i == 1:
+            seeded_movies_allowed = True
+        elif i == 2:
+            seeded_series_allowed = True
+        elif i == 3:
+            seeded_animes_allowed = True
 
 
 def validate_before_commit(videos, video_type):
@@ -383,7 +419,7 @@ if __name__ == '__main__':
     videos = []
     if seeded_videos_allowed:
         log('Adding seeded videos.!')
-        videos = seeded_videos()
+        videos = seeded_videos(seeded_movies_allowed, seeded_series_allowed, seeded_animes_allowed)
 
     while(1):
         try:

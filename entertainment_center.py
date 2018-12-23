@@ -301,6 +301,8 @@ def update_list_of_videos(videos, video_type, single_mode=False):
             break
         else:
             show_error(INV_INPUT, phase)
+            print()
+            print('Here are the {video_type} you added:'.format(video_type=video_type))
             print_formatted_title(videos)
             while(1):
                 try:
@@ -308,6 +310,9 @@ def update_list_of_videos(videos, video_type, single_mode=False):
                     break
                 except:
                     show_error(INV_INPUT, phase)
+                    print()
+                    print('Here are the {video_type} you added:'.format(video_type=video_type))
+                    print_formatted_title(videos)
     is_safe_to_commit = validate_before_commit(videos, video_type)
     if not is_safe_to_commit:
         return update_list_of_videos(videos, video_type)

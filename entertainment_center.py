@@ -180,9 +180,14 @@ def print_formatted_title(videos):
     print(video_str)
 
 
-def show_error(code):
+def show_error(code, phase=None, videos=None):
+    if phase is not None:
+        print_input_filters(phase, videos)
     if code == INV_INPUT:
-        print('It seems you have entered data incorrectly!!\nPlease enter again!')
+        print('Error'.center(disp_size, '+'))
+        print('It appears you have entered incorrect data!'.center(disp_size, ' '))
+        print('Please enter the correct value!!'.center(disp_size, ' '))
+        print('+' * disp_size)
     else:
         print(code)
 
@@ -191,11 +196,12 @@ def update_video_at(videos, index, video_type):
     log('Entering update_video_at')
     video = videos[index]
     if video_type == 'movies':
-        print_input_filters(PHASE_UPD_MOVIES, video)
+        phase = PHASE_UPD_MOVIES
     if video_type == 'series':
-        print_input_filters(PHASE_UPD_SERIES, video)
+        phase = PHASE_UPD_SERIES
     if video_type == 'anime':
-        print_input_filters(PHASE_UPD_ANIME, video)
+        phase = PHASE_UPD_ANIME
+    print_input_filters(phase, video)
     video.print_formatted_attrs()
     while(1):
         try:
@@ -203,7 +209,7 @@ def update_video_at(videos, index, video_type):
             attr_indices = list(map(int, attr_indices.split(',')))
             break
         except:
-            show_error('Invalid input.. expected int got string')
+            show_error(INV_INPUT, phase, video)
     if video.validate_attr_list(attr_indices):
         video.update_video_attrs(video_type, attr_indices)
     else:
@@ -218,11 +224,12 @@ def update_list_of_videos(videos, video_type, single_mode=False):
     add_num_videos = None
     log('Entering update_list_of_videos')
     if video_type == 'movies':
-        print_input_filters(PHASE_UPD_MOVIES)
+        phase = PHASE_UPD_MOVIES
     if video_type == 'series':
-        print_input_filters(PHASE_UPD_SERIES)
+        phase = PHASE_UPD_SERIES
     if video_type == 'anime':
-        print_input_filters(PHASE_UPD_ANIME)
+        phase = PHASE_UPD_ANIME
+    print_input_filters(phase)
     log(video_type)
     print('Here are the {video_type} you added:'.format(video_type=video_type))
     log('updating in batch mode')
@@ -232,21 +239,21 @@ def update_list_of_videos(videos, video_type, single_mode=False):
             choice = int(input('Choose a number:'))
             break
         except:
-            show_error('Invalid input expected number got string')
+            show_error(INV_INPUT, phase)
     log('Choice' + str(choice))
     while(1):
         if choice in range(1, len(videos) + 1):
             videos = update_video_at(videos, choice - 1, video_type)
             break
         else:
-            show_error(INV_INPUT)
+            show_error(INV_INPUT, phase)
             print_formatted_title(videos)
             while(1):
                 try:
                     choice = int(input('Choose a number:'))
                     break
                 except:
-                    show_error('Invalid input expected number got string')
+                    show_error(INV_INPUT, phase)
     is_safe_to_commit = validate_before_commit(videos, video_type)
     if not is_safe_to_commit:
         return update_list_of_videos(videos, video_type)
@@ -271,21 +278,23 @@ def input_videos(input_type, upd_mode=False, video_upd=None):
         current_input_obj = media.Anime()
 
     if not upd_mode:
+        if input_type == INPUT_MOVIE_DTLS:
+            phase = PHASE_ADD_MOVIE
+        elif input_type == INPUT_SERIES_DTLS:
+            phase = PHASE_ADD_SERIES
+        elif input_type == INPUT_ANIME_DTLS:
+            phase = PHASE_ADD_ANIME
+        print_input_filters(phase)
         while(1):
             try:
                 n = int(input('Please enter number of ' + current_input + ' that you want to add :'))
                 break
             except:
-                show_error('Invalid input expected number got string')
+                show_error(INV_INPUT, phase)
 
         user_defined_videos = []
         add_num_videos = n
-        if input_type == INPUT_MOVIE_DTLS:
-            print_input_filters(PHASE_ADD_MOVIE)
-        elif input_type == INPUT_SERIES_DTLS:
-            print_input_filters(PHASE_ADD_SERIES)
-        elif input_type == INPUT_ANIME_DTLS:
-            print_input_filters(PHASE_ADD_ANIME)
+
         while(n > 0):
             curr_add_at = n
             if input_type == INPUT_MOVIE_DTLS:
@@ -368,17 +377,18 @@ if __name__ == '__main__':
     if seeded_videos_allowed:
         log('Adding seeded videos.!')
         videos = seeded_videos()
-    print('Please choose which types you want to add!')
-    print('\n'.join([str(i + 1) + '. ' + temp for i, temp in enumerate(input_type_choice_list)]))
+
     while(1):
         try:
+            print('Please choose which types you want to add!')
+            print('\n'.join([str(i + 1) + '. ' + temp for i, temp in enumerate(input_type_choice_list)]))
             choice = int(input('Enter your choice:'))
             if choice in range(1, len(input_type_choice_list) + 1):
                 break
             else:
-                show_error('Invalid input! Expected a number less than ' + str(len(input_type_choice_list) + 1))
+                show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
         except:
-            show_error('Invalid input.. expected number got string')
+            show_error(INV_INPUT, PHASE_SEEDED_DECIDE)
     if choice == INPUT_MOVIE_DTLS + 1:
         print_input_filters(PHASE_ADD_MOVIE)
         videos += input_videos(INPUT_MOVIE_DTLS)

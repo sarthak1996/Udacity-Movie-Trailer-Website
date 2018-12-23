@@ -192,14 +192,11 @@ class Video():
         print('Updating {type} attributes'.format(type=video_type))
         for attr_index in attr_indices:
             validation_status = self.INV_GENERIC_ERROR
-            print(self.attrs)
-            print(self.attrs.get(0))
-            print(attr_index)
             while(validation_status != self.INV_SUCCESS):
                 val = input('Enter {type} {attr_name} :'.format(type=video_type, attr_name=self.attrs.get(attr_index)))
                 validation_status = self.validate_input_attr_value(attr_index, val)
-                print('here!')
-                print(validation_status)
+                if validation_status != self.INV_SUCCESS:
+                    self.print_validation_error(attr_index)
             self.set_attr_value(attr_index, val)
         return
 
